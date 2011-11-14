@@ -1,4 +1,10 @@
 
+local gianttext = CreateFrame("Text")
+gianttext:SetText("IMMORTALS")
+gianttext:SetPoint("TOPCENTER", UIParent, "TOPCENTER", 0, 100)
+gianttext:SetColor(1, 1, 1)
+gianttext:SetSize(150)
+
 ShowMouseCursor(true) -- keep this around so it's reset properly
 LockMouseCursor(false) -- keep this around so it's reset properly
 
