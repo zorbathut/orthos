@@ -1,0 +1,1 @@
+(cd glorp/glop && git push) ; (cd glorp/logal && git push) ; (cd glorp/opengal32 && git push) ; (cd glorp && git push) ; git push

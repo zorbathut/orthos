@@ -1,0 +1,1 @@
+(cd glorp/glop && git commit -a "$@") ; (cd glorp/logal && git commit -a "$@") ; (cd glorp/opengal32 && git commit -a "$@") ; (cd glorp && git commit -a "$@") ; git commit -a "$@"

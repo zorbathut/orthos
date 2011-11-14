@@ -1,0 +1,3 @@
+[submodule "glorp"]
+	path = glorp
+	url = git@github.com:zorbathut/glorp.git
