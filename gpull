@@ -1,1 +1,1 @@
-(cd glorp/glop && git pull) ; (cd glorp/logal && git pull) ; (cd glorp/opengal32 && git pull) ; (cd glorp && git pull) ; git pull
+(cd glorp/logal && git pull) ; (cd glorp/opengal32 && git pull) ; (cd glorp && git pull) ; git pull

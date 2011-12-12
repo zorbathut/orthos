@@ -1,0 +1,7 @@
+*.$$$
+build
+crashmelt_*
+playtest*
+.ursa.*
+*.stackdump
+profile_*.txt

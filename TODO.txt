@@ -1,0 +1,11 @@
+* Give the UI system a pass
+  * Combine text, turn into "wordwrap"
+  * Add default sizing 'cause that's a really dang good idea
+* Toss all members into some kind of namespace, 'cause, seriously, this is getting stupid
+* Toss glorp files into their own directory
+
+* Figure out the basic turn-based format? sure, throw something together
+* get the framework for hotseat play
+* make a super-basic RPS game, two-player
+* extend to generic multiplayer
+* set up file system
