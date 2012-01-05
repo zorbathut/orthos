@@ -1,4 +1,4 @@
-#!/usr/local/bin/lua
+#!env lua
 
 local name = "immortals"
 local longname = "Immortals"
