@@ -1,1 +1,1 @@
-(cd zorp/logal && git commit -a "$@") ; (cd zorp/opengal32 && git commit -a "$@") ; (cd zorp && git commit -a "$@") ; git commit -a "$@"
+(cd glorp/logal && git commit -a "$@") ; (cd glorp/opengal32 && git commit -a "$@") ; (cd glorp && git commit -a "$@") ; git commit -a "$@"
