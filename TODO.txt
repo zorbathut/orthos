@@ -1,5 +1,3 @@
-* Figure out what libogg refuses to build with
-* Figure out a way to split up defines a bit further - we need lib build flags and extra game build flags
 * libpng needs to link to zlib somehow
 
 
