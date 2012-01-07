@@ -1,5 +1,4 @@
-* libpng needs to link to zlib somehow
-
+* opengalsoft appears to doublebuild?
 
 * Give the UI system a pass
   * Combine text, turn into "wordwrap"

@@ -5,3 +5,4 @@ playtest*
 .ursa.*
 *.stackdump
 profile_*.txt
+*~
