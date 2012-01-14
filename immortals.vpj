@@ -1,0 +1,123 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+  Version="10.0"
+  VendorName="SlickEdit"
+  TemplateName="(Other)"
+  WorkingDir=".">
+  <Config
+    Name="Release"
+    OutputFile=""
+    CompilerConfigName="">
+    <Menu>
+      <Target
+        Name="Compile"
+        MenuCaption="&amp;Compile"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveCurrent"
+        RunFromDir="%rw">
+        <Exec/>
+      </Target>
+      <Target
+        Name="Build"
+        MenuCaption="&amp;Build"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveWorkspaceFiles"
+        RunFromDir="%rw">
+        <Exec/>
+      </Target>
+      <Target
+        Name="Rebuild"
+        MenuCaption="&amp;Rebuild"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveWorkspaceFiles"
+        RunFromDir="%rw">
+        <Exec/>
+      </Target>
+      <Target
+        Name="Debug"
+        MenuCaption="&amp;Debug"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec/>
+      </Target>
+      <Target
+        Name="Execute"
+        MenuCaption="E&amp;xecute"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec CmdLine='".exe"'/>
+      </Target>
+    </Menu>
+  </Config>
+  <Files>
+    <Folder
+      Name="Source Files"
+      Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.c++;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl;*.d">
+      <F N="glorp/args.cpp"/>
+      <F N="glorp/core.cpp"/>
+      <F N="glorp/debug.cpp"/>
+      <F N="glorp/debug_911_off.cpp"/>
+      <F N="glorp/debug_911_on.cpp"/>
+      <F N="glorp/GLee.c"/>
+      <F N="glorp/init.cpp"/>
+      <F N="glorp/main.cpp"/>
+      <F N="glorp/os_linux.cpp"/>
+      <F N="glorp/os_osx.cpp"/>
+      <F N="glorp/os_posix.cpp"/>
+      <F N="glorp/os_universal.cpp"/>
+      <F N="glorp/os_win32.cpp"/>
+      <F N="glorp/parse.cpp"/>
+      <F N="glorp/util.cpp"/>
+    </Folder>
+    <Folder
+      Name="Header Files"
+      Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+      <F N="glorp/args.h"/>
+      <F N="glorp/core.h"/>
+      <F N="glorp/debug.h"/>
+      <F N="glorp/debug_911.h"/>
+      <F N="glorp/GLee.h"/>
+      <F N="glorp/init.h"/>
+      <F N="glorp/os.h"/>
+      <F N="glorp/parse.h"/>
+      <F N="glorp/util.h"/>
+      <F N="glorp/version.h"/>
+    </Folder>
+    <Folder
+      Name="Resource Files"
+      Filters="*.ico;*.cur;*.dlg"/>
+    <Folder
+      Name="Bitmaps"
+      Filters="*.bmp"/>
+    <Folder
+      Name="Other Files"
+      Filters="">
+      <F N="glorp/Den"/>
+      <F N="glorp/Den_lib_box2d.lua"/>
+      <F N="glorp/Den_lib_dx.lua"/>
+      <F N="glorp/Den_lib_lfs.lua"/>
+      <F N="glorp/Den_lib_libcurl.lua"/>
+      <F N="glorp/Den_lib_libflac.lua"/>
+      <F N="glorp/Den_lib_libfltk.lua"/>
+      <F N="glorp/Den_lib_libfreetype.lua"/>
+      <F N="glorp/Den_lib_libjpeg.lua"/>
+      <F N="glorp/Den_lib_libogg.lua"/>
+      <F N="glorp/Den_lib_libpng.lua"/>
+      <F N="glorp/Den_lib_libvorbis.lua"/>
+      <F N="glorp/Den_lib_lua.lua"/>
+      <F N="glorp/Den_lib_luabind.lua"/>
+      <F N="glorp/Den_lib_opengal.lua"/>
+      <F N="glorp/Den_lib_portaudio.lua"/>
+      <F N="glorp/Den_lib_zlib.lua"/>
+      <F N="glorp/Den_os_cygwin.lua"/>
+      <F N="glorp/Den_os_linux.lua"/>
+      <F N="glorp/Den_os_osx.lua"/>
+      <F N="glorp/gcc_wrapper"/>
+      <F N="glorp/gcc_wrapper.sed"/>
+      <F N="main.lua"/>
+      <F N="menu.lua"/>
+      <F N="glorp/notes.txt"/>
+      <F N="glorp/settings.local"/>
+    </Folder>
+  </Files>
+</Project>

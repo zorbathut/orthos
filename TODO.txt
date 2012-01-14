@@ -1,4 +1,11 @@
+Layout:
+
+* OS handles the main thing
+* Core creates and destroys games, defers key events and the like upwards
+* Game is the game environment, is created and destroyed
+
 * opengalsoft appears to doublebuild?
+* add 256x256, 64x64, 48x48 icons
 
 * Give the UI system a pass
   * Combine text, turn into "wordwrap"

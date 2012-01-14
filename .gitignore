@@ -6,3 +6,6 @@ playtest*
 *.stackdump
 profile_*.txt
 *~
+*.vpwhist
+*.vtg
+
