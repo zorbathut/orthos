@@ -1,6 +1,8 @@
 * Create lua environment
+  * test --help
 * F12 to reset lua environment
 * Handle Lua crashes, display error panel
+* Test sound
 * Soft assert()
 * Set up event framework
   * Create events from C++
