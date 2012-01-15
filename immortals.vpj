@@ -72,6 +72,7 @@
     <Folder
       Name="Header Files"
       Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
+      <F N="glorp/input.h"/>
       <F N="glorp/args.h"/>
       <F N="glorp/core.h"/>
       <F N="glorp/debug.h"/>
