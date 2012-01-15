@@ -1,8 +1,3 @@
-* Create lua environment
-  * test --help
-* F12 to reset lua environment
-* Handle Lua crashes, display error panel
-* Test sound
 * Soft assert()
 * Set up event framework
   * Create events from C++
@@ -11,7 +6,10 @@
 * Start the infrastructure for the UI system
   * Layout
   * Frame
-  *
+  * Texture
+  * Text
+  * Mask
+* Test sound
 
 Layout:
 
