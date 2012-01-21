@@ -1,18 +1,16 @@
-* Soft assert()
-* Set up event framework
-  * Create events from C++
-  * Call events
-  * Trigger errors from events
-  * Create events from Lua
-  * Redesign the pre-post render system
-* Hook rdprintf to display lua line info
-* Get stackOutput working?
 * Start the infrastructure for the UI system
   * Layout
   * Frame
   * Texture
   * Text
   * Mask
+* Set up event framework
+  * Create events from Lua
+* Debug tools
+  * Better event error stacktrace
+  * Hook rdprintf to display lua line info from print()
+  * Get stackOutput working?
+  * Soft assert() for lua
 * Test sound
 
 Layout:
