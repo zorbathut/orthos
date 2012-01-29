@@ -95,7 +95,6 @@
       <F N="glorp/libs/frames/include/frames/noncopyable.h"/>
       <F N="glorp/os.h"/>
       <F N="glorp/parse.h"/>
-      <F N="glorp/libs/frames/include/frames/ptr.h"/>
       <F N="glorp/libs/frames/include/frames/renderer.h"/>
       <F N="glorp/libs/frames/include/frames/texture_manager.h"/>
       <F N="glorp/util.h"/>
