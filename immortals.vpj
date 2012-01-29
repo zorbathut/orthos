@@ -48,6 +48,9 @@
         <Exec CmdLine='".exe"'/>
       </Target>
     </Menu>
+    <Includes>
+      <Include Dir="build/cygwin/lib_release/include"/>
+    </Includes>
   </Config>
   <Files>
     <Folder
@@ -61,7 +64,6 @@
       <F N="glorp/debug_911_on.cpp"/>
       <F N="glorp/libs/frames/src/environment.cpp"/>
       <F N="glorp/libs/frames/src/frame.cpp"/>
-      <F N="glorp/GLee.c"/>
       <F N="glorp/init.cpp"/>
       <F N="glorp/libs/frames/src/layout.cpp"/>
       <F N="glorp/main.cpp"/>
@@ -87,7 +89,6 @@
       <F N="glorp/libs/frames/include/frames/environment.h"/>
       <F N="glorp/libs/frames/include/frames/frame.h"/>
       <F N="glorp/libs/frames/include/frames/frameptr.h"/>
-      <F N="glorp/GLee.h"/>
       <F N="glorp/init.h"/>
       <F N="glorp/input.h"/>
       <F N="glorp/libs/frames/include/frames/layout.h"/>
