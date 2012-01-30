@@ -86,6 +86,7 @@
       <F N="glorp/core.h"/>
       <F N="glorp/debug.h"/>
       <F N="glorp/debug_911.h"/>
+      <F N="glorp/libs/frames/include/frames/delegate.h"/>
       <F N="glorp/libs/frames/include/frames/environment.h"/>
       <F N="glorp/libs/frames/include/frames/frame.h"/>
       <F N="glorp/libs/frames/include/frames/frameptr.h"/>
