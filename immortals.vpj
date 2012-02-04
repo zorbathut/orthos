@@ -59,6 +59,7 @@
       <F N="glorp/args.cpp"/>
       <F N="glorp/libs/frames/src/configuration.cpp"/>
       <F N="glorp/core.cpp"/>
+      <F N="glorp/core_lua.cpp"/>
       <F N="glorp/debug.cpp"/>
       <F N="glorp/debug_911_off.cpp"/>
       <F N="glorp/debug_911_on.cpp"/>
@@ -74,6 +75,8 @@
       <F N="glorp/os_win32.cpp"/>
       <F N="glorp/parse.cpp"/>
       <F N="glorp/libs/frames/src/renderer.cpp"/>
+      <F N="glorp/libs/frames/src/stream.cpp"/>
+      <F N="glorp/libs/frames/src/texture.cpp"/>
       <F N="glorp/libs/frames/src/texture_manager.cpp"/>
       <F N="glorp/util.cpp"/>
     </Folder>
@@ -97,6 +100,8 @@
       <F N="glorp/os.h"/>
       <F N="glorp/parse.h"/>
       <F N="glorp/libs/frames/include/frames/renderer.h"/>
+      <F N="glorp/libs/frames/include/frames/stream.h"/>
+      <F N="glorp/libs/frames/include/frames/texture.h"/>
       <F N="glorp/libs/frames/include/frames/texture_manager.h"/>
       <F N="glorp/util.h"/>
       <F N="glorp/libs/frames/include/frames/utility.h"/>
