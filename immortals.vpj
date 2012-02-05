@@ -67,6 +67,7 @@
       <F N="glorp/libs/frames/src/frame.cpp"/>
       <F N="glorp/init.cpp"/>
       <F N="glorp/libs/frames/src/layout.cpp"/>
+      <F N="glorp/libs/frames/src/loader.cpp"/>
       <F N="glorp/main.cpp"/>
       <F N="glorp/os_linux.cpp"/>
       <F N="glorp/os_osx.cpp"/>
@@ -96,6 +97,7 @@
       <F N="glorp/init.h"/>
       <F N="glorp/input.h"/>
       <F N="glorp/libs/frames/include/frames/layout.h"/>
+      <F N="glorp/libs/frames/include/frames/loader.h"/>
       <F N="glorp/libs/frames/include/frames/noncopyable.h"/>
       <F N="glorp/os.h"/>
       <F N="glorp/parse.h"/>
