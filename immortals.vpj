@@ -69,6 +69,7 @@
       <F N="glorp/libs/frames/src/layout.cpp"/>
       <F N="glorp/libs/frames/src/loader.cpp"/>
       <F N="glorp/main.cpp"/>
+      <F N="glorp/libs/frames/src/mask.cpp"/>
       <F N="glorp/os_linux.cpp"/>
       <F N="glorp/os_osx.cpp"/>
       <F N="glorp/os_posix.cpp"/>
@@ -98,9 +99,12 @@
       <F N="glorp/input.h"/>
       <F N="glorp/libs/frames/include/frames/layout.h"/>
       <F N="glorp/libs/frames/include/frames/loader.h"/>
+      <F N="glorp/libs/frames/include/frames/mask.h"/>
       <F N="glorp/libs/frames/include/frames/noncopyable.h"/>
       <F N="glorp/os.h"/>
       <F N="glorp/parse.h"/>
+      <F N="glorp/libs/frames/include/frames/point.h"/>
+      <F N="glorp/libs/frames/include/frames/rect.h"/>
       <F N="glorp/libs/frames/include/frames/renderer.h"/>
       <F N="glorp/libs/frames/include/frames/stream.h"/>
       <F N="glorp/libs/frames/include/frames/texture.h"/>
