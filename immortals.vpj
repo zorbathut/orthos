@@ -64,6 +64,7 @@
       <F N="glorp/debug_911_off.cpp"/>
       <F N="glorp/debug_911_on.cpp"/>
       <F N="glorp/libs/frames/src/environment.cpp"/>
+      <F N="glorp/libs/frames/src/event.cpp"/>
       <F N="glorp/libs/frames/src/frame.cpp"/>
       <F N="glorp/init.cpp"/>
       <F N="glorp/libs/frames/src/layout.cpp"/>
@@ -79,8 +80,10 @@
       <F N="glorp/libs/frames/src/renderer.cpp"/>
       <F N="glorp/libs/frames/src/stream.cpp"/>
       <F N="glorp/libs/frames/src/texture.cpp"/>
+      <F N="glorp/libs/frames/src/texture_config.cpp"/>
       <F N="glorp/libs/frames/src/texture_manager.cpp"/>
       <F N="glorp/util.cpp"/>
+      <F N="glorp/libs/frames/src/utility.cpp"/>
     </Folder>
     <Folder
       Name="Header Files"
@@ -93,6 +96,7 @@
       <F N="glorp/debug_911.h"/>
       <F N="glorp/libs/frames/include/frames/delegate.h"/>
       <F N="glorp/libs/frames/include/frames/environment.h"/>
+      <F N="glorp/libs/frames/include/frames/event.h"/>
       <F N="glorp/libs/frames/include/frames/frame.h"/>
       <F N="glorp/libs/frames/include/frames/frameptr.h"/>
       <F N="glorp/init.h"/>
@@ -104,10 +108,12 @@
       <F N="glorp/os.h"/>
       <F N="glorp/parse.h"/>
       <F N="glorp/libs/frames/include/frames/point.h"/>
+      <F N="glorp/libs/frames/include/frames/ptr.h"/>
       <F N="glorp/libs/frames/include/frames/rect.h"/>
       <F N="glorp/libs/frames/include/frames/renderer.h"/>
       <F N="glorp/libs/frames/include/frames/stream.h"/>
       <F N="glorp/libs/frames/include/frames/texture.h"/>
+      <F N="glorp/libs/frames/include/frames/texture_config.h"/>
       <F N="glorp/libs/frames/include/frames/texture_manager.h"/>
       <F N="glorp/util.h"/>
       <F N="glorp/libs/frames/include/frames/utility.h"/>
