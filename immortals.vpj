@@ -79,6 +79,7 @@
       <F N="glorp/parse.cpp"/>
       <F N="glorp/libs/frames/src/renderer.cpp"/>
       <F N="glorp/libs/frames/src/stream.cpp"/>
+      <F N="glorp/libs/frames/src/text.cpp"/>
       <F N="glorp/libs/frames/src/texture.cpp"/>
       <F N="glorp/libs/frames/src/texture_config.cpp"/>
       <F N="glorp/libs/frames/src/texture_manager.cpp"/>
@@ -112,6 +113,7 @@
       <F N="glorp/libs/frames/include/frames/rect.h"/>
       <F N="glorp/libs/frames/include/frames/renderer.h"/>
       <F N="glorp/libs/frames/include/frames/stream.h"/>
+      <F N="glorp/libs/frames/include/frames/text.h"/>
       <F N="glorp/libs/frames/include/frames/texture.h"/>
       <F N="glorp/libs/frames/include/frames/texture_config.h"/>
       <F N="glorp/libs/frames/include/frames/texture_manager.h"/>
