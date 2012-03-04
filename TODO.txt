@@ -1,10 +1,3 @@
-* Get angry about frame errors
-* Start the infrastructure for the UI system
-  * Layout
-  * Frame
-  * Texture
-  * Text
-  * Mask
 * Set up event framework
   * Create events from Lua
 * Debug tools
@@ -20,12 +13,8 @@ Layout:
 * Core creates and destroys games, defers key events and the like upwards
 * Game is the game environment, is created and destroyed
 
-* opengalsoft appears to doublebuild?
 * add 256x256, 64x64, 48x48 icons
 
-* Give the UI system a pass
-  * Combine text, turn into "wordwrap"
-  * Add default sizing 'cause that's a really dang good idea
 * Toss all members into some kind of namespace, 'cause, seriously, this is getting stupid
 * Toss glorp files into their own directory
 
