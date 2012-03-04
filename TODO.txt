@@ -1,3 +1,4 @@
+* Deal better with Frames errors
 * Set up event framework
   * Create events from Lua
 * Debug tools
