@@ -90,7 +90,7 @@
     <Folder
       Name="Header Files"
       Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
-      <F N="glorp/libs/frames/include/frames/environment_register.h"/>
+      <F N="glorp/libs/frames/include/frames/lua.h"/>
       <F N="glorp/args.h"/>
       <F N="glorp/core.h"/>
       <F N="glorp/debug.h"/>
@@ -101,7 +101,7 @@
       <F N="glorp/libs/frames/include/frames/configuration.h"/>
       <F N="glorp/libs/frames/include/frames/delegate.h"/>
       <F N="glorp/libs/frames/include/frames/environment.h"/>
-      <F N="glorp/libs/frames/include/frames/event.h"/>
+      <F N="glorp/libs/frames/include/frames/environment_register.h"/>
       <F N="glorp/libs/frames/include/frames/frame.h"/>
       <F N="glorp/libs/frames/include/frames/layout.h"/>
       <F N="glorp/libs/frames/include/frames/loader.h"/>
