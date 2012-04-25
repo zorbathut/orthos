@@ -91,14 +91,14 @@
     <Folder
       Name="Header Files"
       Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
-      <F N="glorp/libs/frames/include/frames/color.h"/>
-      <F N="glorp/libs/frames/include/frames/lua.h"/>
+      <F N="glorp/libs/frames/include/frames/input.h"/>
       <F N="glorp/args.h"/>
       <F N="glorp/core.h"/>
       <F N="glorp/debug.h"/>
       <F N="glorp/debug_911.h"/>
       <F N="glorp/init.h"/>
       <F N="glorp/input.h"/>
+      <F N="glorp/libs/frames/include/frames/color.h"/>
       <F N="glorp/libs/frames/include/frames/config.h"/>
       <F N="glorp/libs/frames/include/frames/configuration.h"/>
       <F N="glorp/libs/frames/include/frames/delegate.h"/>
@@ -107,6 +107,7 @@
       <F N="glorp/libs/frames/include/frames/frame.h"/>
       <F N="glorp/libs/frames/include/frames/layout.h"/>
       <F N="glorp/libs/frames/include/frames/loader.h"/>
+      <F N="glorp/libs/frames/include/frames/lua.h"/>
       <F N="glorp/libs/frames/include/frames/mask.h"/>
       <F N="glorp/libs/frames/include/frames/noncopyable.h"/>
       <F N="glorp/libs/frames/include/frames/point.h"/>
