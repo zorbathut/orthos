@@ -56,7 +56,6 @@
     <Folder
       Name="Source Files"
       Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.c++;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl;*.d">
-      <F N="glorp/libs/frames/src/color.cpp"/>
       <F N="glorp/args.cpp"/>
       <F N="glorp/core.cpp"/>
       <F N="glorp/core_lua.cpp"/>
@@ -64,20 +63,6 @@
       <F N="glorp/debug_911_off.cpp"/>
       <F N="glorp/debug_911_on.cpp"/>
       <F N="glorp/init.cpp"/>
-      <F N="glorp/libs/frames/src/configuration.cpp"/>
-      <F N="glorp/libs/frames/src/environment.cpp"/>
-      <F N="glorp/libs/frames/src/event.cpp"/>
-      <F N="glorp/libs/frames/src/frame.cpp"/>
-      <F N="glorp/libs/frames/src/layout.cpp"/>
-      <F N="glorp/libs/frames/src/loader.cpp"/>
-      <F N="glorp/libs/frames/src/mask.cpp"/>
-      <F N="glorp/libs/frames/src/renderer.cpp"/>
-      <F N="glorp/libs/frames/src/stream.cpp"/>
-      <F N="glorp/libs/frames/src/text.cpp"/>
-      <F N="glorp/libs/frames/src/text_manager.cpp"/>
-      <F N="glorp/libs/frames/src/texture.cpp"/>
-      <F N="glorp/libs/frames/src/texture_config.cpp"/>
-      <F N="glorp/libs/frames/src/texture_manager.cpp"/>
       <F N="glorp/libs/frames/src/utility.cpp"/>
       <F N="glorp/main.cpp"/>
       <F N="glorp/os_linux.cpp"/>
@@ -91,47 +76,17 @@
     <Folder
       Name="Header Files"
       Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if">
-      <F N="glorp/libs/frames/include/frames/input.h"/>
       <F N="glorp/args.h"/>
       <F N="glorp/core.h"/>
       <F N="glorp/debug.h"/>
       <F N="glorp/debug_911.h"/>
       <F N="glorp/init.h"/>
       <F N="glorp/input.h"/>
-      <F N="glorp/libs/frames/include/frames/color.h"/>
-      <F N="glorp/libs/frames/include/frames/config.h"/>
-      <F N="glorp/libs/frames/include/frames/configuration.h"/>
-      <F N="glorp/libs/frames/include/frames/delegate.h"/>
-      <F N="glorp/libs/frames/include/frames/environment.h"/>
-      <F N="glorp/libs/frames/include/frames/environment_register.h"/>
-      <F N="glorp/libs/frames/include/frames/frame.h"/>
-      <F N="glorp/libs/frames/include/frames/layout.h"/>
-      <F N="glorp/libs/frames/include/frames/loader.h"/>
-      <F N="glorp/libs/frames/include/frames/lua.h"/>
-      <F N="glorp/libs/frames/include/frames/mask.h"/>
-      <F N="glorp/libs/frames/include/frames/noncopyable.h"/>
-      <F N="glorp/libs/frames/include/frames/point.h"/>
-      <F N="glorp/libs/frames/include/frames/ptr.h"/>
-      <F N="glorp/libs/frames/include/frames/rect.h"/>
-      <F N="glorp/libs/frames/include/frames/renderer.h"/>
-      <F N="glorp/libs/frames/include/frames/stream.h"/>
-      <F N="glorp/libs/frames/include/frames/text.h"/>
-      <F N="glorp/libs/frames/include/frames/text_manager.h"/>
-      <F N="glorp/libs/frames/include/frames/texture.h"/>
-      <F N="glorp/libs/frames/include/frames/texture_config.h"/>
-      <F N="glorp/libs/frames/include/frames/texture_manager.h"/>
-      <F N="glorp/libs/frames/include/frames/utility.h"/>
       <F N="glorp/os.h"/>
       <F N="glorp/parse.h"/>
       <F N="glorp/util.h"/>
       <F N="glorp/version.h"/>
     </Folder>
-    <Folder
-      Name="Resource Files"
-      Filters="*.ico;*.cur;*.dlg"/>
-    <Folder
-      Name="Bitmaps"
-      Filters="*.bmp"/>
     <Folder
       Name="Other Files"
       Filters="">
@@ -162,6 +117,49 @@
       <F N="menu.lua"/>
       <F N="glorp/notes.txt"/>
       <F N="glorp/settings.local"/>
+    </Folder>
+    <Folder
+      Name="frames"
+      Filters="">
+      <F N="glorp/libs/frames/src/color.cpp"/>
+      <F N="glorp/libs/frames/src/configuration.cpp"/>
+      <F N="glorp/libs/frames/src/environment.cpp"/>
+      <F N="glorp/libs/frames/src/event.cpp"/>
+      <F N="glorp/libs/frames/src/frame.cpp"/>
+      <F N="glorp/libs/frames/src/layout.cpp"/>
+      <F N="glorp/libs/frames/src/loader.cpp"/>
+      <F N="glorp/libs/frames/src/mask.cpp"/>
+      <F N="glorp/libs/frames/src/renderer.cpp"/>
+      <F N="glorp/libs/frames/src/stream.cpp"/>
+      <F N="glorp/libs/frames/src/text.cpp"/>
+      <F N="glorp/libs/frames/src/text_manager.cpp"/>
+      <F N="glorp/libs/frames/src/texture.cpp"/>
+      <F N="glorp/libs/frames/src/texture_config.cpp"/>
+      <F N="glorp/libs/frames/src/texture_manager.cpp"/>
+      <F N="glorp/libs/frames/include/frames/color.h"/>
+      <F N="glorp/libs/frames/include/frames/config.h"/>
+      <F N="glorp/libs/frames/include/frames/configuration.h"/>
+      <F N="glorp/libs/frames/include/frames/delegate.h"/>
+      <F N="glorp/libs/frames/include/frames/environment.h"/>
+      <F N="glorp/libs/frames/include/frames/environment_register.h"/>
+      <F N="glorp/libs/frames/include/frames/frame.h"/>
+      <F N="glorp/libs/frames/include/frames/input.h"/>
+      <F N="glorp/libs/frames/include/frames/layout.h"/>
+      <F N="glorp/libs/frames/include/frames/loader.h"/>
+      <F N="glorp/libs/frames/include/frames/lua.h"/>
+      <F N="glorp/libs/frames/include/frames/mask.h"/>
+      <F N="glorp/libs/frames/include/frames/noncopyable.h"/>
+      <F N="glorp/libs/frames/include/frames/point.h"/>
+      <F N="glorp/libs/frames/include/frames/ptr.h"/>
+      <F N="glorp/libs/frames/include/frames/rect.h"/>
+      <F N="glorp/libs/frames/include/frames/renderer.h"/>
+      <F N="glorp/libs/frames/include/frames/stream.h"/>
+      <F N="glorp/libs/frames/include/frames/text.h"/>
+      <F N="glorp/libs/frames/include/frames/text_manager.h"/>
+      <F N="glorp/libs/frames/include/frames/texture.h"/>
+      <F N="glorp/libs/frames/include/frames/texture_config.h"/>
+      <F N="glorp/libs/frames/include/frames/texture_manager.h"/>
+      <F N="glorp/libs/frames/include/frames/utility.h"/>
     </Folder>
   </Files>
 </Project>
