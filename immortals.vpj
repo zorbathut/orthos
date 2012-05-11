@@ -160,6 +160,7 @@
       <F N="glorp/libs/frames/include/frames/texture_config.h"/>
       <F N="glorp/libs/frames/include/frames/texture_manager.h"/>
       <F N="glorp/libs/frames/include/frames/utility.h"/>
+      <F N="glorp/libs/frames/src/input.cpp"/>
     </Folder>
   </Files>
 </Project>
