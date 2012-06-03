@@ -1,8 +1,9 @@
 * Set up event framework
   * Create events from Lua
+    * Think over how this'll work
+  * Command/Inspect system
   
 * Debug tools
-  * Better event error stacktrace
   * Hook rdprintf to display lua line info from print()
   * Get stackOutput working?
   * Soft assert() for lua
