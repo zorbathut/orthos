@@ -1,7 +1,7 @@
 * Console!
-* Deal better with Frames errors
 * Set up event framework
   * Create events from Lua
+  
 * Debug tools
   * Better event error stacktrace
   * Hook rdprintf to display lua line info from print()
@@ -9,19 +9,17 @@
   * Soft assert() for lua
 * Test sound
 
-Layout:
+* Prototype combat system
+* Choose and insert enemies
+* Choose and insert deck
+* A few basic enemy options
+* A few basic card options
+* Win/loss conditions
+* Make it fun?
 
-* OS handles the main thing
-* Core creates and destroys games, defers key events and the like upwards
-* Game is the game environment, is created and destroyed
+* this might take a while
 
-* add 256x256, 64x64, 48x48 icons
+* World map code
+* Prototype intro sequence
 
-* Toss all members into some kind of namespace, 'cause, seriously, this is getting stupid
-* Toss glorp files into their own directory
-
-* Figure out the basic turn-based format? sure, throw something together
-* get the framework for hotseat play
-* make a super-basic RPS game, two-player
-* extend to generic multiplayer
-* set up file system
+* Write plot?
