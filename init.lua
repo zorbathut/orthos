@@ -122,12 +122,10 @@ texite:EventMouseButtonClickAttach(function (...) print("EMBC", select("#", ...)
 texite:EventMouseMoveAttach(function (...) print("EMM", select("#", ...), ...) end)
 texite:EventMouseMoveOutsideAttach(function (...) print("EMMO", select("#", ...), ...) end)]]
 
-do return end
-
 local v = 0
-table.insert(External.Event.System.Update.Begin, function ()
+Event.System.Update.Begin:Attach(function ()
   texite:SetWidth(v % 300 + 100)
-  --v = v + 1
+  v = v + 1
   --texite:SetSelection(v, v + 5)
   --v = (v + 1) % #texite:GetText()
 end)
