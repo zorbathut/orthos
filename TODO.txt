@@ -1,6 +1,26 @@
+* Store snapshot
+* Execute game local init.lua
+* Move init.lua test code into game local
+
+* Environment creation
+  * Save "clean" environment backup, post-frames
+  * Command.Environment.Create(template, ordering)
+  * Command.Environment.Destroy(env)
+  
+  * Duplicates clean environment
+  * Copies command and inspects from parent
+  * Creates events and event deferrals from parent
+  * Creates frame, assigns to new root
+
 * Set up event framework
   * Create events from Lua
     * Think over how this'll work
+      * On creating a new environment, all current events are "copied" - it makes a hook that points to argh this is getting kind of awful already
+      * okay what should the API look like
+        * Create a new environment, with event priorities
+        * Environment teardown function? we need it anyway to deal with the ui root, so
+        * Duplicates all the command and inspect hierarchies, and the base elements (we'll have those somewhere, right?)
+        * This is good.
   * Command/Inspect system
   
 * Debug tools

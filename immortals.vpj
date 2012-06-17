@@ -124,6 +124,11 @@
           <F N="glorp/libs/frames/Den_embed"/>
         </Folder>
       </Folder>
+      <F N="glorp/init.lua"/>
+      <F N="glorp/init_bootstrap.lua"/>
+      <F N="glorp/init_console.lua"/>
+      <F N="glorp/init_event.lua"/>
+      <F N="glorp/init_util.lua"/>
       <F N="glorp/args.cpp"/>
       <F N="glorp/args.h"/>
       <F N="glorp/core.cpp"/>
