@@ -1,0 +1,3 @@
+echo hi && build/cygwin/immortals.exe
+
+#(ssh zorba@lore 'bash -s' < dor.sh) && build/cygwin/immortals.exe
