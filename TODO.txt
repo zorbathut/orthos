@@ -1,8 +1,4 @@
 
-* Rebuild events - we don't want to use the table technique, it is bad
-  * Add/Remove, similar to Frames?
-  * Implement that in Lua if we can
-
 * Environment creation
   * Save "clean" environment backup, post-frames
   * Command.Environment.Create(template, ordering)
@@ -29,6 +25,8 @@
   * Get stackOutput working?
   * Soft assert() for lua
 * Test sound
+
+* REMEMBER THE AVENGERS
 
 * Prototype combat system
 * Choose and insert enemies
