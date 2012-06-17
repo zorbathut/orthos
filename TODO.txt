@@ -1,6 +1,7 @@
-* Store snapshot
-* Execute game local init.lua
-* Move init.lua test code into game local
+
+* Rebuild events - we don't want to use the table technique, it is bad
+  * Add/Remove, similar to Frames?
+  * Implement that in Lua if we can
 
 * Environment creation
   * Save "clean" environment backup, post-frames
