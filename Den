@@ -1,9 +1,9 @@
 #!env lua
 
-local name = "immortals"
-local longname = "Immortals"
-local font = "ParmaPetit-Normal.ttf"
-local resolution = {1024, 768}
+local name = "orthos"
+local longname = "Orthos"
+local font = "font/Vera.ttf"
+local resolution = {1920, 1080}
 
 local libs = {
   box2d = false,
