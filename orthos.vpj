@@ -82,6 +82,8 @@
               <F N="glorp/libs/frames/include/frames/delegate.h"/>
               <F N="glorp/libs/frames/include/frames/environment.h"/>
               <F N="glorp/libs/frames/include/frames/environment_register.h"/>
+              <F N="glorp/libs/frames/include/frames/event_declaration.h"/>
+              <F N="glorp/libs/frames/include/frames/event_definition.h"/>
               <F N="glorp/libs/frames/include/frames/frame.h"/>
               <F N="glorp/libs/frames/include/frames/input.h"/>
               <F N="glorp/libs/frames/include/frames/layout.h"/>
@@ -91,6 +93,7 @@
               <F N="glorp/libs/frames/include/frames/noncopyable.h"/>
               <F N="glorp/libs/frames/include/frames/point.h"/>
               <F N="glorp/libs/frames/include/frames/ptr.h"/>
+              <F N="glorp/libs/frames/include/frames/raw.h"/>
               <F N="glorp/libs/frames/include/frames/rect.h"/>
               <F N="glorp/libs/frames/include/frames/renderer.h"/>
               <F N="glorp/libs/frames/include/frames/stream.h"/>
@@ -106,12 +109,12 @@
             <F N="glorp/libs/frames/src/color.cpp"/>
             <F N="glorp/libs/frames/src/configuration.cpp"/>
             <F N="glorp/libs/frames/src/environment.cpp"/>
-            <F N="glorp/libs/frames/src/event.cpp"/>
             <F N="glorp/libs/frames/src/frame.cpp"/>
             <F N="glorp/libs/frames/src/input.cpp"/>
             <F N="glorp/libs/frames/src/layout.cpp"/>
             <F N="glorp/libs/frames/src/loader.cpp"/>
             <F N="glorp/libs/frames/src/mask.cpp"/>
+            <F N="glorp/libs/frames/src/raw.cpp"/>
             <F N="glorp/libs/frames/src/renderer.cpp"/>
             <F N="glorp/libs/frames/src/stream.cpp"/>
             <F N="glorp/libs/frames/src/text.cpp"/>
@@ -124,11 +127,6 @@
           <F N="glorp/libs/frames/Den_embed"/>
         </Folder>
       </Folder>
-      <F N="glorp/init.lua"/>
-      <F N="glorp/init_bootstrap.lua"/>
-      <F N="glorp/init_console.lua"/>
-      <F N="glorp/init_event.lua"/>
-      <F N="glorp/init_util.lua"/>
       <F N="glorp/args.cpp"/>
       <F N="glorp/args.h"/>
       <F N="glorp/core.cpp"/>
@@ -163,8 +161,12 @@
       <F N="glorp/gcc_wrapper.sed"/>
       <F N="glorp/init.cpp"/>
       <F N="glorp/init.h"/>
+      <F N="glorp/init.lua"/>
+      <F N="glorp/init_bootstrap.lua"/>
+      <F N="glorp/init_console.lua"/>
+      <F N="glorp/init_event.lua"/>
+      <F N="glorp/init_util.lua"/>
       <F N="glorp/input.h"/>
-      <F N="glorp/main.cpp"/>
       <F N="glorp/notes.txt"/>
       <F N="glorp/os.h"/>
       <F N="glorp/os_linux.cpp"/>
