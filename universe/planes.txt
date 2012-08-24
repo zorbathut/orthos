@@ -1,0 +1,18 @@
+City
+  Creates Astral via intellect
+  Creates Cyber via technology
+  Enters Dream via sleep
+
+Astral
+  Influences City via magic
+  Can piggyback on City to reach Dream
+
+Cyber
+  Creates Astral via intellect
+  Obviously connects to most/all City technology
+
+Dream
+  Can travel to Cyber, given a bridge and intent
+
+Bio
+  ?
