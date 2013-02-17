@@ -8,7 +8,6 @@ do
   local descale = 0.9
   local solid_intensity = 1
   
-  local timer = math.random() * 360
   local idx = 0
   local gadgetwidth
   for c in ("ORTHOS"):gmatch(".") do
@@ -19,6 +18,8 @@ do
       char = Frames.Raw(Frames.Root)
       char:SetWidth(gadgetwidth)
       char:SetHeight(gadgetwidth)
+      local timer = math.random() * 360
+      local lasttime = Inspect.System.Time.Real()
       char:EventRenderAttach(function ()
         gl.Disable("DEPTH_TEST")
         gl.DepthFunc("LEQUAL")
@@ -32,7 +33,8 @@ do
         gl.Rotate(35.264, 1, 0, 0)
         gl.Rotate(45, 0, 1, 0)
         
-        timer = timer + 0.005
+        timer = timer + (Inspect.System.Time.Real() - lasttime) * 0.3
+        lasttime = Inspect.System.Time.Real()
         
         gl.Begin("QUADS")
         gl.Color(solid_intensity, 0, 0)
@@ -67,12 +69,67 @@ do
     idx = idx + 1
   end
   
-  local bg = Frames.Texture(Frames.Root)
-  bg:SetLayer(-1)
-  bg:SetTexture("copyright_infringement/astral01.jpg")
-  bg:SetPoint("CENTER", Frames.Root, "CENTER")
-  bg:SetTint(0, 1, 0)
+  local function MakeRandomBg(restrict)
+    local tex = Frames.Texture(Frames.Root)
+    tex:SetLayer(-1)
+    
+    local opts = {"astral", "city", "cyber"}
+    local chose
+    while not chose do
+      chose = opts[math.random(#opts)]
+      if chose == restrict then chose = nil end
+    end
+    local texit = string.format("copyright_infringement/%s%02d.jpg", chose, math.random(3))
+    tex:SetTexture(texit)
+    
+    local cols = {
+      astral = {1, 0, 0},
+      city = {0, 1, 0},
+      cyber = {0, 0, 1}
+    }
+    tex:SetTint(unpack(cols[chose]))
+    
+    tex:SetPoint("CENTER", Frames.Root, "CENTER")
+    local scal = math.min(Frames.Root:GetHeight() / tex:GetHeight(), Frames.Root:GetWidth() / tex:GetWidth())
+    tex:SetHeight(tex:GetHeight() * scal)
+    tex:SetWidth(tex:GetWidth() * scal)
+    
+    return tex, chose
+  end
   
+  local delay = 2
+  local fade = 3
+  Event.System.Update.Begin:Attach(
+    coroutine.wrap(
+      function ()
+        local bga, cat = MakeRandomBg("")
+        local creation = Inspect.System.Time.Real()
+        
+        while true do
+          while Inspect.System.Time.Real() < creation + delay do
+            coroutine.yield()
+          end
+          
+          local nbga, ncat = MakeRandomBg(cat)
+          bga:SetLayer(-1)
+          nbga:SetAlpha(0)
+          
+          while Inspect.System.Time.Real() < creation + delay + fade do
+            local shift = (Inspect.System.Time.Real() - creation - delay) / fade
+            bga:SetAlpha(1 - shift)
+            nbga:SetAlpha(shift)
+            coroutine.yield()
+          end
+          
+          bga:Obliterate()
+          
+          bga, cat = nbga, ncat
+          creation = creation + delay + fade
+          bga:SetAlpha(1)
+        end
+      end
+    )
+  )
 end
 
 
