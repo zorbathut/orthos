@@ -32,8 +32,6 @@ do
         gl.Rotate(35.264, 1, 0, 0)
         gl.Rotate(45, 0, 1, 0)
         
-        
-        
         timer = timer + 0.005
         
         gl.Begin("QUADS")
@@ -68,7 +66,13 @@ do
     char:SetPoint("CENTER", Frames.Root, starpos + step * idx, 0.25)
     idx = idx + 1
   end
-  print(gadgetwidth)
+  
+  local bg = Frames.Texture(Frames.Root)
+  bg:SetLayer(-1)
+  bg:SetTexture("copyright_infringement/astral01.jpg")
+  bg:SetPoint("CENTER", Frames.Root, "CENTER")
+  bg:SetTint(0, 1, 0)
+  
 end
 
 
