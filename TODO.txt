@@ -3,8 +3,9 @@
 * don't show the bits that are unimportant
 
 * Prototype combat system
-  * Firing
   * Target
+  * Impact
+  * Health
 * Choose and insert enemies
 * Choose and insert deck
 * A few basic enemy options
