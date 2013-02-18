@@ -2,11 +2,9 @@
 * REMEMBER THE AVENGERS
 * don't show the bits that are unimportant
 
-* Deal with the invalidation bug?
-  * Debug output per-frame
-  * Start analyzing
-
 * Prototype combat system
+  * Firing
+  * Target
 * Choose and insert enemies
 * Choose and insert deck
 * A few basic enemy options
