@@ -80,7 +80,7 @@ do
       chose = opts[math.random(#opts)]
       if chose == restrict then chose = nil end
     end
-    local texit = string.format("copyright_infringement/%s%02d.jpg", chose, math.random(3))
+    local texit = string.format("copyright_infringement/%s%02d", chose, math.random(3))
     tex:SetTexture(texit)
     
     local cols = {

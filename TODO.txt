@@ -1,13 +1,10 @@
 
-* Pretty BG's for intro screen
-
-* Debug tools
-  * Hook rdprintf to display lua line info from print()
-  * Get stackOutput working?
-  * Soft assert() for lua
-* Test sound
-
 * REMEMBER THE AVENGERS
+* don't show the bits that are unimportant
+
+* Deal with the invalidation bug?
+  * Debug output per-frame
+  * Start analyzing
 
 * Prototype combat system
 * Choose and insert enemies
@@ -16,6 +13,12 @@
 * A few basic card options
 * Win/loss conditions
 * Make it fun?
+
+* Debug tools
+  * Hook rdprintf to display lua line info from print()
+  * Get stackOutput working?
+  * Soft assert() for lua
+* Test sound
 
 * this might take a while
 
