@@ -11,6 +11,10 @@
 * A few basic card options
 * Win/loss conditions
 * Make it fun?
+  * Cooldown on movement
+  * Cooldown on firing
+  * Sound effects
+  * Music
 
 * Debug tools
   * Hook rdprintf to display lua line info from print()

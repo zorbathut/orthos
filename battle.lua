@@ -76,6 +76,19 @@ local function MakeEntity(x, y)
     end
   end
   
+  function fram:FireSecondary()
+    Command.Coro.Play(function ()
+      local blast = Frames.Texture(fram)
+      blast:SetTexture("placeholder/blaster.png")
+      blast:SetPoint(0, 0.5, img, "CENTER")
+      blast:SetLayer(-1)  -- behind the player
+      
+      Command.Coro.Wait(0.06)
+      
+      blast:Obliterate()
+    end)
+  end
+  
   fram:Warp(x, y)
   
   return fram
@@ -92,5 +105,7 @@ Event.System.Key.Down:Attach(function (key)
     player:ShiftTry(-1, 0)
   elseif key == "Right" then
     player:ShiftTry(1, 0)
+  elseif key == "x" then
+    player:FireSecondary()
   end
 end)
