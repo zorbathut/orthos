@@ -1,0 +1,209 @@
+Name	Type	Description
+Spike	Steel	One point of damage applied to the first hitscan target
+Spike	Steel	One point of damage applied to the first hitscan target
+Spike	Steel	One point of damage applied to the first hitscan target
+Spike	Steel	One point of damage applied to the first hitscan target
+Toss	Steel	Thrown item, 1 point damage
+Toss	Steel	Thrown item, 1 point damage
+Toss	Steel	Thrown item, 1 point damage
+Toss	Steel	Thrown item, 1 point damage
+Blast	Steel	AOE column
+Blast	Steel	AOE column
+Blast	Steel	AOE column
+Blast	Steel	AOE column
+Explode	Steel	AOE row
+Explode	Steel	AOE row
+Explode	Steel	AOE row
+Explode	Steel	AOE row
+Stab	Steel	Attack enemy in front, range 2
+Stab	Steel	Attack enemy in front, range 2
+Stab	Steel	Attack enemy in front, range 2
+Stab	Steel	Attack enemy in front, range 2
+Stab	Flow	Attack enemy in front, range 2
+Stab	Flow	Attack enemy in front, range 2
+Stab	Flow	Attack enemy in front, range 2
+Stab	Flow	Attack enemy in front, range 2
+Slice	Steel	Attack enemy in front wide 3
+Slice	Steel	Attack enemy in front wide 3
+Slice	Steel	Attack enemy in front wide 3
+Slice	Steel	Attack enemy in front wide 3
+Slice	Flow	Attack enemy in front wide 3
+Slice	Flow	Attack enemy in front wide 3
+Slice	Flow	Attack enemy in front wide 3
+Slice	Flow	Attack enemy in front wide 3
+Wall	Home	Create wall blocking enemy projectiles, wall item is destroyed on contact
+Wall	Home	Create wall blocking enemy projectiles, wall item is destroyed on contact
+Wall	Home	Create wall blocking enemy projectiles, wall item is destroyed on contact
+Wall	Home	Create wall blocking enemy projectiles, wall item is destroyed on contact
+Wall	Unity	Create wall blocking enemy projectiles, wall item is destroyed on contact
+Wall	Unity	Create wall blocking enemy projectiles, wall item is destroyed on contact
+Wall	Unity	Create wall blocking enemy projectiles, wall item is destroyed on contact
+Wall	Unity	Create wall blocking enemy projectiles, wall item is destroyed on contact
+Penetrator	Steel	Goes through first target without damage, impacts second target
+Penetrator	Steel	Goes through first target without damage, impacts second target
+Penetrator	Steel	Goes through first target without damage, impacts second target
+Penetrator	Steel	Goes through first target without damage, impacts second target
+Penetrator	Unity	Goes through first target without damage, impacts second target
+Penetrator	Unity	Goes through first target without damage, impacts second target
+Penetrator	Unity	Goes through first target without damage, impacts second target
+Penetrator	Unity	Goes through first target without damage, impacts second target
+Electrodes	Regret	Fires three projectiles, does damage per projectile if at least 2 hit
+Electrodes	Regret	Fires three projectiles, does damage per projectile if at least 2 hit
+Electrodes	Regret	Fires three projectiles, does damage per projectile if at least 2 hit
+Electrodes	Regret	Fires three projectiles, does damage per projectile if at least 2 hit
+Electrodes	Unity	Fires three projectiles, does damage per projectile if at least 2 hit
+Electrodes	Unity	Fires three projectiles, does damage per projectile if at least 2 hit
+Electrodes	Unity	Fires three projectiles, does damage per projectile if at least 2 hit
+Electrodes	Unity	Fires three projectiles, does damage per projectile if at least 2 hit
+Wave	Sound	Slow-moving wave that hits targets as it goes, counts as enemy so blocks projectiles and can be destroyed
+Wave	Sound	Slow-moving wave that hits targets as it goes, counts as enemy so blocks projectiles and can be destroyed
+Wave	Sound	Slow-moving wave that hits targets as it goes, counts as enemy so blocks projectiles and can be destroyed
+Wave	Sound	Slow-moving wave that hits targets as it goes, counts as enemy so blocks projectiles and can be destroyed
+Blockage	Sound	Block the two panels directly in front of player
+Blockage	Sound	Block the two panels directly in front of player
+Blockage	Sound	Block the two panels directly in front of player
+Blockage	Sound	Block the two panels directly in front of player
+Dash	Sound	Travel directly forward until reaching the end of the grid or an enemy, then swing sword.
+Dash	Sound	Travel directly forward until reaching the end of the grid or an enemy, then swing sword.
+Dash	Sound	Travel directly forward until reaching the end of the grid or an enemy, then swing sword.
+Dash	Sound	Travel directly forward until reaching the end of the grid or an enemy, then swing sword.
+Dash	Flow	Travel directly forward until reaching the end of the grid or an enemy, then swing sword.
+Dash	Flow	Travel directly forward until reaching the end of the grid or an enemy, then swing sword.
+Dash	Flow	Travel directly forward until reaching the end of the grid or an enemy, then swing sword.
+Dash	Flow	Travel directly forward until reaching the end of the grid or an enemy, then swing sword.
+Capture	Sound	Capture panel directly in front of player, does damage if target is enemy
+Capture	Sound	Capture panel directly in front of player, does damage if target is enemy
+Capture	Sound	Capture panel directly in front of player, does damage if target is enemy
+Capture	Sound	Capture panel directly in front of player, does damage if target is enemy
+Acquire	Sound	Take one panel from enemy
+Acquire	Sound	Take one panel from enemy
+Acquire	Sound	Take one panel from enemy
+Acquire	Sound	Take one panel from enemy
+Acquire	Home	Take one panel from enemy
+Acquire	Home	Take one panel from enemy
+Acquire	Home	Take one panel from enemy
+Acquire	Home	Take one panel from enemy
+Unstable Defender	Steel	On hit, take no damage and fire a hitscan bolt directly forward
+Unstable Defender	Steel	On hit, take no damage and fire a hitscan bolt directly forward
+Unstable Defender	Steel	On hit, take no damage and fire a hitscan bolt directly forward
+Unstable Defender	Steel	On hit, take no damage and fire a hitscan bolt directly forward
+Unstable Defender	Regret	On hit, take no damage and fire a hitscan bolt directly forward
+Unstable Defender	Regret	On hit, take no damage and fire a hitscan bolt directly forward
+Unstable Defender	Regret	On hit, take no damage and fire a hitscan bolt directly forward
+Unstable Defender	Regret	On hit, take no damage and fire a hitscan bolt directly forward
+Blast Defender	Regret	On hit, take no damage and damage all enemies in 3x3 around the player
+Blast Defender	Regret	On hit, take no damage and damage all enemies in 3x3 around the player
+Blast Defender	Regret	On hit, take no damage and damage all enemies in 3x3 around the player
+Blast Defender	Regret	On hit, take no damage and damage all enemies in 3x3 around the player
+Blast Defender	Unity	On hit, take no damage and damage all enemies in 3x3 around the player
+Blast Defender	Unity	On hit, take no damage and damage all enemies in 3x3 around the player
+Blast Defender	Unity	On hit, take no damage and damage all enemies in 3x3 around the player
+Blast Defender	Unity	On hit, take no damage and damage all enemies in 3x3 around the player
+Fortify	Home	Adds an extra hit to your three back panels
+Fortify	Home	Adds an extra hit to your three back panels
+Fortify	Home	Adds an extra hit to your three back panels
+Fortify	Home	Adds an extra hit to your three back panels
+Weaken	Sound	Weaken back row of enemy grid for a time
+Weaken	Sound	Weaken back row of enemy grid for a time
+Weaken	Sound	Weaken back row of enemy grid for a time
+Weaken	Sound	Weaken back row of enemy grid for a time
+Stun/disable/transmute	Regret	Hitscan enemy disabled for a time
+Stun/disable/transmute	Regret	Hitscan enemy disabled for a time
+Stun/disable/transmute	Regret	Hitscan enemy disabled for a time
+Stun/disable/transmute	Regret	Hitscan enemy disabled for a time
+Recompile	Home	Rebuild all panels adjacent to character, + pattern
+Recompile	Home	Rebuild all panels adjacent to character, + pattern
+Recompile	Home	Rebuild all panels adjacent to character, + pattern
+Recompile	Home	Rebuild all panels adjacent to character, + pattern
+Timer	Home	Drop time bomb 1 square ahead, explodes if not hit
+Timer	Home	Drop time bomb 1 square ahead, explodes if not hit
+Timer	Home	Drop time bomb 1 square ahead, explodes if not hit
+Timer	Home	Drop time bomb 1 square ahead, explodes if not hit
+Cloud	Home	Moving zone of damage within the enemy grid
+Cloud	Home	Moving zone of damage within the enemy grid
+Cloud	Home	Moving zone of damage within the enemy grid
+Cloud	Home	Moving zone of damage within the enemy grid
+Mine	Steel	Places mine within enemy grid, explodes when enemy moves over it
+Mine	Steel	Places mine within enemy grid, explodes when enemy moves over it
+Mine	Steel	Places mine within enemy grid, explodes when enemy moves over it
+Mine	Steel	Places mine within enemy grid, explodes when enemy moves over it
+Mine	Home	Places mine within enemy grid, explodes when enemy moves over it
+Mine	Home	Places mine within enemy grid, explodes when enemy moves over it
+Mine	Home	Places mine within enemy grid, explodes when enemy moves over it
+Mine	Home	Places mine within enemy grid, explodes when enemy moves over it
+Corrosion	Sound	Places corrosion tile within enemy grid, +1 damage when enemy is standing within it
+Corrosion	Sound	Places corrosion tile within enemy grid, +1 damage when enemy is standing within it
+Corrosion	Sound	Places corrosion tile within enemy grid, +1 damage when enemy is standing within it
+Corrosion	Sound	Places corrosion tile within enemy grid, +1 damage when enemy is standing within it
+Corrosion	Home	Places corrosion tile within enemy grid, +1 damage when enemy is standing within it
+Corrosion	Home	Places corrosion tile within enemy grid, +1 damage when enemy is standing within it
+Corrosion	Home	Places corrosion tile within enemy grid, +1 damage when enemy is standing within it
+Corrosion	Home	Places corrosion tile within enemy grid, +1 damage when enemy is standing within it
+Glue	Flow	Places glue tile within enemy grid, holds enemy in place for a time
+Glue	Flow	Places glue tile within enemy grid, holds enemy in place for a time
+Glue	Flow	Places glue tile within enemy grid, holds enemy in place for a time
+Glue	Flow	Places glue tile within enemy grid, holds enemy in place for a time
+Glue	Home	Places glue tile within enemy grid, holds enemy in place for a time
+Glue	Home	Places glue tile within enemy grid, holds enemy in place for a time
+Glue	Home	Places glue tile within enemy grid, holds enemy in place for a time
+Glue	Home	Places glue tile within enemy grid, holds enemy in place for a time
+Steal	Regret	Places steal tile within enemy grid, one (or two?) shots by the enemy when on the tile are reversed
+Steal	Regret	Places steal tile within enemy grid, one (or two?) shots by the enemy when on the tile are reversed
+Steal	Regret	Places steal tile within enemy grid, one (or two?) shots by the enemy when on the tile are reversed
+Steal	Regret	Places steal tile within enemy grid, one (or two?) shots by the enemy when on the tile are reversed
+Satellite	Regret	Make a target appear and move around both areas. When an enemy is targeted, the satellite will start rapidly shooting a machine gun at the target.
+Satellite	Regret	Make a target appear and move around both areas. When an enemy is targeted, the satellite will start rapidly shooting a machine gun at the target.
+Satellite	Regret	Make a target appear and move around both areas. When an enemy is targeted, the satellite will start rapidly shooting a machine gun at the target.
+Satellite	Regret	Make a target appear and move around both areas. When an enemy is targeted, the satellite will start rapidly shooting a machine gun at the target.
+Satellite	Unity	Make a target appear and move around both areas. When an enemy is targeted, the satellite will start rapidly shooting a machine gun at the target.
+Satellite	Unity	Make a target appear and move around both areas. When an enemy is targeted, the satellite will start rapidly shooting a machine gun at the target.
+Satellite	Unity	Make a target appear and move around both areas. When an enemy is targeted, the satellite will start rapidly shooting a machine gun at the target.
+Satellite	Unity	Make a target appear and move around both areas. When an enemy is targeted, the satellite will start rapidly shooting a machine gun at the target.
+Patch	Home	Make an item appear in your back row, which occasionally repairs your grid if it remains undamaged.
+Patch	Home	Make an item appear in your back row, which occasionally repairs your grid if it remains undamaged.
+Patch	Home	Make an item appear in your back row, which occasionally repairs your grid if it remains undamaged.
+Patch	Home	Make an item appear in your back row, which occasionally repairs your grid if it remains undamaged.
+Accelerator	Sound	Places a booster on a tile. Any shot passing over it does +1 damage
+Accelerator	Sound	Places a booster on a tile. Any shot passing over it does +1 damage
+Accelerator	Sound	Places a booster on a tile. Any shot passing over it does +1 damage
+Accelerator	Sound	Places a booster on a tile. Any shot passing over it does +1 damage
+Accelerator	Regret	Places a booster on a tile. Any shot passing over it does +1 damage
+Accelerator	Regret	Places a booster on a tile. Any shot passing over it does +1 damage
+Accelerator	Regret	Places a booster on a tile. Any shot passing over it does +1 damage
+Accelerator	Regret	Places a booster on a tile. Any shot passing over it does +1 damage
+Decelerator	Sound	Places a booster on a tile. Any shot passing over it does -1 damage
+Decelerator	Sound	Places a booster on a tile. Any shot passing over it does -1 damage
+Decelerator	Sound	Places a booster on a tile. Any shot passing over it does -1 damage
+Decelerator	Sound	Places a booster on a tile. Any shot passing over it does -1 damage
+Decelerator	Regret	Places a booster on a tile. Any shot passing over it does -1 damage
+Decelerator	Regret	Places a booster on a tile. Any shot passing over it does -1 damage
+Decelerator	Regret	Places a booster on a tile. Any shot passing over it does -1 damage
+Decelerator	Regret	Places a booster on a tile. Any shot passing over it does -1 damage
+Defender	Home	Places a tile that blocks three attacks if you stand in it
+Defender	Home	Places a tile that blocks three attacks if you stand in it
+Defender	Home	Places a tile that blocks three attacks if you stand in it
+Defender	Home	Places a tile that blocks three attacks if you stand in it
+Radiation	Regret	All enemies create a 3x3 circle that harms other enemies
+Radiation	Regret	All enemies create a 3x3 circle that harms other enemies
+Radiation	Regret	All enemies create a 3x3 circle that harms other enemies
+Radiation	Regret	All enemies create a 3x3 circle that harms other enemies
+Radiation	Unity	All enemies create a 3x3 circle that harms other enemies
+Radiation	Unity	All enemies create a 3x3 circle that harms other enemies
+Radiation	Unity	All enemies create a 3x3 circle that harms other enemies
+Radiation	Unity	All enemies create a 3x3 circle that harms other enemies
+Pull	Flow	Move all enemies closer
+Pull	Flow	Move all enemies closer
+Pull	Flow	Move all enemies closer
+Pull	Flow	Move all enemies closer
+Push	Flow	Move all enemies further
+Push	Flow	Move all enemies further
+Push	Flow	Move all enemies further
+Push	Flow	Move all enemies further
+Grapple	Flow	Drag hitscan enemy 2x closer
+Grapple	Flow	Drag hitscan enemy 2x closer
+Grapple	Flow	Drag hitscan enemy 2x closer
+Grapple	Flow	Drag hitscan enemy 2x closer
+Repel	Flow	Drag hitscan enemy 2x further
+Repel	Flow	Drag hitscan enemy 2x further
+Repel	Flow	Drag hitscan enemy 2x further
+Repel	Flow	Drag hitscan enemy 2x further

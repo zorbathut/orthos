@@ -1,4 +1,6 @@
 
+* paper mockup
+
 * REMEMBER THE AVENGERS
 * don't show the bits that are unimportant
 
@@ -29,3 +31,93 @@
 * Prototype intro sequence
 
 * Write plot?
+  * make sure each character has motivations and a reason to be there
+
+* more twewy analysis
+  * boss battles
+  * how did they keep you fighting things
+
+* deconstruct
+  * hp health mechanic
+  * card mechanic
+  * loot after killing
+    * "money"?
+    * chips?
+    * ???
+  
+
+======== LONG-TERM
+
+* Different art style for each realm
+  * faces on everything in tech realm? think gurren lagann
+
+* Create hypothesis, test, learn, adjust, repeat
+
+======== PR
+
+* Mailing list
+* Webcasting
+* Start posting on forums
+  * igf forum
+  * sa
+  * reddit
+  * ?
+
+======== UNCARING
+
+======== NOTES
+
+* Bio/gaia - gestalt consciousness? Telekinetic? Unconscious melange?
+* http://january.cc/ - music?
+* make sure music links to everything
+
+
+=== chip notes
+
+Basic concepts that show up:
+* Hitscan weapon
+* Thrown weapon
+* AOE effects (penetrate, row, column, x, square)
+* Elemental effects
+* Melee effects
+* Attack increases based on damage taken
+* Shockwave effects?
+* "Make a row of flaming towers appear, damaging any enemies that touch the flames." - wall effects?
+* Panel destroyers
+* Multishot forward
+* Forward, turn to impact enemy (basically a homing device?)
+* "A wave moves forward, one row at a time, hitting all enemy panels to cause watery damage."
+* "A small electrical ball moves ahead, hitting any enemy that touches it with a strong electric attack."
+* Defensive counterattacks?
+* Circles hero
+* AOE around hero
+* "A small snake is released into the enemy area, and whatever enemy that gets hit by it will sustain wood-based damage."
+* "Dash straight ahead quickly to attack the enemy, recovering some HP from that attack."
+* Player-movement effects
+* Vampire effects
+* Panel capture
+* Shield
+* Heal
+* Panel crackers - what does that mean in context? Panel reinforcers?
+* Enemy stun/disable/transmute
+* Repair
+* Time bomb - destroy before it explodes
+* Make a cloud appear and send it to one of the enemy rows. It will then move north and south, raining on any enemies in the way to cause damage.
+* Place a hidden mine in a random panel of the enemy's area. When the enemy passes over it, it detonates to cause damage. - this is so passive
+* Trap effects
+* Make a target appear and move around the enemy area. When an enemy is targeted, the satellite will start rapidly shooting a machine gun at the target.
+* Make a candle appear in your back row, which constantly recovers your HP as long as it's left undamaged.
+* passive buff effects?
+* Make an Anubis statue appear, which damages all enemies as long as it's undamaged.
+* Invulnerability
+* Invisibility
+* Stationary
+* Barrier - hit once, no damage, absorb, damage limits positive or negative, or other various effects, maybe elemental
+* All enemies radiate flame? I like effects that hit enemies
+* shotgun hitscan, shotgun penetrate?
+
+* categories:
+  * damage
+  * redirection
+  * boost
+  * ?

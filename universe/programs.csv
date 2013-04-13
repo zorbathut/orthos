@@ -1,0 +1,40 @@
+Spike;X;;;;;;X;;;2;;X;;;;;;1;One point of damage applied to the first hitscan target;Difficult to balance, but we need something like this for the tutorial
+Toss;X;;;;;;X;;;2;;X;;;;;;1;Thrown item, 1 point damage;
+Blast;;;;;;;X;;;1;;X;;;;;;1;AOE column;
+Explode;;;;;;;X;;;1;;X;;;;;;1;AOE row;Don’t like these two, seems to violate orthos’s rules
+Stab;;;;X;;;;;;1;;X;;X;;;;2;Attack enemy in front, range 2;Maybe range 2 instead?
+Slice;;;;X;;;;;;1;;X;;X;;;;2;Attack enemy in front wide 3;Not very orthogonal except in the most literal sense
+Wall;;;;;X;X;;;;2;;;;;X;X;;2;Create wall blocking enemy projectiles, wall item is destroyed on contact;
+Penetrator;;;;;;;X;X;;2;;X;;;;X;;2;Goes through first target without damage, impacts second target;
+Electrodes;;;X;;;;;;X;2;;;;;;X;X;2;Fires three projectiles, does damage per projectile if at least 2 hit;
+Wave;;X;;;;;;;;1;;;X;;;;;1;Slow-moving wave that hits targets as it goes, counts as enemy so blocks projectiles and can be destroyed;Do enemies need to be smart enough to avoid it?
+Blockage;;;;;X;;;;;1;;;X;;;;;1;Block the two panels directly in front of player;
+Dash;;X;;X;;;;;;2;;;X;X;;;;2;Travel directly forward until reaching the end of the grid or an enemy, then swing sword.;
+Capture;;;X;;;;;;;1;;;X;;;;;1;Capture panel directly in front of player, does damage if target is enemy;
+Acquire;;;X;;;X;;;;2;;;X;;X;;;2;Take one panel from enemy;Needs a pretty big minus – what’s the impact?
+Unstable Defender;X;;;;;;X;;X;3;;X;;;;;X;2;On hit, take no damage and fire a hitscan bolt directly forward;
+Blast Defender;;;;;;;;X;X;2;;;;;;X;X;2;On hit, take no damage and damage all enemies in 3x3 around the player;
+Fortify;;;;;X;X;;;;2;;;;;X;;;1;Adds an extra hit to your three back panels;
+Weaken;;;X;;;;;;;1;;;X;;;;;1;Weaken back row of enemy grid for a time;
+Stun/disable/transmute;;;;;X;;;;X;2;;;;;;;X;1;Hitscan enemy disabled for a time;Not sure what to do with this
+Recompile;;;;;;X;;;;1;;;;;X;;;1;Rebuild all panels adjacent to character, + pattern;
+Timer;;;;;X;;;;;1;;;;;X;;;1;Drop time bomb 1 square ahead, explodes if not hit;1 square ahead?
+Cloud;;;;;X;;;;;1;;;;;X;;;1;Moving zone of damage within the enemy grid;Same “enemies should avoid it” deal? Or maybe it needs to follow the player somehow?
+Mine;X;;;;;;;;;1;;X;;;X;;;2;Places mine within enemy grid, explodes when enemy moves over it;Very passive, but I like that you place it in advance. Back tier only? Think of more traps?
+Corrosion;X;;;;;;;;;1;;;X;;X;;;2;Places corrosion tile within enemy grid, +1 damage when enemy is standing within it;
+Glue;X;;;X;;;;;;2;;;;X;X;;;2;Places glue tile within enemy grid, holds enemy in place for a time;
+Steal;;;;;;X;;;X;2;;;;;;;X;1;Places steal tile within enemy grid, one (or two?) shots by the enemy when on the tile are reversed;
+Satellite;;;;;X;;;X;X;3;;;;;;X;X;2;Make a target appear and move around both areas. When an enemy is targeted, the satellite will start rapidly shooting a machine gun at the target.;
+Patch;;;;;X;X;;;;2;;;;;X;;;1;Make an item appear in your back row, which occasionally repairs your grid if it remains undamaged.;
+Accelerator;;;X;;;;;;X;2;;;X;;;;X;2;Places a booster on a tile. Any shot passing over it does +1 damage;
+Decelerator;;;X;;;;;;X;2;;;X;;;;X;2;Places a booster on a tile. Any shot passing over it does -1 damage;
+??? elemental effects;;;;;;;;;;0;;;;;;;;0;Play around with adding modifiers?;
+Redirector;;;;;;;;;;0;;;;;;;;0;Redirects a shot at 90 degrees towards the center of the grid (phrase this better);
+Dot;;;;;;;;;;0;;;;;;;;0;Places an item that causes constant damage to the enemy over time;
+Defender;;;;;;X;;;;1;;;;;X;;;1;Places a tile that blocks three attacks if you stand in it;
+Barrier;;;;;;;;;;0;;;;;;;;0;;Various things that block conditionally – maybe enemies need elements?
+Radiation;;;;;;;;X;X;2;;;;;;X;X;2;All enemies create a 3x3 circle that harms other enemies;
+Pull;;X;;X;;;;;;2;;;;X;;;;1;Move all enemies closer;
+Push;;X;;X;;;;;;2;;;;X;;;;1;Move all enemies further;
+Grapple;;X;;X;;;;;;2;;;;X;;;;1;Drag hitscan enemy 2x closer;
+Repel;;X;;X;;;;;;2;;;;X;;;;1;Drag hitscan enemy 2x further;
