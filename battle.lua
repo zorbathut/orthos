@@ -1,13 +1,17 @@
 
-local deckOriginal = {}
+local deckDiscard = {}
 for k = 1, 40 do
-  table.insert(deckOriginal, {name = "Card" .. k, type = "Steel"})
+  table.insert(deckDiscard, {name = "Card" .. k, type = "Steel"})
 end
 
 local deckStack = {}
-local function deckReroll()
+local function deckDraw()
+  if #deckStack > 0 then
+    return table.remove(deckStack)
+  end
+  
   deckStack = {}
-  for k, v in pairs(deckOriginal) do
+  for k, v in pairs(deckDiscard) do
     table.insert(deckStack, v)
   end
   
@@ -18,35 +22,34 @@ local function deckReroll()
     deckStack[srcidx] = deckStack[k]
     deckStack[k] = sitem
   end
+  
+  deckDiscard = {}
+  
+  assert(#deckStack > 0)
+  return table.remove(deckStack) -- explodes if for some reason we have all cards being held
 end
-deckReroll()
+local function deckDiscard(card)
+  table.insert(deckDiscard, card)
+end
 
 local deckActive = {}
 
 local decking = false
 local function deckChoose()
-  deckActive = {}
+  while #deckActive > 0 do
+    deckDiscard(table.remove(deckActive))
+  end
+  
   decking = true
   
-  local deckbuild = Command.Environment.Create(_G, "Deck", "battle_deckbuild.lua")
+  local deckbuild = Command.Environment.Create(_G, "Deck", function (env)
+    Command.Environment.Insert(env, "Command.Deck.Draw", deckDraw)
+    Command.Environment.Insert(env, "Command.Deck.Discard", deckDiscard)
+  end, "battle_deckbuild.lua")
   
-  deckbuild.Frames.Root:SetLayer(100) -- always on top
-  deckbuild.Frames.Root:SetBackground(0, 0, 0, 0.2)
   deckbuild.Event.Deck.Created:Attach(function (deck)
-    -- Remove deck from our stack
-    local used = {}
-    for k, v in pairs(deck) do
-      used[v] = true
-    end
+    deckActive = deck
     
-    local newdeckstack = {}
-    for k, v in pairs(deckStack) do
-      if not used[v] then
-        table.insert(newdeckstack, v)
-      end
-    end
-    
-    deckStack = newdeckstack
     Command.Environment.Destroy(deckbuild)
     
     -- one-frame delay because otherwise we try to autofire
