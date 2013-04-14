@@ -1,4 +1,64 @@
 
+local deckOriginal = {}
+for k = 1, 40 do
+  table.insert(deckOriginal, {name = "Card" .. k, type = "Steel"})
+end
+
+local deckStack = {}
+local function deckReroll()
+  deckStack = {}
+  for k, v in pairs(deckOriginal) do
+    table.insert(deckStack, v)
+  end
+  
+  -- shuffle
+  for k in ipairs(deckStack) do
+    local srcidx = math.random(#deckStack - k + 1) + k - 1
+    local sitem = deckStack[srcidx]
+    deckStack[srcidx] = deckStack[k]
+    deckStack[k] = sitem
+  end
+end
+deckReroll()
+
+local deckActive = {}
+
+local decking = false
+local function deckChoose()
+  deckActive = {}
+  decking = true
+  
+  local deckbuild = Command.Environment.Create(_G, "Deck", "battle_deckbuild.lua")
+  
+  deckbuild.Frames.Root:SetLayer(100) -- always on top
+  deckbuild.Frames.Root:SetBackground(0, 0, 0, 0.2)
+  deckbuild.Event.Deck.Created:Attach(function (deck)
+    -- Remove deck from our stack
+    local used = {}
+    for k, v in pairs(deck) do
+      used[v] = true
+    end
+    
+    local newdeckstack = {}
+    for k, v in pairs(deckStack) do
+      if not used[v] then
+        table.insert(newdeckstack, v)
+      end
+    end
+    
+    deckStack = newdeckstack
+    Command.Environment.Destroy(deckbuild)
+    
+    -- one-frame delay because otherwise we try to autofire
+    -- todo: rig up better event control
+    Command.Coro.Play(function ()
+      coroutine.yield()
+      decking = false
+    end)
+  end)
+end
+deckChoose()
+
 local gridsize = 200
 local border = 5
 local outline = 5
@@ -76,6 +136,7 @@ local function MakeEntity(x, y)
     end
   end
   
+  -- currently not even using this
   function fram:FireSecondary()
     Command.Coro.Play(function ()
       local blast = Frames.Texture(fram)
@@ -97,6 +158,8 @@ end
 local player = MakeEntity(1, 2)
 
 Event.System.Key.Down:Attach(function (key)
+  if decking then return end
+  
   if key == "Up" then
     player:ShiftTry(0, -1)
   elseif key == "Down" then
@@ -105,7 +168,7 @@ Event.System.Key.Down:Attach(function (key)
     player:ShiftTry(-1, 0)
   elseif key == "Right" then
     player:ShiftTry(1, 0)
-  elseif key == "x" then
-    player:FireSecondary()
+  elseif key == "z" then
+    player:FirePrimary()
   end
 end)
