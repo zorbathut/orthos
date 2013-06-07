@@ -107,8 +107,8 @@ entities:SetLayer(1)
 local function MakeEntity(x, y)
   local fram = Frames.Frame(entities)
   local img = Frames.Texture(fram)
-  img:SetPoint("CENTER", fram, "CENTER")
-  img:SetTexture("copyright_infringement/hero_kid")
+  img:SetPoint(0.5, 0.7, fram, "CENTER")
+  img:SetTexture("noncommercial/hero")
   
   function fram:CanTravel(x, y)
     return grid[x] and grid[x][y] and not grid[x][y].enemy
