@@ -10,6 +10,7 @@ local function MakeBorder(target)
   return cminibg
 end
 
+-- keys and key handlers
 local selects = {}
 local cards = {}
 for k = 1, 5 do
@@ -22,15 +23,35 @@ for k = 1, 5 do
   cardbig:SetPoint("CENTER", Frames.Root, "CENTER")
   cardbig:SetVisible(false)
   
-  table.insert(selects, {card = card, mini = cardmini, bg = MakeBorder(cardmini), big = cardbig})
+  table.insert(selects, {card = card, selectable = cardmini, bg = MakeBorder(cardmini), big = cardbig})
 end
 
-do
-  local accept = Command.Art.Button.Accept(Frames.Root)
-  accept:SetPoint("CENTER", Frames.Root, "CENTER", 200, 200)
-  table.insert(selects, {big = Frames.Frame(Frames.Root), bg = MakeBorder(accept)})
-end
+local backButton = Command.Art.Button.Back(Frames.Root)
+backButton:SetPoint("CENTER", Frames.Root, "CENTER", 200, 200)
+table.insert(selects, {selectable = backButton, big = Frames.Frame(Frames.Root), bg = MakeBorder(backButton)})
 
+local acceptButton = Command.Art.Button.Accept(Frames.Root)
+acceptButton:SetPoint("CENTER", Frames.Root, "CENTER", 250, 200)
+table.insert(selects, {selectable = backButton, big = Frames.Frame(Frames.Root), bg = MakeBorder(acceptButton)})
+
+
+local function resyncHighlights()
+  for _, v in ipairs(selects) do
+    v.selectable:SetDisable(false)
+  end
+  
+  for _, v in ipairs(cards) do
+    v.display:SetDisable(true)
+  end
+  
+  if not next(cards) then
+    backButton:SetDisable(true)
+  end
+end
+resyncHighlights()
+
+
+-- selection
 local selected = nil
 
 Command.Environment.Insert(_G, "Command.Deckbuilder.Select", function (item)
@@ -53,5 +74,9 @@ Event.System.Key.Down:Attach(function (key)
     Command.Deckbuilder.Select(math.min(selected + 1, #selects))
   elseif key == "Left" then
     Command.Deckbuilder.Select(math.max(selected - 1, 1))
+  elseif key == "z" then
+    if selects[selected].Trigger then
+      selects[selected]:Trigger()
+    end
   end
 end)

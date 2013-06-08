@@ -1,5 +1,6 @@
 
-* paper mockup
+* selectable cards, ability to dump the cards back to the game
+
 
 * REMEMBER THE AVENGERS
 * don't show the bits that are unimportant

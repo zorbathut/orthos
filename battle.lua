@@ -46,6 +46,7 @@ local function deckChoose()
     Command.Environment.Insert(env, "Command.Deck.Draw", deckDraw)
     Command.Environment.Insert(env, "Command.Deck.Discard", deckDiscard)
   end, "battle_deckbuild.lua")
+  deckbuild.Frames.Root:SetLayer(1)
   
   deckbuild.Event.Deck.Created:Attach(function (deck)
     deckActive = deck
