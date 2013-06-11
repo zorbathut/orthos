@@ -1,6 +1,10 @@
 
-* selectable cards, ability to dump the cards back to the game
-
+* Using abilities
+* Main cycle to go back to ability choice
+* Basic monster
+  * timer attack
+* Player damage (and lose)
+* Monster damage (and win)
 
 * REMEMBER THE AVENGERS
 * don't show the bits that are unimportant
