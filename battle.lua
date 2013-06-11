@@ -5,7 +5,7 @@ for k = 1, 40 do
 end
 
 local deckStack = {}
-local function deckDraw()
+Command.Environment.Insert(_G, "Command.Deck.Draw", function ()
   if #deckStack > 0 then
     return table.remove(deckStack)
   end
@@ -27,25 +27,23 @@ local function deckDraw()
   
   assert(#deckStack > 0)
   return table.remove(deckStack) -- explodes if for some reason we have all cards being held
-end
-local function deckDiscard(card)
+end)
+
+Command.Environment.Insert(_G, "Command.Deck.Discard", function (card)
   table.insert(deckDiscard, card)
-end
+end)
 
 local deckActive = {}
 
 local decking = false
 local function deckChoose()
   while #deckActive > 0 do
-    deckDiscard(table.remove(deckActive))
+    Command.Deck.Discard(table.remove(deckActive))
   end
   
   decking = true
   
-  local deckbuild = Command.Environment.Create(_G, "Deck", function (env)
-    Command.Environment.Insert(env, "Command.Deck.Draw", deckDraw)
-    Command.Environment.Insert(env, "Command.Deck.Discard", deckDiscard)
-  end, "battle_deckbuild.lua")
+  local deckbuild = Command.Environment.Create(_G, "Deck", "battle_deckbuild.lua")
   deckbuild.Frames.Root:SetLayer(100)
   
   deckbuild.Event.Deck.Created:Attach(function (deck)
@@ -53,6 +51,7 @@ local function deckChoose()
     deckActive = deck
     
     Command.Environment.Destroy(deckbuild)
+    deckbuild = nil -- let cleanup happen
     
     -- one-frame delay because otherwise we try to autofire
     -- todo: rig up better event control
@@ -141,10 +140,28 @@ local function MakeEntity(x, y)
     end
   end
   
+  fram:Warp(x, y)
+  
+  return fram
+end
+
+function MakePlayer(x, y)
+  local player = MakeEntity(x, y)
+  
+  function player:FirePrimary()
+    if #deckActive > 0 then
+      print("kazam! item:")
+      dump(deckActive[1])
+      table.remove(deckActive, 1)
+    else
+      deckChoose()
+    end
+  end
+
   -- currently not even using this
-  function fram:FireSecondary()
+  function player:FireSecondary()
     Command.Coro.Play(function ()
-      local blast = Frames.Texture(fram)
+      local blast = Frames.Texture(player)
       blast:SetTexture("placeholder/blaster.png")
       blast:SetPoint(0, 0.5, img, "CENTER")
       blast:SetLayer(-1)  -- behind the player
@@ -155,12 +172,10 @@ local function MakeEntity(x, y)
     end)
   end
   
-  fram:Warp(x, y)
-  
-  return fram
+  return player
 end
-
-local player = MakeEntity(1, 2)
+  
+local player = MakePlayer(1, 2)
 
 Event.System.Key.Down:Attach(function (key)
   if decking then return end

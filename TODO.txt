@@ -6,6 +6,9 @@
 * Player damage (and lose)
 * Monster damage (and win)
 
+* Tool day:
+  * Trace the GC to find our frame
+
 * REMEMBER THE AVENGERS
 * don't show the bits that are unimportant
 

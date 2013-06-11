@@ -53,11 +53,29 @@ local acceptButton = Command.Art.Button.Accept(Frames.Root)
 acceptButton:SetPoint("CENTER", Frames.Root, "CENTER", 250, 200)
 local function Accept()
   if #cards > 0 then
-    created(cards)
+    -- need to discard unused cards, so we're bruteforcing it again
+    local remaining = {}
+    for _, v in ipairs(selects) do
+      if v.card then
+        remaining[v.card] = true
+      end
+    end
+    for _, v in ipairs(cards) do
+      remaining[v.card] = nil
+    end
+    for k in pairs(remaining) do
+      Command.Deck.Discard(k)
+    end
+    
+    -- need to assemble real cards
+    local realcards = {}
+    for _, v in ipairs(cards) do
+      table.insert(realcards, v.card)
+    end
+    created(realcards)
   end
 end
 table.insert(selects, {selectable = backButton, big = Frames.Frame(Frames.Root), bg = MakeBorder(acceptButton), Trigger = Accept})
-
 
 local function resyncDisplay()
   for _, v in ipairs(selects) do
