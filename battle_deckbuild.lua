@@ -1,5 +1,12 @@
-
+-- externally facing events
 local created = Command.Event.Create(_G, "Deck.Created")
+
+-- everything else
+local greyout = Frames.Frame(Frames.Root)
+greyout:SetBackground(0, 0, 0, 0.5)
+greyout:SetLayer(-1)
+greyout:SetPoint("TOPLEFT", Frames.Root, "TOPLEFT")
+greyout:SetPoint("BOTTOMRIGHT", Frames.Root, "BOTTOMRIGHT")
 
 local function MakeBorder(target)
   local cminibg = Frames.Frame(Frames.Root)
@@ -13,6 +20,7 @@ end
 -- keys and key handlers
 local selects = {}
 local cards = {}
+local cardIndicators = {}
 for k = 1, 5 do
   local card = Command.Deck.Draw()
   
@@ -23,33 +31,88 @@ for k = 1, 5 do
   cardbig:SetPoint("CENTER", Frames.Root, "CENTER")
   cardbig:SetVisible(false)
   
-  table.insert(selects, {card = card, selectable = cardmini, bg = MakeBorder(cardmini), big = cardbig})
+  local menuitem -- we will stash our menu here
+  
+  local function Choose()
+    Command.Deckbuilder.Push(menuitem)
+  end
+  
+  menuitem = {card = card, selectable = cardmini, bg = MakeBorder(cardmini), big = cardbig, Trigger = Choose}
+  
+  table.insert(selects, menuitem)
 end
 
 local backButton = Command.Art.Button.Back(Frames.Root)
 backButton:SetPoint("CENTER", Frames.Root, "CENTER", 200, 200)
-table.insert(selects, {selectable = backButton, big = Frames.Frame(Frames.Root), bg = MakeBorder(backButton)})
+local function Back()
+  Command.Deckbuilder.Pop()
+end
+table.insert(selects, {selectable = backButton, big = Frames.Frame(Frames.Root), bg = MakeBorder(backButton), Trigger = Back})
 
 local acceptButton = Command.Art.Button.Accept(Frames.Root)
 acceptButton:SetPoint("CENTER", Frames.Root, "CENTER", 250, 200)
-table.insert(selects, {selectable = backButton, big = Frames.Frame(Frames.Root), bg = MakeBorder(acceptButton)})
+local function Accept()
+  if #cards > 0 then
+    created(cards)
+  end
+end
+table.insert(selects, {selectable = backButton, big = Frames.Frame(Frames.Root), bg = MakeBorder(acceptButton), Trigger = Accept})
 
 
-local function resyncHighlights()
+local function resyncDisplay()
   for _, v in ipairs(selects) do
     v.selectable:SetDisable(false)
   end
   
   for _, v in ipairs(cards) do
-    v.display:SetDisable(true)
+    v.selectable:SetDisable(true)
   end
   
   if not next(cards) then
     backButton:SetDisable(true)
   end
+  
+  while #cardIndicators > #cards do
+    cardIndicators[#cardIndicators]:Obliterate()
+    cardIndicators[#cardIndicators] = nil
+  end
+  
+  while #cardIndicators < #cards do
+    local card = Command.Art.Button.Card(Frames.Root, cards[#cardIndicators + 1].card)
+    
+    if #cardIndicators > 0 then
+      card:SetPoint("TOPLEFT", cardIndicators[#cardIndicators], "BOTTOMLEFT", 0, 10)
+    else
+      card:SetPoint("TOPLEFT", Frames.Root, "CENTER", 175, -130)
+    end
+    
+    table.insert(cardIndicators, card)
+  end
 end
-resyncHighlights()
+resyncDisplay()
 
+Command.Environment.Insert(_G, "Command.Deckbuilder.Push", function (item)
+  local found = false
+  for _, v in ipairs(cards) do
+    if v == item then found = true end
+  end
+  
+  if found then return end
+   
+  table.insert(cards, item)
+   
+  -- show the icon for it
+   
+  resyncDisplay()
+end)
+
+Command.Environment.Insert(_G, "Command.Deckbuilder.Pop", function ()
+  table.remove(cards)
+   
+  -- show the icon for it
+   
+  resyncDisplay()
+end)
 
 -- selection
 local selected = nil
