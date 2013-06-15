@@ -102,17 +102,31 @@ for row = 1, 6 do
   end
 end
 
-local entities = Frames.Frame(Frames.Root)
-entities:SetLayer(1)
+local entityLayer = Frames.Frame(Frames.Root)
+entityLayer:SetLayer(1)
 
-local function MakeEntity(x, y)
-  local fram = Frames.Frame(entities)
+local entities = {}
+local player = nil -- filled with actual player
+
+local function MakeEntity(params)
+  local x = params.x
+  local y = params.y
+  local pic = params.pic
+  local enemy = params.enemy
+  
+  assert(x)
+  assert(y)
+  assert(pic)
+  
+  local fram = Frames.Frame(entityLayer)
   local img = Frames.Texture(fram)
   img:SetPoint(0.5, 0.7, fram, "CENTER")
-  img:SetTexture("noncommercial/hero")
+  img:SetTexture(pic)
+  
+  fram.img = img
   
   function fram:CanTravel(x, y)
-    return grid[x] and grid[x][y] and not grid[x][y].enemy
+    return grid[x] and grid[x][y] and (not grid[x][y].enemy) == (not enemy)
   end
   
   function fram:Shift(dx, dy)
@@ -142,11 +156,13 @@ local function MakeEntity(x, y)
   
   fram:Warp(x, y)
   
+  entities[fram] = true
+  
   return fram
 end
 
 function MakePlayer(x, y)
-  local player = MakeEntity(x, y)
+  local player = MakeEntity({x = x, y = y, pic = "noncommercial/hero"})
   
   function player:FirePrimary()
     if #deckActive > 0 then
@@ -174,8 +190,46 @@ function MakePlayer(x, y)
   
   return player
 end
+
+function MakeBandit(x, y)
+  local bandit = MakeEntity({x = x, y = y, pic = "noncommercial/bandit", enemy = true})
   
-local player = MakePlayer(1, 2)
+  local indicator = Frames.Text(bandit)
+  indicator:SetPoint("RIGHTCENTER", bandit.img, "LEFTCENTER")
+  indicator:SetVisible(false)
+  indicator:SetSize(20)
+  
+  bandit.Think = coroutine.wrap(function ()
+    while true do
+      if player.y == bandit.y then
+        print("On level")
+        
+        indicator:SetVisible(true)
+        local ct = 90
+        for i = 1, ct do
+          indicator:SetText(tostring(ct - i))
+          coroutine.yield()
+        end
+        
+        if player.y == bandit.y then
+          print("DAMAGE")
+        end
+        indicator:SetVisible(false)
+        
+        for i = 1, 30 do
+          coroutine.yield()
+        end
+      end
+      
+      coroutine.yield()
+    end
+  end)
+  
+  return bandit
+end
+  
+player = MakePlayer(1, 2)
+local monster = MakeBandit(6, 3)
 
 Event.System.Key.Down:Attach(function (key)
   if decking then return end
@@ -190,5 +244,15 @@ Event.System.Key.Down:Attach(function (key)
     player:ShiftTry(1, 0)
   elseif key == "z" then
     player:FirePrimary()
+  end
+end)
+
+Event.System.Tick:Attach(function ()
+  if decking then return end
+  
+  for entity in pairs(entities) do
+    if entity.Think then
+      entity.Think()
+    end
   end
 end)
