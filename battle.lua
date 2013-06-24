@@ -1,7 +1,9 @@
 
+assert(loadfile("battle_ability.lua"))()
+
 local deckDiscard = {}
 for k = 1, 40 do
-  table.insert(deckDiscard, {name = "Card" .. k, type = "Steel"})
+  table.insert(deckDiscard, {name = "Spike", type = "Steel"})
 end
 
 local deckStack = {}
@@ -55,10 +57,7 @@ local function deckChoose()
     
     -- one-frame delay because otherwise we try to autofire
     -- todo: rig up better event control
-    Command.Coro.Play(function ()
-      coroutine.yield()
-      decking = false
-    end)
+    decking = "aborting"
   end)
 end
 deckChoose()
@@ -196,10 +195,9 @@ function MakePlayer(x, y)
   
   function player:FirePrimary()
     if #deckActive > 0 then
-      print("kazam! item:")
       dump(deckActive[1])
+      Command.Battle.Cast(deckActive[1].name, self)
       table.remove(deckActive, 1)
-      Command.Battle.Damage(true)
     else
       deckChoose()
     end
@@ -324,7 +322,20 @@ Command.Environment.Insert(_G, "Command.Battle.Damage", function (enemy)
   end
 end)
 
+Command.Environment.Insert(_G, "Inspect.Battle.Grid", function ()
+  return grid
+end)
+
+Command.Environment.Insert(_G, "Inspect.Battle.Entities", function ()
+  return entities
+end)
+
+Command.Environment.Insert(_G, "Inspect.Battle.Active", function ()
+  return not decking
+end)
+
 Event.System.Key.Down:Attach(function (key)
+  if decking == "aborting" then decking = false return end  -- eugh
   if decking then return end
   
   if key == "Up" then
@@ -341,7 +352,7 @@ Event.System.Key.Down:Attach(function (key)
 end)
 
 Event.System.Tick:Attach(function ()
-  if decking then return end
+  if not Inspect.Battle.Active() then return end
   
   for entity in pairs(entities) do
     if entity.Think then

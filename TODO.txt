@@ -1,15 +1,5 @@
 
-* Player damage (and lose)
-* Monster damage (and win)
-
-* Tool day:
-  * Trace the GC to find our frame
-
-* REMEMBER THE AVENGERS
-* don't show the bits that are unimportant
-
 * Prototype combat system
-  * Win/loss conditions
   * A few basic card options
   * Choose and insert enemies
   * A few basic enemy options
@@ -18,6 +8,13 @@
     * Cooldown on firing
     * Sound effects
     * Music
+
+    
+* Tool day:
+  * Trace the GC to find our frame
+
+* REMEMBER THE AVENGERS
+* don't show the bits that are unimportant
 
 * Debug tools
   * Hook rdprintf to display lua line info from print()
