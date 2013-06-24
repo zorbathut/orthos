@@ -1,5 +1,5 @@
 (cd glorp/libs/logal && git commit -a "$@")
 (cd glorp/libs/opengal32 && git commit -a "$@")
-(cd glorp/libs/frames && git commit -a "$@")
+(cd glorp/libs/frame && git commit -a "$@")
 (cd glorp && git commit -a "$@")
 git commit -a "$@"
