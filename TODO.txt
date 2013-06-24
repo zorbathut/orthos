@@ -1,6 +1,4 @@
 
-* pax hotel reservations
-
 * Player damage (and lose)
 * Monster damage (and win)
 
@@ -11,13 +9,10 @@
 * don't show the bits that are unimportant
 
 * Prototype combat system
-  * Deck
-  * Button to choose
-  * Use cards
+  * Win/loss conditions
+  * A few basic card options
   * Choose and insert enemies
   * A few basic enemy options
-  * A few basic card options
-  * Win/loss conditions
   * Make it fun?
     * Cooldown on movement
     * Cooldown on firing
