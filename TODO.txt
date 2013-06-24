@@ -1,6 +1,7 @@
 
 * Prototype combat system
   * A few basic card options
+  * Card display!
   * Choose and insert enemies
   * A few basic enemy options
   * Make it fun?
