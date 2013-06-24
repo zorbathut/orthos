@@ -89,16 +89,40 @@ for row = 1, 6 do
     local inlay = Frame.Frame(brick)
     inlay:SetPoint("TOPLEFT", brick, "TOPLEFT", border, border)
     inlay:SetPoint("BOTTOMRIGHT", brick, "BOTTOMRIGHT", -border, -border)
-    if enemy then
-      inlay:SetBackground(0.5, 0.2, 0.2)
-    else
-      inlay:SetBackground(0.2, 0.2, 0.5)
-    end
+    
     
     local demph = Frame.Frame(inlay)
     demph:SetPoint("TOPLEFT", inlay, "TOPLEFT", border, border)
     demph:SetPoint("BOTTOMRIGHT", inlay, "BOTTOMRIGHT", -border, -border)
-    demph:SetBackground(0.1, 0.1, 0.1)
+    
+    local alive = true
+    function brick:AliveSet(in_alive)
+      alive = in_alive
+      
+      if enemy then
+        if alive then
+          inlay:SetBackground(0.5, 0.2, 0.2)
+        else
+          inlay:SetBackground(0.2, 0.0, 0.0)
+        end
+      else
+        if alive then
+          inlay:SetBackground(0.2, 0.2, 0.5)
+        else
+          inlay:SetBackground(0.0, 0.0, 0.2)
+        end
+      end
+      
+      if alive then
+        demph:SetBackground(0.1, 0.1, 0.1)
+      else
+        demph:SetBackground(0.02, 0.02, 0.02)
+      end
+    end
+    function brick:AliveGet()
+      return alive
+    end
+    brick:AliveSet(true)
   end
 end
 
@@ -126,7 +150,7 @@ local function MakeEntity(params)
   fram.img = img
   
   function fram:CanTravel(x, y)
-    return grid[x] and grid[x][y] and (not grid[x][y].enemy) == (not enemy)
+    return grid[x] and grid[x][y] and (not grid[x][y].enemy) == (not enemy) and grid[x][y]:AliveGet()
   end
   
   function fram:Shift(dx, dy)
@@ -154,6 +178,12 @@ local function MakeEntity(params)
     end
   end
   
+  function fram:Hit()
+    -- take damage if possible
+    -- this is super hacky
+    Command.Battle.Damage(grid[x][y].enemy)
+  end
+  
   fram:Warp(x, y)
   
   entities[fram] = true
@@ -169,6 +199,7 @@ function MakePlayer(x, y)
       print("kazam! item:")
       dump(deckActive[1])
       table.remove(deckActive, 1)
+      Command.Battle.Damage(true)
     else
       deckChoose()
     end
@@ -212,7 +243,7 @@ function MakeBandit(x, y)
         end
         
         if player.y == bandit.y then
-          print("DAMAGE")
+          player:Hit()
         end
         indicator:SetVisible(false)
         
@@ -230,6 +261,68 @@ end
   
 player = MakePlayer(1, 2)
 local monster = MakeBandit(6, 3)
+
+Command.Environment.Insert(_G, "Command.Battle.Bump", function (x, y)
+  for entity, _ in pairs(entities) do
+    if entity.x == x and entity.y == y then
+      -- yes, bump
+      local dx = {0, 0, 1, -1}
+      local dy = {1, -1, 0, 0}
+      local avail = {}
+      for id in ipairs(dx) do
+        if entity:CanTravel(x + dx[id], y + dy[id]) then
+          table.insert(avail, {x + dx[id], y + dy[id]})
+        end
+      end
+      
+      if #avail == 0 then
+        for nx in ipairs(grid) do
+          for ny in ipairs(grid[nx]) do
+            if entity:CanTravel(nx, ny) then
+              table.insert(avail, {nx, ny})
+            end
+          end
+        end
+      end
+      
+      if #avail == 0 then
+        if grid[x][y].enemy then
+          print("U WIN")
+        else
+          print("U LOSE")
+        end
+      else
+        local ncor = avail[math.random(#avail)]
+        entity:Warp(ncor[1], ncor[2])
+      end
+    end
+  end
+end)
+
+Command.Environment.Insert(_G, "Command.Battle.Damage", function (enemy)
+  local order
+  if enemy then
+    order = {6, 5, 4}
+  else
+    order = {1, 2, 3}
+  end
+  
+  for _, kx in ipairs(order) do
+    local available = {}
+    for ky, tab in pairs(grid[kx]) do
+      if tab:AliveGet() then
+        table.insert(available, ky)
+      end
+    end
+    
+    if #available > 0 then
+      local chosen = available[math.random(#available)]
+      grid[kx][chosen]:AliveSet(false)
+      Command.Battle.Bump(kx, chosen)
+      break
+    end
+  end
+end)
 
 Event.System.Key.Down:Attach(function (key)
   if decking then return end
