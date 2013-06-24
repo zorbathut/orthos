@@ -20,7 +20,7 @@ for c in ("ORTHOS"):gmatch(".") do
     char:SetHeight(gadgetwidth)
     local timer = math.random() * 360
     local lasttime = Inspect.System.Time.Real()
-    char:EventRenderAttach(function ()
+    char:EventAttach(Frames.Event.Render, function ()
       gl.Disable("DEPTH_TEST")
       gl.DepthFunc("LEQUAL")
       gl.DepthMask(true)

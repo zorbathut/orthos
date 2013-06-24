@@ -1,4 +1,6 @@
 
+* pax hotel reservations
+
 * Player damage (and lose)
 * Monster damage (and win)
 
