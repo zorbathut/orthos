@@ -44,7 +44,7 @@ local function deckChoose()
   decking = true
   
   local deckbuild = Command.Environment.Create(_G, "Deck", "battle_deckbuild.lua")
-  deckbuild.Frames.Root:SetLayer(100)
+  deckbuild.Frame.Root:SetLayer(100)
   
   deckbuild.Event.Deck.Created:Attach(function (deck)
     dump("Deck chosen:", deck)
@@ -67,9 +67,9 @@ local gridsize = 200
 local border = 5
 local outline = 5
 
-local grid = Frames.Frame(Frames.Root)
-grid:SetPoint("TOPLEFT", Frames.Root, "CENTER", -gridsize * 3, -gridsize * 1.5)
-grid:SetPoint("BOTTOMRIGHT", Frames.Root, "CENTER", gridsize * 3, gridsize * 1.5)
+local grid = Frame.Frame(Frame.Root)
+grid:SetPoint("TOPLEFT", Frame.Root, "CENTER", -gridsize * 3, -gridsize * 1.5)
+grid:SetPoint("BOTTOMRIGHT", Frame.Root, "CENTER", gridsize * 3, gridsize * 1.5)
 
 for row = 1, 6 do
   grid[row] = {}
@@ -78,7 +78,7 @@ for row = 1, 6 do
   if row >= 4 then enemy = true end
   
   for col = 1, 3 do
-    local brick = Frames.Frame(grid)
+    local brick = Frame.Frame(grid)
     brick.enemy = enemy
     grid[row][col] = brick
     
@@ -86,7 +86,7 @@ for row = 1, 6 do
     brick:SetWidth(gridsize)
     brick:SetHeight(gridsize)
     
-    local inlay = Frames.Frame(brick)
+    local inlay = Frame.Frame(brick)
     inlay:SetPoint("TOPLEFT", brick, "TOPLEFT", border, border)
     inlay:SetPoint("BOTTOMRIGHT", brick, "BOTTOMRIGHT", -border, -border)
     if enemy then
@@ -95,14 +95,14 @@ for row = 1, 6 do
       inlay:SetBackground(0.2, 0.2, 0.5)
     end
     
-    local demph = Frames.Frame(inlay)
+    local demph = Frame.Frame(inlay)
     demph:SetPoint("TOPLEFT", inlay, "TOPLEFT", border, border)
     demph:SetPoint("BOTTOMRIGHT", inlay, "BOTTOMRIGHT", -border, -border)
     demph:SetBackground(0.1, 0.1, 0.1)
   end
 end
 
-local entityLayer = Frames.Frame(Frames.Root)
+local entityLayer = Frame.Frame(Frame.Root)
 entityLayer:SetLayer(1)
 
 local entities = {}
@@ -118,8 +118,8 @@ local function MakeEntity(params)
   assert(y)
   assert(pic)
   
-  local fram = Frames.Frame(entityLayer)
-  local img = Frames.Texture(fram)
+  local fram = Frame.Frame(entityLayer)
+  local img = Frame.Texture(fram)
   img:SetPoint(0.5, 0.7, fram, "CENTER")
   img:SetTexture(pic)
   
@@ -177,7 +177,7 @@ function MakePlayer(x, y)
   -- currently not even using this
   function player:FireSecondary()
     Command.Coro.Play(function ()
-      local blast = Frames.Texture(player)
+      local blast = Frame.Texture(player)
       blast:SetTexture("placeholder/blaster.png")
       blast:SetPoint(0, 0.5, img, "CENTER")
       blast:SetLayer(-1)  -- behind the player
@@ -194,7 +194,7 @@ end
 function MakeBandit(x, y)
   local bandit = MakeEntity({x = x, y = y, pic = "noncommercial/bandit", enemy = true})
   
-  local indicator = Frames.Text(bandit)
+  local indicator = Frame.Text(bandit)
   indicator:SetPoint("RIGHTCENTER", bandit.img, "LEFTCENTER")
   indicator:SetVisible(false)
   indicator:SetSize(20)

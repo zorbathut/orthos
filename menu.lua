@@ -15,12 +15,12 @@ for c in ("ORTHOS"):gmatch(".") do
   if idx == 4 then
     local rwidth = gadgetwidth * descale
     
-    char = Frames.Raw(Frames.Root)
+    char = Frame.Raw(Frame.Root)
     char:SetWidth(gadgetwidth)
     char:SetHeight(gadgetwidth)
     local timer = math.random() * 360
     local lasttime = Inspect.System.Time.Real()
-    char:EventAttach(Frames.Event.Render, function ()
+    char:EventAttach(Frame.Event.Render, function ()
       gl.Disable("DEPTH_TEST")
       gl.DepthFunc("LEQUAL")
       gl.DepthMask(true)
@@ -55,7 +55,7 @@ for c in ("ORTHOS"):gmatch(".") do
       gl.End()
     end)
   else
-    char = Frames.Text(Frames.Root)
+    char = Frame.Text(Frame.Root)
     char:SetText(c)
     char:SetFont("font/FundamentalBrigade.ttf")
     char:SetSize(300)
@@ -65,12 +65,12 @@ for c in ("ORTHOS"):gmatch(".") do
     end
   end
   
-  char:SetPoint("CENTER", Frames.Root, starpos + step * idx, 0.25)
+  char:SetPoint("CENTER", Frame.Root, starpos + step * idx, 0.25)
   idx = idx + 1
 end
 
 local function MakeRandomBg(restrict)
-  local tex = Frames.Texture(Frames.Root)
+  local tex = Frame.Texture(Frame.Root)
   tex:SetLayer(-1)
   
   local opts = {"astral", "city", "cyber"}
@@ -89,8 +89,8 @@ local function MakeRandomBg(restrict)
   }
   tex:SetTint(unpack(cols[chose]))
   
-  tex:SetPoint("CENTER", Frames.Root, "CENTER")
-  local scal = math.min(Frames.Root:GetHeight() / tex:GetHeight(), Frames.Root:GetWidth() / tex:GetWidth())
+  tex:SetPoint("CENTER", Frame.Root, "CENTER")
+  local scal = math.min(Frame.Root:GetHeight() / tex:GetHeight(), Frame.Root:GetWidth() / tex:GetWidth())
   tex:SetHeight(tex:GetHeight() * scal)
   tex:SetWidth(tex:GetWidth() * scal)
   

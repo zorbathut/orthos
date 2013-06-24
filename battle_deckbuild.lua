@@ -2,14 +2,14 @@
 local created = Command.Event.Create(_G, "Deck.Created")
 
 -- everything else
-local greyout = Frames.Frame(Frames.Root)
+local greyout = Frame.Frame(Frame.Root)
 greyout:SetBackground(0, 0, 0, 0.5)
 greyout:SetLayer(-1)
-greyout:SetPoint("TOPLEFT", Frames.Root, "TOPLEFT")
-greyout:SetPoint("BOTTOMRIGHT", Frames.Root, "BOTTOMRIGHT")
+greyout:SetPoint("TOPLEFT", Frame.Root, "TOPLEFT")
+greyout:SetPoint("BOTTOMRIGHT", Frame.Root, "BOTTOMRIGHT")
 
 local function MakeBorder(target)
-  local cminibg = Frames.Frame(Frames.Root)
+  local cminibg = Frame.Frame(Frame.Root)
   cminibg:SetPoint("TOPLEFT", target, "TOPLEFT", -3, -3)
   cminibg:SetPoint("BOTTOMRIGHT", target, "BOTTOMRIGHT", 3, 3)
   cminibg:SetLayer(-1)
@@ -24,11 +24,11 @@ local cardIndicators = {}
 for k = 1, 5 do
   local card = Command.Deck.Draw()
   
-  local cardmini = Command.Art.Button.Card(Frames.Root, card)
-  cardmini:SetPoint("CENTER", Frames.Root, "CENTER", (k - 3) * 60, 200)
+  local cardmini = Command.Art.Button.Card(Frame.Root, card)
+  cardmini:SetPoint("CENTER", Frame.Root, "CENTER", (k - 3) * 60, 200)
       
-  local cardbig = Command.Art.Card.Big(Frames.Root, card)
-  cardbig:SetPoint("CENTER", Frames.Root, "CENTER")
+  local cardbig = Command.Art.Card.Big(Frame.Root, card)
+  cardbig:SetPoint("CENTER", Frame.Root, "CENTER")
   cardbig:SetVisible(false)
   
   local menuitem -- we will stash our menu here
@@ -42,15 +42,15 @@ for k = 1, 5 do
   table.insert(selects, menuitem)
 end
 
-local backButton = Command.Art.Button.Back(Frames.Root)
-backButton:SetPoint("CENTER", Frames.Root, "CENTER", 200, 200)
+local backButton = Command.Art.Button.Back(Frame.Root)
+backButton:SetPoint("CENTER", Frame.Root, "CENTER", 200, 200)
 local function Back()
   Command.Deckbuilder.Pop()
 end
-table.insert(selects, {selectable = backButton, big = Frames.Frame(Frames.Root), bg = MakeBorder(backButton), Trigger = Back})
+table.insert(selects, {selectable = backButton, big = Frame.Frame(Frame.Root), bg = MakeBorder(backButton), Trigger = Back})
 
-local acceptButton = Command.Art.Button.Accept(Frames.Root)
-acceptButton:SetPoint("CENTER", Frames.Root, "CENTER", 250, 200)
+local acceptButton = Command.Art.Button.Accept(Frame.Root)
+acceptButton:SetPoint("CENTER", Frame.Root, "CENTER", 250, 200)
 local function Accept()
   if #cards > 0 then
     -- need to discard unused cards, so we're bruteforcing it again
@@ -75,7 +75,7 @@ local function Accept()
     created(realcards)
   end
 end
-table.insert(selects, {selectable = backButton, big = Frames.Frame(Frames.Root), bg = MakeBorder(acceptButton), Trigger = Accept})
+table.insert(selects, {selectable = backButton, big = Frame.Frame(Frame.Root), bg = MakeBorder(acceptButton), Trigger = Accept})
 
 local function resyncDisplay()
   for _, v in ipairs(selects) do
@@ -96,12 +96,12 @@ local function resyncDisplay()
   end
   
   while #cardIndicators < #cards do
-    local card = Command.Art.Button.Card(Frames.Root, cards[#cardIndicators + 1].card)
+    local card = Command.Art.Button.Card(Frame.Root, cards[#cardIndicators + 1].card)
     
     if #cardIndicators > 0 then
       card:SetPoint("TOPLEFT", cardIndicators[#cardIndicators], "BOTTOMLEFT", 0, 10)
     else
-      card:SetPoint("TOPLEFT", Frames.Root, "CENTER", 175, -130)
+      card:SetPoint("TOPLEFT", Frame.Root, "CENTER", 175, -130)
     end
     
     table.insert(cardIndicators, card)
