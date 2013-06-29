@@ -1,11 +1,20 @@
 
 layer = {
+  bg = -10,
   grid = -1,
   entities = 0,
   sfx = 1,
   hud = 2,
   deckbuilder = 3
 }
+
+do
+  local bg = Frame.Texture(Frame.Root)
+  bg:SetLayer(layer.bg)
+  bg:SetTexture("copyright_infringement/cyberspace_bg")
+  bg:SetPoint("TOPLEFT", Frame.Root, "TOPLEFT")
+  bg:SetPoint("BOTTOMRIGHT", Frame.Root, "BOTTOMRIGHT")
+end
 
 local hud = Frame.Frame(Frame.Root)
 hud:SetLayer(layer.hud)

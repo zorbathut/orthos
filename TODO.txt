@@ -1,6 +1,5 @@
 
 * Prototype combat system
-  * Background
   * Enemy destruction, creation
   * A few basic card options
     * Electrodes
