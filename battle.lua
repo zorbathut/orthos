@@ -1,8 +1,8 @@
 
-local layer = {
+layer = {
   grid = -1,
   entities = 0,
-  fx = 1,
+  sfx = 1,
   hud = 2,
   deckbuilder = 3
 }
@@ -13,8 +13,11 @@ hud:SetLayer(layer.hud)
 assert(loadfile("battle_ability.lua"))()
 
 local deckDiscard = {}
-for k = 1, 40 do
-  table.insert(deckDiscard, {name = "Spike", type = "Steel"})
+do
+  local types = {"Spike", "Shatter", "Blast"}
+  for k = 1, 40 do
+    table.insert(deckDiscard, {name = types[math.random(#types)], type = "Steel"})
+  end
 end
 
 local deckStack = {}
@@ -272,7 +275,7 @@ Command.Environment.Insert(_G, "Command.Battle.Display.Card.Resync", function ()
   hud.carddisplay = Frame.Frame(hud)
   
   local bottom = hud
-  for k = #deckActive, 1, -1 do
+  for k = 1, #deckActive do
     local tf = Command.Art.Button.Card(hud.carddisplay, deckActive[k])
     tf:SetPoint("BOTTOMRIGHT", bottom, "BOTTOMRIGHT", -10, -10)
     tf:SetLayer(-k)
