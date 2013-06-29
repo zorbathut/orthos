@@ -1,7 +1,7 @@
 
 * Prototype combat system
+  * stop accessing entity x/y directly
   * A few basic card options
-    * Fortify
     * Wall
   * A few basic enemy options
     * Turret
