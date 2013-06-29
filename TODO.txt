@@ -1,14 +1,29 @@
 
 * Prototype combat system
+  * Background
+  * Enemy destruction, creation
   * A few basic card options
-  * Choose and insert enemies
+    * Electrodes
+    * Dash
+    * Pull
+    * Repel
+    * Fortify
+    * Wall
+    * Decoy? acts friendly, must be damaged by enemy, damages enemy?
   * A few basic enemy options
+    * Turret
+    * Flamer
+    * Rocketer
+    * Laserer
+    * Boss
+    * Enemies that intentionally guard each other?
+  * Choose and insert enemies
   * Make it fun?
     * Cooldown on movement
     * Cooldown on firing
     * Sound effects
     * Music
-
+    * Stuns
    
 * Tool day:
   * Trace the GC to find our frame

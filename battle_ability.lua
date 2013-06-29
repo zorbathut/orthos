@@ -25,29 +25,49 @@ local function DamageAoe(tx, ty, dx, dy)
   end
 end
 
+local function SearchScanline(sx, sy, direction, missEnemy, missFriendly)
+  assert(direction ~= 0)
+  if direction == 0 then return {} end
+  
+  local found = {}
+  
+  sx = sx + direction * 0.1 -- close enough
+  
+  print(sx, sy, direction)
+  for entity in pairs(Inspect.Battle.Entities()) do
+    print(entity.x, entity.y, sx, sy, direction, (sx - entity.x) * direction)
+    if entity.y == sy and not (entity:FactionGet() == "enemy" and missEnemy) and not (entity:FactionGet() == "friendly" and missFriendly) and (entity.x - sx) * direction > 0 then
+      table.insert(found, {ent = entity, dist = math.abs(sx - entity.x)})
+    end
+  end
+  
+  table.sort(found, function (a, b) return a.dist < b.dist end)
+  
+  local rv = {}
+  for _, v in ipairs(found) do
+    table.insert(rv, v.ent)
+  end
+  return rv
+end
+
 local lookup = {
+
+--[[ ============================
+      PLAYER SPELLS
+      ============================ ]]
+      
   Spike = function (initiator)
     local ix, iy = initiator.x, initiator.y
     local grid = Inspect.Battle.Grid()
     local entities = Inspect.Battle.Entities()
     
-    Command.Battle.Cast("SFXFire", ix, iy);
+    Command.Battle.Cast("SFXFire", ix, iy)
     
-    local closelen = 1000
-    local closeent = nil
+    local targets = SearchScanline(ix, iy, 1, false, false)
     
-    for entity in pairs(entities) do
-      if entity.y == iy and entity.x > ix then
-        if entity ~= initiator and math.abs(entity.x - ix) < closelen then
-          closelen = math.abs(entity.x - ix)
-          closeent = entity
-        end
-      end
-    end
-    
-    if closeent then
-      closeent:Hit()
-      Command.Battle.Cast("SFXExplosion", closeent);
+    if targets[1] then
+      Command.Battle.Cast("SFXExplosion", targets[1])
+      targets[1]:Hit()
     end
   end,
   
@@ -58,7 +78,7 @@ local lookup = {
     local target = Frame.Texture(sfx)
     local grid = Inspect.Battle.Grid()
     
-    target:SetTexture("noncommercial/ice.png")
+    target:SetTexture("noncommercial/ice")
     target:SetWidth(grid[1][1]:GetWidth() * 3)
     target:SetHeight(grid[1][1]:GetHeight() * 3)
     
@@ -94,13 +114,64 @@ local lookup = {
     Command.Battle.Cast("SFXBlast", x, y, 2, 0)
   end,
   
-  SFXFire = function (x, y)
+  Pierce = function (initiator)
+    local ix, iy = initiator.x, initiator.y
+    local grid = Inspect.Battle.Grid()
+    local entities = Inspect.Battle.Entities()
+    
+    Command.Battle.Cast("SFXFire", ix, iy)
+    
+    local targets = SearchScanline(ix, iy, 1, false, false)
+    
+    if targets[1] then
+      Command.Battle.Cast("SFXPierce", targets[1])
+    end
+    
+    if targets[2] then
+      Command.Battle.Cast("SFXExplosion", targets[2])
+      targets[2]:Hit()
+    end
+  end,
+  
+--[[ ============================
+      ENEMY SPELLS
+      ============================ ]]
+
+  EnemySpike = function (initiator)
+    local ix, iy = initiator.x, initiator.y
+    local grid = Inspect.Battle.Grid()
+    local entities = Inspect.Battle.Entities()
+    
+    Command.Battle.Cast("SFXFire", ix, iy, -1)
+    
+    local targets = SearchScanline(ix, iy, -1, true, false)
+    
+    if targets[1] then
+      Command.Battle.Cast("SFXExplosion", targets[1])
+      targets[1]:Hit()
+    end
+  end,
+      
+--[[ ============================
+      VISUAL EFFECTS
+      ============================ ]]
+      
+  SFXFire = function (x, y, direction)
     local grid = Inspect.Battle.Grid()
     local blaster = Frame.Texture(sfx)
-    blaster:SetTexture("placeholder/blaster.png")
-    blaster:SetPoint("CENTERLEFT", grid[x][y], "CENTER", 20, -20)
+    if direction ~= -1 then
+      blaster:SetTexture("placeholder/blaster")
+      blaster:SetPoint("CENTERLEFT", grid[x][y], "CENTER", 20, -20)
+    else
+      blaster:SetTexture("placeholder/blaster_mirror")
+      blaster:SetPoint("CENTERRIGHT", grid[x][y], "CENTER", -20, -20)
+    end
     
-    Command.Coro.Wait(0.1)
+    local cooldown = 6
+    for i = 1, cooldown do
+      blaster:SetAlpha(1.0 - math.pow(i / cooldown, 2))
+      coroutine.yield()
+    end
     
     blaster:Obliterate()
   end,
@@ -110,7 +181,7 @@ local lookup = {
     local flame = Frame.Texture(sfx)
     local gridx = grid[x][y]:GetWidth()
     local gridy = grid[x][y]:GetHeight()
-    flame:SetTexture("noncommercial/fire.png")
+    flame:SetTexture("noncommercial/fire")
     flame:SetPoint("CENTER", grid[x][y], "CENTER", gridx * dx, gridy * dy)
     flame:SetWidth(grid[x][y]:GetWidth())
     flame:SetHeight(grid[x][y]:GetHeight())
@@ -127,7 +198,7 @@ local lookup = {
   SFXExplosion = function (target)
     local grid = Inspect.Battle.Grid()
     local explosion = Frame.Texture(sfx)
-    explosion:SetTexture("copyright_infringement/Explosion.png")
+    explosion:SetTexture("copyright_infringement/Explosion")
     explosion:SetPoint("CENTER", grid[target.x][target.y], "CENTER", 0, 0)
     
     local dur = 60 * 0.3
@@ -137,6 +208,21 @@ local lookup = {
     end
     
     explosion:Obliterate()
+  end,
+  
+  SFXPierce = function (target)
+    local grid = Inspect.Battle.Grid()
+    local pierce = Frame.Texture(sfx)
+    pierce:SetTexture("placeholder/pierce")
+    pierce:SetPoint("CENTER", grid[target.x][target.y], "CENTER", 0, 0)
+    
+    local cooldown = 10
+    for i = 1, cooldown do
+      pierce:SetAlpha(1.0 - math.pow(i / cooldown, 2))
+      coroutine.yield()
+    end
+    
+    pierce:Obliterate()
   end,
 }
 

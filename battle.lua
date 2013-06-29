@@ -14,7 +14,7 @@ assert(loadfile("battle_ability.lua"))()
 
 local deckDiscard = {}
 do
-  local types = {"Spike", "Shatter", "Blast"}
+  local types = {"Spike", "Shatter", "Blast", "Pierce"}
   for k = 1, 40 do
     table.insert(deckDiscard, {name = types[math.random(#types)], type = "Steel"})
   end
@@ -152,7 +152,8 @@ local function MakeEntity(params)
   local x = params.x
   local y = params.y
   local pic = params.pic
-  local enemy = params.enemy
+  local faction = params.faction
+  assert(faction == "enemy" or faction == "friendly" or faction == "neutral" or faction == "ghost")
   
   assert(x)
   assert(y)
@@ -166,7 +167,14 @@ local function MakeEntity(params)
   fram.img = img
   
   function fram:CanTravel(x, y)
-    return grid[x] and grid[x][y] and (not grid[x][y].enemy) == (not enemy) and grid[x][y]:AliveGet()
+    if not (grid[x] and grid[x][y] and grid[x][y]:AliveGet()) then
+      return false
+    end
+    
+    if faction == "enemy" and grid[x][y].enemy == false then return false end
+    if faction == "friendly" and grid[x][y].enemy == true then return false end
+    
+    return true
   end
   
   function fram:Shift(dx, dy)
@@ -197,7 +205,17 @@ local function MakeEntity(params)
   function fram:Hit()
     -- take damage if possible
     -- this is super hacky
-    Command.Battle.Damage(grid[x][y].enemy)
+    if faction == "enemy" then
+      Command.Battle.Damage(true)
+    elseif faction == "friendly" then
+      Command.Battle.Damage(false)
+    else
+      print("Damage to unknown unit!")
+    end
+  end
+  
+  function fram:FactionGet()
+    return faction
   end
   
   fram:Warp(x, y)
@@ -208,7 +226,7 @@ local function MakeEntity(params)
 end
 
 function MakePlayer(x, y)
-  local player = MakeEntity({x = x, y = y, pic = "noncommercial/hero"})
+  local player = MakeEntity({x = x, y = y, pic = "noncommercial/hero", faction = "friendly"})
   
   function player:FirePrimary()
     if #deckActive > 0 then
@@ -226,7 +244,7 @@ function MakePlayer(x, y)
 end
 
 function MakeBandit(x, y)
-  local bandit = MakeEntity({x = x, y = y, pic = "noncommercial/bandit", enemy = true})
+  local bandit = MakeEntity({x = x, y = y, pic = "noncommercial/bandit", faction = "enemy"})
   
   local indicator = Frame.Text(bandit)
   indicator:SetPoint("RIGHTCENTER", bandit.img, "LEFTCENTER")
@@ -245,9 +263,8 @@ function MakeBandit(x, y)
           coroutine.yield()
         end
         
-        if player.y == bandit.y then
-          player:Hit()
-        end
+        Command.Battle.Cast("EnemySpike", bandit)
+        
         indicator:SetVisible(false)
         
         for i = 1, 30 do
