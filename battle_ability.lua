@@ -33,9 +33,7 @@ local function SearchScanline(sx, sy, direction, missEnemy, missFriendly)
   
   sx = sx + direction * 0.1 -- close enough
   
-  print(sx, sy, direction)
   for entity in pairs(Inspect.Battle.Entities()) do
-    print(entity.x, entity.y, sx, sy, direction, (sx - entity.x) * direction)
     if entity.y == sy and not (entity:FactionGet() == "enemy" and missEnemy) and not (entity:FactionGet() == "friendly" and missFriendly) and (entity.x - sx) * direction > 0 then
       table.insert(found, {ent = entity, dist = math.abs(sx - entity.x)})
     end
@@ -232,9 +230,6 @@ Command.Environment.Insert(_G, "Command.Battle.Cast", function (abilityId, ...)
   print("Casting", abilityId, ...)
   actives[coroutine.spawn(function (...) lookup[abilityId](...) while true do coroutine.yield(true) end end, ...)] = true
 end)
-
-print("CBC", Command.Battle.Cast)
-print(Command)
 
 Event.System.Tick:Attach(function ()
   if not Inspect.Battle.Active() then return end

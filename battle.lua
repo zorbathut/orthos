@@ -5,7 +5,8 @@ layer = {
   entities = 0,
   sfx = 1,
   hud = 2,
-  deckbuilder = 3
+  ded = 5,
+  deckbuilder = 10
 }
 
 do
@@ -15,6 +16,8 @@ do
   bg:SetPoint("TOPLEFT", Frame.Root, "TOPLEFT")
   bg:SetPoint("BOTTOMRIGHT", Frame.Root, "BOTTOMRIGHT")
 end
+
+local state = "playing"
 
 local hud = Frame.Frame(Frame.Root)
 hud:SetLayer(layer.hud)
@@ -60,13 +63,12 @@ end)
 
 local deckActive = {}
 
-local decking = false
 local function deckChoose()
   while #deckActive > 0 do
     Command.Deck.Discard(table.remove(deckActive))
   end
   
-  decking = true
+  state = "decking"
   
   local deckbuild = Command.Environment.Create(_G, "Deck", "battle_deckbuild.lua")
   deckbuild.Frame.Root:SetLayer(layer.deckbuilder)
@@ -80,7 +82,7 @@ local function deckChoose()
     
     -- one-frame delay because otherwise we try to autofire
     -- todo: rig up better event control
-    decking = "aborting"
+    state = "deck_aborting"
     
     Command.Battle.Display.Card.Resync()
   end)
@@ -180,6 +182,10 @@ local function MakeEntity(params)
       return false
     end
     
+    if grid[x][y].entity and grid[x][y].entity ~= self then
+      return false
+    end
+    
     if faction == "enemy" and grid[x][y].enemy == false then return false end
     if faction == "friendly" and grid[x][y].enemy == true then return false end
     
@@ -193,9 +199,19 @@ local function MakeEntity(params)
   function fram:Warp(nx, ny)
     assert(self:CanTravel(nx, ny))
     if self:CanTravel(nx, ny) then
+    
+      if self.x or self.y then
+        grid[self.x][self.y].entity = nil
+      end
+      
       self.x = nx
       self.y = ny
       self:SetPoint("CENTER", grid[nx][ny], "CENTER")
+      
+      if self.x or self.y then
+        grid[self.x][self.y].entity = self
+      end
+      
     end
   end
   
@@ -227,6 +243,12 @@ local function MakeEntity(params)
     return faction
   end
   
+  function fram:Fall()
+    -- For now . . .
+    self:Obliterate()
+    entities[self] = nil
+  end
+  
   fram:Warp(x, y)
   
   entities[fram] = true
@@ -247,6 +269,25 @@ function MakePlayer(x, y)
     else
       deckChoose()
     end
+  end
+  
+  function player:Fall()
+    -- uhoh
+    local ded = Frame.Frame(Frame.Root)
+    ded:SetLayer(layer.ded)
+    ded:SetPoint("TOPLEFT", Frame.Root, "TOPLEFT")
+    ded:SetPoint("BOTTOMRIGHT", Frame.Root, "BOTTOMRIGHT")
+    ded:SetBackground(0.2, 0, 0, 0.7)
+    
+    local dedtext = Frame.Text(ded)
+    dedtext:SetText("U DED")
+    dedtext:SetPoint("CENTER", ded, "CENTER")
+    dedtext:SetSize(40)
+    
+    state = "loss"
+    
+    self:Obliterate()
+    entities[self] = nil
   end
   
   return player
@@ -289,7 +330,9 @@ function MakeBandit(x, y)
 end
   
 player = MakePlayer(1, 2)
-local monster = MakeBandit(6, 3)
+
+MakeBandit(6, 3)
+MakeBandit(5, 1)
 
 hud:SetPoint("BOTTOMRIGHT", player, "TOPCENTER")
 
@@ -310,38 +353,34 @@ Command.Environment.Insert(_G, "Command.Battle.Display.Card.Resync", function ()
 end)
 
 Command.Environment.Insert(_G, "Command.Battle.Bump", function (x, y)
-  for entity, _ in pairs(entities) do
-    if entity.x == x and entity.y == y then
-      -- yes, bump
-      local dx = {0, 0, 1, -1}
-      local dy = {1, -1, 0, 0}
-      local avail = {}
-      for id in ipairs(dx) do
-        if entity:CanTravel(x + dx[id], y + dy[id]) then
-          table.insert(avail, {x + dx[id], y + dy[id]})
-        end
+  if grid[x][y].entity then
+    local entity = grid[x][y].entity
+
+    local dx = {0, 0, 1, -1}
+    local dy = {1, -1, 0, 0}
+    local avail = {}
+    for id in ipairs(dx) do
+      if entity:CanTravel(x + dx[id], y + dy[id]) then
+        table.insert(avail, {x + dx[id], y + dy[id]})
       end
-      
-      if #avail == 0 then
-        for nx in ipairs(grid) do
-          for ny in ipairs(grid[nx]) do
-            if entity:CanTravel(nx, ny) then
-              table.insert(avail, {nx, ny})
-            end
+    end
+    
+    if #avail == 0 then
+      for nx in ipairs(grid) do
+        for ny in ipairs(grid[nx]) do
+          if entity:CanTravel(nx, ny) then
+            table.insert(avail, {nx, ny})
           end
         end
       end
-      
-      if #avail == 0 then
-        if grid[x][y].enemy then
-          print("U WIN")
-        else
-          print("U LOSE")
-        end
-      else
-        local ncor = avail[math.random(#avail)]
-        entity:Warp(ncor[1], ncor[2])
-      end
+    end
+    
+    if #avail == 0 then
+      -- Destroy entity!
+      entity:Fall()
+    else
+      local ncor = avail[math.random(#avail)]
+      entity:Warp(ncor[1], ncor[2])
     end
   end
 end)
@@ -380,12 +419,11 @@ Command.Environment.Insert(_G, "Inspect.Battle.Entities", function ()
 end)
 
 Command.Environment.Insert(_G, "Inspect.Battle.Active", function ()
-  return not decking
+  return state == "playing"
 end)
 
 Event.System.Key.Down:Attach(function (key)
-  if decking == "aborting" then decking = false return end  -- eugh
-  if decking then return end
+  if state ~= "playing" then return end
   
   if key == "Up" then
     player:ShiftTry(0, -1)
@@ -401,6 +439,7 @@ Event.System.Key.Down:Attach(function (key)
 end)
 
 Event.System.Tick:Attach(function ()
+  if state == "deck_aborting" then state = "playing" return end  -- eugh
   if not Inspect.Battle.Active() then return end
   
   for entity in pairs(entities) do
