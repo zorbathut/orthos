@@ -1,9 +1,6 @@
 
 * Prototype combat system
   * A few basic enemy options
-    * Turret
-      * make the attack better
-      * Interrupt turret on bump
     * Flamer
     * Rocketer
     * Laserer

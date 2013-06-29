@@ -163,65 +163,77 @@ local lookup = {
   end,
   
   Bandit = function (x, y)
+    local grid = Inspect.Battle.Grid.Table()
     local bandit = CreateEntity({x = x, y = y, pic = "noncommercial/bandit", faction = "enemy"})
   
     bandit.indicator = Frame.Texture(bandit)
     bandit.indicator:SetTexture("placeholder/reticle")
     bandit.indicator:SetVisible(false)
     
-    return bandit
-  end,
-  
-  BanditAI = function(self)
-    local grid = Inspect.Battle.Grid.Table()
-    
-    while true do
-      local targets = Inspect.Battle.Grid.Hitscan(self:XGet(), self:YGet(), -1, true, false)
-      if targets[1] then
-        self.indicator:SetVisible(true)
-        
-        local dx = 1
-        
-        self.indicator:SetPoint("CENTER", grid[self:XGet() - dx][self:YGet()], "CENTER")
-        
-        local framespermove = 25
-        for i = 1, framespermove / 2 do
-          coroutine.yield()
-        end
-        
-        local fire = false
-        while true do
-          for i = 1, framespermove do
-            if grid[self:XGet() - dx][self:YGet()].entity and grid[self:XGet() - dx][self:YGet()].entity:FactionGet() ~= "enemy" then
-              fire = true
-              break
-            end
+    function ai(self)
+      for i = 1, 60 do
+        coroutine.yield()
+      end
+      
+      while true do
+        local targets = Inspect.Battle.Grid.Hitscan(self:XGet(), self:YGet(), -1, true, false)
+        if targets[1] then
+          self.indicator:SetVisible(true)
+          
+          local dx = 1
+          
+          self.indicator:SetPoint("CENTER", grid[self:XGet() - dx][self:YGet()], "CENTER")
+          
+          local framespermove = 20
+          for i = 1, framespermove / 2 do
             coroutine.yield()
           end
           
-          -- early out from the inner loop
-          if fire then break end
-          
-          dx = dx + 1
-          if not grid[self:XGet() - dx] then
-            break
+          local fire = false
+          while true do
+            for i = 1, framespermove do
+              if grid[self:XGet() - dx][self:YGet()].entity and grid[self:XGet() - dx][self:YGet()].entity:FactionGet() ~= "enemy" then
+                fire = true
+                for i = 1, framespermove * 1.5 do
+                  coroutine.yield()
+                end
+                break
+              end
+              coroutine.yield()
+            end
+            
+            -- early out from the inner loop
+            if fire then break end
+            
+            dx = dx + 1
+            if not grid[self:XGet() - dx] then
+              break
+            end
+            self.indicator:SetPoint("CENTER", grid[self:XGet() - dx][self:YGet()], "CENTER")
           end
-          self.indicator:SetPoint("CENTER", grid[self:XGet() - dx][self:YGet()], "CENTER")
-        end
-        
-        if fire then
-          Command.Battle.Cast("EnemySpike", self)
-        end
-        
-        self.indicator:SetVisible(false)
-        
-        for i = 1, 30 do
+          
+          if fire then
+            Command.Battle.Cast("EnemySpike", self)
+          end
+          
+          self.indicator:SetVisible(false)
+          
+          for i = 1, 30 do
+            coroutine.yield()
+          end
+        else
           coroutine.yield()
         end
-      else
-        coroutine.yield()
       end
     end
+    
+    function bandit:Bump()
+      bandit.Think = coroutine.spawn(ai, bandit)
+      bandit.indicator:SetVisible(false)
+    end
+    bandit:Bump()
+    
+    return bandit
   end,
   
   Wall = function (x, y)
@@ -252,9 +264,6 @@ Command.Environment.Insert(_G, "Command.Battle.Spawn", function (entityId, ...)
   print("Spawning", entityId, ...)
   local ent = lookup[entityId](...)
   assert(ent)
-  if lookup[entityId .. "AI"] then
-    ent.Think = coroutine.spawn(lookup[entityId .. "AI"], ent)
-  end
   entities[ent] = true
   return ent
 end)

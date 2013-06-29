@@ -147,6 +147,7 @@ Command.Environment.Insert(_G, "Command.Battle.Bump", function (x, y)
     else
       local ncor = avail[math.random(#avail)]
       entity:Warp(ncor[1], ncor[2])
+      if entity.Bump then entity:Bump() end
     end
   end
 end)
