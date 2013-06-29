@@ -1,4 +1,15 @@
 
+local layer = {
+  grid = -1,
+  entities = 0,
+  fx = 1,
+  hud = 2,
+  deckbuilder = 3
+}
+
+local hud = Frame.Frame(Frame.Root)
+hud:SetLayer(layer.hud)
+
 assert(loadfile("battle_ability.lua"))()
 
 local deckDiscard = {}
@@ -46,7 +57,7 @@ local function deckChoose()
   decking = true
   
   local deckbuild = Command.Environment.Create(_G, "Deck", "battle_deckbuild.lua")
-  deckbuild.Frame.Root:SetLayer(100)
+  deckbuild.Frame.Root:SetLayer(layer.deckbuilder)
   
   deckbuild.Event.Deck.Created:Attach(function (deck)
     dump("Deck chosen:", deck)
@@ -58,6 +69,8 @@ local function deckChoose()
     -- one-frame delay because otherwise we try to autofire
     -- todo: rig up better event control
     decking = "aborting"
+    
+    Command.Battle.Display.Card.Resync()
   end)
 end
 deckChoose()
@@ -69,6 +82,7 @@ local outline = 5
 local grid = Frame.Frame(Frame.Root)
 grid:SetPoint("TOPLEFT", Frame.Root, "CENTER", -gridsize * 3, -gridsize * 1.5)
 grid:SetPoint("BOTTOMRIGHT", Frame.Root, "CENTER", gridsize * 3, gridsize * 1.5)
+grid:SetLayer(layer.grid)
 
 for row = 1, 6 do
   grid[row] = {}
@@ -126,7 +140,7 @@ for row = 1, 6 do
 end
 
 local entityLayer = Frame.Frame(Frame.Root)
-entityLayer:SetLayer(1)
+entityLayer:SetLayer(layer.entities)
 
 local entities = {}
 local player = nil -- filled with actual player
@@ -198,23 +212,11 @@ function MakePlayer(x, y)
       dump(deckActive[1])
       Command.Battle.Cast(deckActive[1].name, self)
       table.remove(deckActive, 1)
+      
+      Command.Battle.Display.Card.Resync()
     else
       deckChoose()
     end
-  end
-
-  -- currently not even using this
-  function player:FireSecondary()
-    Command.Coro.Play(function ()
-      local blast = Frame.Texture(player)
-      blast:SetTexture("placeholder/blaster.png")
-      blast:SetPoint(0, 0.5, img, "CENTER")
-      blast:SetLayer(-1)  -- behind the player
-      
-      Command.Coro.Wait(0.06)
-      
-      blast:Obliterate()
-    end)
   end
   
   return player
@@ -259,6 +261,24 @@ end
   
 player = MakePlayer(1, 2)
 local monster = MakeBandit(6, 3)
+
+hud:SetPoint("BOTTOMRIGHT", player, "TOPCENTER")
+
+Command.Environment.Insert(_G, "Command.Battle.Display.Card.Resync", function ()
+  if hud.carddisplay then
+    hud.carddisplay:Obliterate()
+  end
+  
+  hud.carddisplay = Frame.Frame(hud)
+  
+  local bottom = hud
+  for k = #deckActive, 1, -1 do
+    local tf = Command.Art.Button.Card(hud.carddisplay, deckActive[k])
+    tf:SetPoint("BOTTOMRIGHT", bottom, "BOTTOMRIGHT", -10, -10)
+    tf:SetLayer(-k)
+    bottom = tf
+  end
+end)
 
 Command.Environment.Insert(_G, "Command.Battle.Bump", function (x, y)
   for entity, _ in pairs(entities) do

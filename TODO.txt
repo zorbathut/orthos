@@ -1,7 +1,6 @@
 
 * Prototype combat system
   * A few basic card options
-  * Card display!
   * Choose and insert enemies
   * A few basic enemy options
   * Make it fun?
@@ -10,12 +9,13 @@
     * Sound effects
     * Music
 
-    
+   
 * Tool day:
   * Trace the GC to find our frame
 
 * REMEMBER THE AVENGERS
 * don't show the bits that are unimportant
+* Remember the spiky rabbit from dokinabi - take a side character, make them major unexpectedly?
 
 * Debug tools
   * Hook rdprintf to display lua line info from print()
