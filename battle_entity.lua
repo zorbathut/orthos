@@ -32,22 +32,9 @@ do
   end
 
   function Entity:Warp(nx, ny)
-    local grid = Inspect.Battle.Grid.Table()
-    
     assert(self:CanTravel(nx, ny))
     if self:CanTravel(nx, ny) then
-    
-      if self.x or self.y then
-        grid[self.x][self.y].entity = nil
-      end
-      
-      self.x = nx
-      self.y = ny
-      self:SetPoint("CENTER", grid[nx][ny], "CENTER")
-      
-      if self.x or self.y then
-        grid[self.x][self.y].entity = self
-      end
+      self:WarpForce(nx, ny)
     end
   end
   
@@ -57,9 +44,26 @@ do
     end
   end
   
-  function Entity:WarpTry(dx, dy)
-    if self:CanTravel(dx, dy) then
-      self:Warp(dx, dy)
+  function Entity:WarpTry(nx, ny)
+    if self:CanTravel(nx, ny) then
+      self:Warp(nx, ny)
+    end
+  end
+  
+  function Entity:WarpForce(nx, ny)  
+    local grid = Inspect.Battle.Grid.Table()
+  
+    if self.x or self.y then
+      assert(grid[self.x][self.y].entity == self)
+      grid[self.x][self.y].entity = nil
+    end
+    
+    self.x = nx
+    self.y = ny
+    self:SetPoint("CENTER", grid[nx][ny], "CENTER")
+    
+    if self.x or self.y then
+      grid[self.x][self.y].entity = self
     end
   end
   
@@ -84,6 +88,11 @@ do
     -- For now . . .
     self:Obliterate()
     entities[self] = nil
+    local grid = Inspect.Battle.Grid.Table()
+    if self.x or self.y then
+      assert(grid[self.x][self.y].entity == self)
+      grid[self.x][self.y].entity = nil
+    end
   end
 end
 
@@ -110,7 +119,11 @@ function CreateEntity(params)
     fram[k] = v
   end
   
-  fram:Warp(x, y)
+  if params.canSpawnInVoid then
+    fram:WarpForce(x, y)
+  else
+    fram:Warp(x, y)
+  end
   
   return fram
 end
@@ -174,7 +187,30 @@ local lookup = {
       
       coroutine.yield()
     end
-  end
+  end,
+  
+  Wall = function (x, y)
+    local wall = CreateEntity({x = x, y = y, pic = "noncommercial/wall", faction = "neutral", canSpawnInVoid = true})
+    
+    local hpindicator = Frame.Text(wall)
+    hpindicator:SetPoint("CENTER", wall, "CENTER")
+    hpindicator:SetBackground(0, 0, 0, 0.8)
+    hpindicator:SetSize(30)
+    
+    local hp = 3
+    
+    hpindicator:SetText(tostring(hp))
+    
+    function wall:Hit()
+      hp = hp - 1
+      hpindicator:SetText(tostring(hp))
+      if hp == 0 then
+        self:Fall()
+      end
+    end
+    
+    return wall
+  end,
 }
 
 Command.Environment.Insert(_G, "Command.Battle.Spawn", function (entityId, ...)

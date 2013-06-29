@@ -159,6 +159,19 @@ local lookup = {
   end,
   
   Wall = function (initiator)
+    local grid = Inspect.Battle.Grid.Table()
+    local destx, desty = initiator.x + 1, initiator.y
+    
+    if grid[destx][desty].entity then
+      Command.Battle.Bump(destx, desty)
+    end
+    
+    if not grid[destx][desty].entity then
+      local wall = Command.Battle.Spawn("Wall", destx, desty)
+      if not grid[destx][desty]:AliveGet() then
+        wall:Fall()
+      end
+    end
   end,
   
 --[[ ============================
