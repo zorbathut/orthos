@@ -146,7 +146,7 @@ local lookup = {
     local entities = Inspect.Battle.Entities()
     local targs = {}
     for entity in pairs(entities) do
-      if entity.faction ~= "friendly" then
+      if entity:FactionGet() ~= "friendly" then
         table.insert(targs, entity)
       end
     end
@@ -166,6 +166,18 @@ local lookup = {
     if hs[1] then
       hs[1]:WarpTry(hs[1].x + 1, hs[1].y)
       hs[1]:WarpTry(hs[1].x + 1, hs[1].y)
+    end
+  end,
+  
+  Fortify = function (initiator)
+    local grid = Inspect.Battle.Grid()
+    for y = 1, 3 do
+      for x = 3, 1, -1 do
+        if not grid[x][y]:AliveGet() then
+          grid[x][y]:AliveSet(true)
+          break
+        end
+      end
     end
   end,
   

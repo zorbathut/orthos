@@ -1,19 +1,18 @@
 
 * Prototype combat system
   * A few basic card options
-    * Electrodes
     * Fortify
     * Wall
-    * Decoy? acts friendly, must be damaged by enemy, damages enemy?
   * A few basic enemy options
     * Turret
-    
+      * make the attack better
     * Flamer
     * Rocketer
     * Laserer
     * Boss
     * Enemies that intentionally guard each other?
   * Choose and insert enemies
+  * Ability types!
   * Make it fun?
     * Cooldown on movement
     * Cooldown on firing
