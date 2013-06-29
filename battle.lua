@@ -26,7 +26,7 @@ assert(loadfile("battle_ability.lua"))()
 
 local deckDiscard = {}
 do
-  local types = {"Spike", "Shatter", "Blast", "Pierce"}
+  local types = {"Spike", "Shatter", "Blast", "Pierce", "Dash", "Pull", "Repel"}
   for k = 1, 40 do
     table.insert(deckDiscard, {name = types[math.random(#types)], type = "Steel"})
   end
@@ -212,7 +212,7 @@ local function MakeEntity(params)
   end
   
   function fram:WarpTry(dx, dy)
-    if self:CanTravel(self.x + dx, self.y + dy) then
+    if self:CanTravel(dx, dy) then
       self:Warp(dx, dy)
     end
   end

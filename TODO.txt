@@ -1,16 +1,13 @@
 
 * Prototype combat system
-  * Enemy destruction, creation
   * A few basic card options
     * Electrodes
-    * Dash
-    * Pull
-    * Repel
     * Fortify
     * Wall
     * Decoy? acts friendly, must be damaged by enemy, damages enemy?
   * A few basic enemy options
     * Turret
+    
     * Flamer
     * Rocketer
     * Laserer

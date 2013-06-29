@@ -25,7 +25,7 @@ local function DamageAoe(tx, ty, dx, dy)
   end
 end
 
-local function SearchScanline(sx, sy, direction, missEnemy, missFriendly)
+local function SearchHitscan(sx, sy, direction, missEnemy, missFriendly)
   assert(direction ~= 0)
   if direction == 0 then return {} end
   
@@ -61,7 +61,7 @@ local lookup = {
     
     Command.Battle.Cast("SFXFire", ix, iy)
     
-    local targets = SearchScanline(ix, iy, 1, false, false)
+    local targets = SearchHitscan(ix, iy, 1, false, false)
     
     if targets[1] then
       Command.Battle.Cast("SFXExplosion", targets[1])
@@ -119,7 +119,7 @@ local lookup = {
     
     Command.Battle.Cast("SFXFire", ix, iy)
     
-    local targets = SearchScanline(ix, iy, 1, false, false)
+    local targets = SearchHitscan(ix, iy, 1, false, false)
     
     if targets[1] then
       Command.Battle.Cast("SFXPierce", targets[1])
@@ -128,6 +128,44 @@ local lookup = {
     if targets[2] then
       Command.Battle.Cast("SFXExplosion", targets[2])
       targets[2]:Hit()
+    end
+  end,
+  
+  Dash = function (initiator)
+    initiator:WarpTry(3, initiator.y)
+    if initiator.x ~= 3 then
+      initiator:WarpTry(2, initiator.y)
+    end
+    
+    DamageAoe(initiator.x, initiator.y, {1}, {0})
+    
+    Command.Battle.Cast("SFXBlast", initiator.x, initiator.y, 1, 0)
+  end,
+  
+  Pull = function (initiator)
+    local entities = Inspect.Battle.Entities()
+    local targs = {}
+    for entity in pairs(entities) do
+      if entity.faction ~= "friendly" then
+        table.insert(targs, entity)
+      end
+    end
+    table.sort(targs, function (a, b) return a.x < b.x end)
+    
+    for _, entity in ipairs(targs) do
+      entity:WarpTry(entity.x - 1, entity.y)
+    end
+  end,
+  
+  Repel = function (initiator)
+    local hs = SearchHitscan(initiator.x, initiator.y, 1)
+    if hs[2] then
+      hs[2]:WarpTry(hs[2].x + 1, hs[2].y)
+    end
+    
+    if hs[1] then
+      hs[1]:WarpTry(hs[1].x + 1, hs[1].y)
+      hs[1]:WarpTry(hs[1].x + 1, hs[1].y)
     end
   end,
   
@@ -142,7 +180,7 @@ local lookup = {
     
     Command.Battle.Cast("SFXFire", ix, iy, -1)
     
-    local targets = SearchScanline(ix, iy, -1, true, false)
+    local targets = SearchHitscan(ix, iy, -1, true, false)
     
     if targets[1] then
       Command.Battle.Cast("SFXExplosion", targets[1])
