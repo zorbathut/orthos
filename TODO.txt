@@ -1,8 +1,5 @@
 
 * Prototype combat system
-  * stop accessing entity x/y directly
-  * A few basic card options
-    * Wall
   * A few basic enemy options
     * Turret
       * make the attack better
@@ -11,6 +8,8 @@
     * Laserer
     * Boss
     * Enemies that intentionally guard each other?
+  * A few basic card options
+    * More attack options?
   * Choose and insert enemies
   * Ability types!
   * Make it fun?

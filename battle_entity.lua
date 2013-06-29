@@ -26,6 +26,14 @@ do
     
     return true
   end
+  
+  function Entity:XGet()
+    return self.x
+  end
+  
+  function Entity:YGet()
+    return self.y
+  end
 
   function Entity:Shift(dx, dy)
     self:Warp(self.x + dx, self.y + dy)
@@ -167,7 +175,7 @@ local lookup = {
   
   BanditAI = function(self)
     while true do
-      local targets = Inspect.Battle.Grid.Hitscan(self.x, self.y, -1, true, false)
+      local targets = Inspect.Battle.Grid.Hitscan(self:XGet(), self:YGet(), -1, true, false)
       if targets[1] then
         self.indicator:SetVisible(true)
         local ct = 90

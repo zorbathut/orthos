@@ -13,7 +13,7 @@ local function DamageAoe(tx, ty, dx, dy)
   for entity in pairs(entities) do
     local match = false
     for i = 1, #dx do
-      if entity.x == tx + dx[i] and entity.y == ty + dy[i] then
+      if entity:XGet() == tx + dx[i] and entity:YGet() == ty + dy[i] then
         table.insert(entitiesToDamage, entity)
         break
       end
@@ -32,7 +32,7 @@ local lookup = {
       ============================ ]]
       
   Spike = function (initiator)
-    local ix, iy = initiator.x, initiator.y
+    local ix, iy = initiator:XGet(), initiator:YGet()
     local grid = Inspect.Battle.Grid.Table()
     local entities = Inspect.Battle.Entities()
     
@@ -47,7 +47,7 @@ local lookup = {
   end,
   
   Shatter = function (initiator)
-    local ix, iy = initiator.x, initiator.y
+    local ix, iy = initiator:XGet(), initiator:YGet()
     local targetx, targety = ix + 3, iy
     
     local target = Frame.Texture(sfx)
@@ -80,7 +80,7 @@ local lookup = {
   end,
   
   Blast = function (initiator)
-    local x, y = initiator.x, initiator.y
+    local x, y = initiator:XGet(), initiator:YGet()
     DamageAoe(x, y, {1, 1, 1, 2}, {-1, 0, 1, 0})
     
     Command.Battle.Cast("SFXBlast", x, y, 1, -1)
@@ -90,7 +90,7 @@ local lookup = {
   end,
   
   Pierce = function (initiator)
-    local ix, iy = initiator.x, initiator.y
+    local ix, iy = initiator:XGet(), initiator:YGet()
     local grid = Inspect.Battle.Grid.Table()
     local entities = Inspect.Battle.Entities()
     
@@ -110,13 +110,13 @@ local lookup = {
   
   Dash = function (initiator)
     initiator:WarpTry(3, initiator.y)
-    if initiator.x ~= 3 then
+    if initiator:XGet() ~= 3 then
       initiator:WarpTry(2, initiator.y)
     end
     
-    DamageAoe(initiator.x, initiator.y, {1}, {0})
+    DamageAoe(initiator:XGet(), initiator:YGet(), {1}, {0})
     
-    Command.Battle.Cast("SFXBlast", initiator.x, initiator.y, 1, 0)
+    Command.Battle.Cast("SFXBlast", initiator:XGet(), initiator:YGet(), 1, 0)
   end,
   
   Pull = function (initiator)
@@ -127,22 +127,22 @@ local lookup = {
         table.insert(targs, entity)
       end
     end
-    table.sort(targs, function (a, b) return a.x < b.x end)
+    table.sort(targs, function (a, b) return a:XGet() < b:XGet() end)
     
     for _, entity in ipairs(targs) do
-      entity:WarpTry(entity.x - 1, entity.y)
+      entity:WarpTry(entity:XGet() - 1, entity:YGet())
     end
   end,
   
   Repel = function (initiator)
-    local hs = Inspect.Battle.Grid.Hitscan(initiator.x, initiator.y, 1)
+    local hs = Inspect.Battle.Grid.Hitscan(initiator:XGet(), initiator:YGet(), 1)
     if hs[2] then
-      hs[2]:WarpTry(hs[2].x + 1, hs[2].y)
+      hs[2]:WarpTry(hs[2]:XGet() + 1, hs[2]:YGet())
     end
     
     if hs[1] then
-      hs[1]:WarpTry(hs[1].x + 1, hs[1].y)
-      hs[1]:WarpTry(hs[1].x + 1, hs[1].y)
+      hs[1]:WarpTry(hs[1]:XGet() + 1, hs[1]:YGet())
+      hs[1]:WarpTry(hs[1]:XGet() + 1, hs[1]:YGet())
     end
   end,
   
@@ -160,7 +160,7 @@ local lookup = {
   
   Wall = function (initiator)
     local grid = Inspect.Battle.Grid.Table()
-    local destx, desty = initiator.x + 1, initiator.y
+    local destx, desty = initiator:XGet() + 1, initiator:YGet()
     
     if grid[destx][desty].entity then
       Command.Battle.Bump(destx, desty)
@@ -179,7 +179,7 @@ local lookup = {
       ============================ ]]
 
   EnemySpike = function (initiator)
-    local ix, iy = initiator.x, initiator.y
+    local ix, iy = initiator:XGet(), initiator:YGet()
     local grid = Inspect.Battle.Grid.Table()
     local entities = Inspect.Battle.Entities()
     
@@ -240,7 +240,7 @@ local lookup = {
     local grid = Inspect.Battle.Grid.Table()
     local explosion = Frame.Texture(sfx)
     explosion:SetTexture("copyright_infringement/Explosion")
-    explosion:SetPoint("CENTER", grid[target.x][target.y], "CENTER", 0, 0)
+    explosion:SetPoint("CENTER", grid[target:XGet()][target:YGet()], "CENTER", 0, 0)
     
     local dur = 60 * 0.3
     for k = 1, dur do
@@ -255,7 +255,7 @@ local lookup = {
     local grid = Inspect.Battle.Grid.Table()
     local pierce = Frame.Texture(sfx)
     pierce:SetTexture("placeholder/pierce")
-    pierce:SetPoint("CENTER", grid[target.x][target.y], "CENTER", 0, 0)
+    pierce:SetPoint("CENTER", grid[target:XGet()][target:YGet()], "CENTER", 0, 0)
     
     local cooldown = 10
     for i = 1, cooldown do

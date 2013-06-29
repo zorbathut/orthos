@@ -28,7 +28,7 @@ assert(loadfile("battle_entity.lua"))()
 
 local deckDiscard = {}
 do
-  local types = {"Spike", "Shatter", "Blast", "Pierce", "Dash", "Pull", "Repel", "Fortify", "Wall"}
+  local types = {"Spike", "Spike", "Shatter", "Shatter", "Blast", "Blast", "Pierce", "Pierce", "Dash", "Pull", "Repel", "Fortify", "Wall"}
   for k = 1, 40 do
     table.insert(deckDiscard, {name = types[math.random(#types)], type = "Steel"})
   end
