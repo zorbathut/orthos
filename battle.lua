@@ -126,25 +126,15 @@ for row = 1, 6 do
     function brick:AliveSet(in_alive)
       alive = in_alive
       
+      brick:SetVisible(alive)
+      
       if enemy then
-        if alive then
-          inlay:SetBackground(0.5, 0.2, 0.2)
-        else
-          inlay:SetBackground(0.2, 0.0, 0.0)
-        end
+        inlay:SetBackground(0.5, 0.2, 0.2)
       else
-        if alive then
-          inlay:SetBackground(0.2, 0.2, 0.5)
-        else
-          inlay:SetBackground(0.0, 0.0, 0.2)
-        end
+        inlay:SetBackground(0.2, 0.2, 0.5)
       end
       
-      if alive then
-        demph:SetBackground(0.1, 0.1, 0.1)
-      else
-        demph:SetBackground(0.02, 0.02, 0.02)
-      end
+      demph:SetBackground(0.1, 0.1, 0.1)
     end
     function brick:AliveGet()
       return alive
