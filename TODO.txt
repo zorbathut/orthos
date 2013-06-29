@@ -1,11 +1,13 @@
 
 * Prototype combat system
   * A few basic enemy options
-    * Flamer
     * Rocketer
-    * Laserer
+      * Lines
+    * Accelerator
+      * Runs you over
     * Boss
     * Enemies that intentionally guard each other?
+  * Stop using frame times
   * A few basic card options
     * More attack options?
   * Choose and insert enemies

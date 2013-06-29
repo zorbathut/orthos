@@ -258,6 +258,79 @@ local lookup = {
     
     return wall
   end,
+  
+  BossFlame = function (x, y)
+    local boss = CreateEntity({x = x, y = y, pic = "noncommercial/boss_flame", faction = "enemy"})
+    local grid = Inspect.Battle.Grid.Table()
+    
+    local indicator = Frame.Texture(boss)
+    indicator:SetTexture("noncommercial/fire")
+    indicator:SetVisible(false)
+    indicator:SetPoint(0.5, nil, boss.img, "LEFT")
+    indicator:SetHeight(45)
+    indicator:SetWidth(45)
+    
+    function ai(self)
+      local prerollPause = 120
+      local hopMin = 2
+      local hopMax = 5
+      local hopDelay = 25
+      local flameDelay = 60
+      
+      while true do
+        for i = 1, prerollPause do
+          coroutine.yield()
+        end
+        
+        local hops = math.random(hopMin, hopMax)
+        for i = 1, hops do
+          local finalhop = (i == hops)
+          
+          local dests = {}
+          for nx in ipairs(grid) do
+            for ny in ipairs(grid[nx]) do
+              if self:CanTravel(nx, ny) and grid[nx][ny].entity ~= self then
+                if not finalhop or nx ~= 6 then
+                  table.insert(dests, {nx, ny})
+                end
+              end
+            end
+          end
+          
+          if #dests > 0 then
+            local dest = dests[math.random(#dests)]
+            
+            self:Warp(dest[1], dest[2])
+          else
+            break
+          end
+          
+          if not finalhop then
+            for i = 1, hopDelay do
+              coroutine.yield()
+            end
+          end
+        end
+        
+        indicator:SetVisible(true)
+        for i = 1, flameDelay do
+          indicator:SetPoint(nil, 0.5, self, nil, 0.3 + math.random() * 0.4)
+          coroutine.yield()
+        end
+        indicator:SetVisible(false)
+        
+        Command.Battle.Cast("EnemyBossFlame", self)
+      end
+    end
+    
+    function boss:Bump()
+      boss.Think = coroutine.spawn(ai, boss)
+      indicator:SetVisible(false)
+    end
+    boss:Bump()
+    
+    return boss
+  end,
 }
 
 Command.Environment.Insert(_G, "Command.Battle.Spawn", function (entityId, ...)

@@ -193,6 +193,16 @@ local lookup = {
     end
   end,
       
+  EnemyBossFlame = function (initiator)
+    local x, y = initiator:XGet(), initiator:YGet()
+    DamageAoe(x, y, {-2, -2, -2, -1}, {-1, 0, 1, 0})
+    
+    Command.Battle.Cast("SFXBlast", x, y, -2, -1)
+    Command.Battle.Cast("SFXBlast", x, y, -2, 0)
+    Command.Battle.Cast("SFXBlast", x, y, -2, 1)
+    Command.Battle.Cast("SFXBlast", x, y, -1, 0)
+  end,
+  
 --[[ ============================
       VISUAL EFFECTS
       ============================ ]]
