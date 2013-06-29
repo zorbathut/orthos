@@ -165,35 +165,62 @@ local lookup = {
   Bandit = function (x, y)
     local bandit = CreateEntity({x = x, y = y, pic = "noncommercial/bandit", faction = "enemy"})
   
-    bandit.indicator = Frame.Text(bandit)
-    bandit.indicator:SetPoint("RIGHTCENTER", bandit.img, "LEFTCENTER")
+    bandit.indicator = Frame.Texture(bandit)
+    bandit.indicator:SetTexture("placeholder/reticle")
     bandit.indicator:SetVisible(false)
-    bandit.indicator:SetSize(20)
     
     return bandit
   end,
   
   BanditAI = function(self)
+    local grid = Inspect.Battle.Grid.Table()
+    
     while true do
       local targets = Inspect.Battle.Grid.Hitscan(self:XGet(), self:YGet(), -1, true, false)
       if targets[1] then
         self.indicator:SetVisible(true)
-        local ct = 90
-        for i = 1, ct do
-          self.indicator:SetText(tostring(ct - i))
+        
+        local dx = 1
+        
+        self.indicator:SetPoint("CENTER", grid[self:XGet() - dx][self:YGet()], "CENTER")
+        
+        local framespermove = 25
+        for i = 1, framespermove / 2 do
           coroutine.yield()
         end
         
-        Command.Battle.Cast("EnemySpike", self)
+        local fire = false
+        while true do
+          for i = 1, framespermove do
+            if grid[self:XGet() - dx][self:YGet()].entity and grid[self:XGet() - dx][self:YGet()].entity:FactionGet() ~= "enemy" then
+              fire = true
+              break
+            end
+            coroutine.yield()
+          end
+          
+          -- early out from the inner loop
+          if fire then break end
+          
+          dx = dx + 1
+          if not grid[self:XGet() - dx] then
+            break
+          end
+          self.indicator:SetPoint("CENTER", grid[self:XGet() - dx][self:YGet()], "CENTER")
+        end
+        
+        if fire then
+          Command.Battle.Cast("EnemySpike", self)
+        end
         
         self.indicator:SetVisible(false)
         
         for i = 1, 30 do
           coroutine.yield()
         end
+      else
+        coroutine.yield()
       end
-      
-      coroutine.yield()
     end
   end,
   
