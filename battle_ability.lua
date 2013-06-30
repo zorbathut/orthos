@@ -61,8 +61,8 @@ local lookup = {
     
     target:SetAlpha(0.2)
     
-    local chargeup = 30
-    local cooldown = 30
+    local chargeup = Utility.TicksFromSeconds(0.5)
+    local cooldown = Utility.TicksFromSeconds(0.5)
     
     for i = 1, chargeup do
       target:SetAlpha(0.2 + math.pow(i / chargeup, 5) * 0.8)
@@ -241,7 +241,7 @@ local lookup = {
     flame:SetTexture("noncommercial/fire")
     Command.Battle.Grid.Position(flame, x, y)
     
-    local cooldown = 15
+    local cooldown = Utility.TicksFromSeconds(0.25)
     for i = 1, cooldown do
       flame:SetAlpha(1.0 - math.pow(i / cooldown, 2))
       coroutine.yield()
@@ -256,7 +256,7 @@ local lookup = {
     explosion:SetTexture("copyright_infringement/Explosion")
     explosion:SetPoint("CENTER", grid[target:PositionXGetGrid()][target:PositionYGetGrid()], "CENTER", 0, 0)
     
-    local dur = 60 * 0.3
+    local dur = Utility.TicksFromSeconds(0.3)
     for k = 1, dur do
       coroutine.yield()
       explosion:SetTint(1, 1, 1, 1 - k / dur)
@@ -271,7 +271,7 @@ local lookup = {
     pierce:SetTexture("placeholder/pierce")
     pierce:SetPoint("CENTER", grid[target:PositionXGetGrid()][target:PositionYGetGrid()], "CENTER", 0, 0)
     
-    local cooldown = 10
+    local cooldown = Utility.TicksFromSeconds(0.15)
     for i = 1, cooldown do
       pierce:SetAlpha(1.0 - math.pow(i / cooldown, 2))
       coroutine.yield()

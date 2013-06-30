@@ -195,7 +195,7 @@ local lookup = {
     bandit.indicator:SetVisible(false)
     
     function ai(self)
-      for i = 1, 60 do
+      for i = 1, Utility.TicksFromSeconds(1) do
         coroutine.yield()
       end
       
@@ -209,9 +209,9 @@ local lookup = {
           Command.Battle.Grid.Position(self.indicator, self:PositionXGetGrid() - dx, self:PositionYGetGrid())
           
           -- tuning factors
-          local framespermove = 20
-          local firedelay = 30
-          local reset = 30
+          local framespermove = Utility.TicksFromSeconds(0.3)
+          local firedelay = Utility.TicksFromSeconds(0.5)
+          local reset = Utility.TicksFromSeconds(0.5)
           
           -- move targeting reticle ahead gradually
           local fire = false
@@ -302,11 +302,11 @@ local lookup = {
     indicator:SetWidth(45)
     
     function ai(self)
-      local prerollPause = 120
+      local prerollPause = Utility.TicksFromSeconds(1.3)
       local hopMin = 2
       local hopMax = 5
-      local hopDelay = 25
-      local flameDelay = 60
+      local hopDelay = Utility.TicksFromSeconds(0.35)
+      local flameDelay = Utility.TicksFromSeconds(1)
       
       while true do
         for i = 1, prerollPause do
