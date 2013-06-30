@@ -9,6 +9,9 @@ local slamDelay = Utility.TicksFromSeconds(0.6)
 local slamSpeed = 10 / Utility.TicksFromSeconds(1)
 local slamXEnd = -3
 local slamXSpawn = 9
+local rocketDelay = Utility.TicksFromSeconds(1.2)
+local rocketLaunchSpeed = 0.9 / Utility.TicksFromSeconds(1)
+local rocketTravelSpeed = 15 / Utility.TicksFromSeconds(1)
 
 local function BossHop(self, typ)
   local grid = Inspect.Battle.Grid.Table()
@@ -162,4 +165,66 @@ function Lookup.BossSlam(x, y)
   boss:Bump()
   
   return boss
+end
+
+function Lookup.BossRocket(x, y)
+  local boss = CreateEntity({x = x, y = y, pic = "noncommercial/boss_rocket", faction = "enemy"})
+  local grid = Inspect.Battle.Grid.Table()
+  
+  function ai(self)
+    while true do
+      BossHop(self, "rocket")
+      
+      -- launch ze missiles
+      Command.Battle.Spawn("BossRocket_Sub", self:AnchorXGet(), self:AnchorYGet(), 1)
+      Command.Battle.Spawn("BossRocket_Sub", self:AnchorXGet(), self:AnchorYGet(), -1)
+      
+      for k = 1, rocketDelay do
+        coroutine.yield()
+      end
+    end
+  end
+  
+  -- this boss doesn't need to reset AI when bumped
+  boss.Think = coroutine.spawn(ai, boss)
+  
+  return boss
+end
+
+function Lookup.BossRocket_Sub(x, y, dir)
+  local rocket = CreateEntity({x = x, y = y, pic = "placeholder/rocket", faction = "enemy", attached = false})
+  local grid = Inspect.Battle.Grid.Table()
+  
+  function ai(self)
+    while (self:PositionYGet() - (y + dir)) * dir < 0 do
+      self:PositionWarp(self:PositionXGet(), self:PositionYGet() + dir * rocketLaunchSpeed)
+      coroutine.yield()
+    end
+    
+    while self:PositionXGet() > slamXEnd do
+      if grid[self:PositionXGetGrid()] and grid[self:PositionXGetGrid()][self:PositionYGetGrid()] then
+        local ent = grid[self:PositionXGetGrid()][self:PositionYGetGrid()].entity
+        if ent and ent:FactionGet() ~= "enemy" then
+          Command.Battle.Cast("SFXBlast", self:PositionXGet(), self:PositionYGet())
+          ent:Hit()
+          self:Fall()
+          return
+        end
+      end
+      
+      self:PositionWarp(self:PositionXGet() - rocketTravelSpeed, self:PositionYGet())
+      coroutine.yield()
+    end
+    
+    self:Fall()
+  end
+  
+  -- this boss doesn't need to reset AI when bumped
+  rocket.Think = coroutine.spawn(ai, rocket)
+  
+  function rocket:Hit()
+    rocket:Fall() -- kaboom
+  end
+  
+  return rocket
 end

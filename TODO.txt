@@ -2,12 +2,9 @@
 * Prototype combat system
   * Stop using frame times
   * A few basic enemy options
-    * Accelerator
-      * Runs you over
-    * Rocketer
-      * Lines
     * Boss
   -- Tool: Make installer!
+  * priority system for dropping
   * Enemies that intentionally guard each other?
   * A few basic card options
     * More attack options?

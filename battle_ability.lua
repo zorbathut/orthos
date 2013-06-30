@@ -140,17 +140,21 @@ local lookup = {
   Repel = function (initiator)
     local hs = Inspect.Battle.Grid.Hitscan(initiator:PositionXGetGrid(), initiator:PositionYGetGrid(), 1)
     if hs[2] then
-      if hs[2]:AnchorWarpValid(hs[2]:AnchorXGet() + 1, hs[2]:AnchorYGet()) then
-        hs[2]:AnchorWarp(hs[2]:AnchorXGet() + 1, hs[2]:AnchorYGet())
+      if hs[2]:AnchorXGet() then
+        if hs[2]:AnchorWarpValid(hs[2]:AnchorXGet() + 1, hs[2]:AnchorYGet()) then
+          hs[2]:AnchorWarp(hs[2]:AnchorXGet() + 1, hs[2]:AnchorYGet())
+        end
       end
     end
     
     if hs[1] then
-      if hs[1]:AnchorWarpValid(hs[1]:AnchorXGet() + 1, hs[1]:AnchorYGet()) then
-        hs[1]:AnchorWarp(hs[1]:AnchorXGet() + 1, hs[1]:AnchorYGet())
-      end
-      if hs[1]:AnchorWarpValid(hs[1]:AnchorXGet() + 1, hs[1]:AnchorYGet()) then
-        hs[1]:AnchorWarp(hs[1]:AnchorXGet() + 1, hs[1]:AnchorYGet())
+      if hs[1]:AnchorXGet() then
+        if hs[1]:AnchorWarpValid(hs[1]:AnchorXGet() + 1, hs[1]:AnchorYGet()) then
+          hs[1]:AnchorWarp(hs[1]:AnchorXGet() + 1, hs[1]:AnchorYGet())
+        end
+        if hs[1]:AnchorWarpValid(hs[1]:AnchorXGet() + 1, hs[1]:AnchorYGet()) then
+          hs[1]:AnchorWarp(hs[1]:AnchorXGet() + 1, hs[1]:AnchorYGet())
+        end
       end
     end
   end,

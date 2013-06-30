@@ -158,7 +158,11 @@ function CreateEntity(params)
   
   fram:FactionSet(faction)
   fram:PositionAttachSet(attached)
-  fram:AnchorWarp(x, y)
+  if attached then
+    fram:AnchorWarp(x, y)
+  else
+    fram:PositionWarp(x, y)
+  end
   
   return fram
 end
@@ -299,7 +303,7 @@ assert(loadfile("battle_entity_boss.lua"))(lookup)
 Command.Environment.Insert(_G, "Command.Battle.Spawn", function (entityId, ...)
   print("Spawning", entityId, ...)
   local ent = lookup[entityId](...)
-  assert(ent)
+  assert(ent, "Didn't return anything from entity spawn function")
   entities[ent] = true
   return ent
 end)
