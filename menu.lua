@@ -130,3 +130,27 @@ Event.System.Update.Begin:Attach(
     end
   )
 )
+
+local starttext = Frame.Text(Frame.Root)
+starttext:SetSize(60)
+starttext:SetPoint("CENTER", Frame.Root, "CENTER", 0, 250)
+starttext:SetText("( START )")
+
+local descr = Frame.Text(Frame.Root)
+descr:SetSize(40)
+descr:SetText("Arrows to move - Z to choose or fire")
+descr:SetPoint("CENTER", Frame.Root, "CENTER", 0, 400)
+
+local descr2 = Frame.Text(Frame.Root)
+descr2:SetSize(20)
+descr2:SetText("This is a bare-bones combat prototype. Visit www.mandible.net or www.twitch.tv/zorbathut for more information.")
+descr2:SetPoint("BOTTOMCENTER", Frame.Root, "BOTTOMCENTER", 0, -10)
+
+local init = Command.Event.Create(_G, "Init.Start")
+
+Event.System.Key.Down:Attach(function (key)
+  if key == "z" or key == "Return" then
+    print("go")
+    init()
+  end
+end)
