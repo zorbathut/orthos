@@ -3,6 +3,8 @@
   * Victory screen
   * Choose and insert enemies
   -- Tool: Make installer!
+  * debugging - why is the boss behaving like a rocket? I think this happens when the boss is bumped in missile mode
+  * better ability icons
   * priority system for dropping
   * Enemies that intentionally guard each other?
   * A few basic card options

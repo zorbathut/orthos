@@ -3,9 +3,9 @@ local Lookup = ...
 --[[ BOSS TUNING FACTORS ]]
 
 local prerollPause = Utility.TicksFromSeconds(1.3)
-local hopMin = 2
-local hopMax = 5
-local hopDelay = Utility.TicksFromSeconds(0.35)
+local hopMin = 1
+local hopMax = 3
+local hopDelay = Utility.TicksFromSeconds(0.45)
 local flameDelay = Utility.TicksFromSeconds(1)
 local slamDelay = Utility.TicksFromSeconds(0.6)
 local slamSpeed = 10 / Utility.TicksFromSeconds(1)

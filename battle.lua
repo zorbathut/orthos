@@ -192,6 +192,34 @@ end)
 
 Event.Battle.Lost:Attach(function ()
   state = "loss"
+  
+  -- uhoh
+  local ded = Frame.Frame(Frame.Root)
+  ded:SetLayer(layer.ded)
+  ded:SetPoint("TOPLEFT", Frame.Root, "TOPLEFT")
+  ded:SetPoint("BOTTOMRIGHT", Frame.Root, "BOTTOMRIGHT")
+  ded:SetBackground(0.2, 0, 0, 0.7)
+  
+  local dedtext = Frame.Text(ded)
+  dedtext:SetText("U DED")
+  dedtext:SetPoint("CENTER", ded, "CENTER")
+  dedtext:SetSize(40)
+end)
+
+Event.Battle.Won:Attach(function ()
+  state = "won"
+  
+  -- yay
+  local ded = Frame.Frame(Frame.Root)
+  ded:SetLayer(layer.ded)
+  ded:SetPoint("TOPLEFT", Frame.Root, "TOPLEFT")
+  ded:SetPoint("BOTTOMRIGHT", Frame.Root, "BOTTOMRIGHT")
+  ded:SetBackground(0, 0, 0.2, 0.7)
+  
+  local dedtext = Frame.Text(ded)
+  dedtext:SetText("U WON")
+  dedtext:SetPoint("CENTER", ded, "CENTER")
+  dedtext:SetSize(40)
 end)
 
 Event.System.Key.Down:Attach(function (key)

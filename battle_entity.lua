@@ -3,9 +3,12 @@ local entityLayer = Frame.Frame(Frame.Root)
 entityLayer:SetLayer(layer.entities)
 
 local loseTrigger = Command.Event.Create(_G, "Battle.Lost")
+local winTrigger = Command.Event.Create(_G, "Battle.Won")
 
 -- repository of all active entities
 local entities = {}
+
+local entity_enemies = {}
 
 --[[ ========== BASE ENTITY CLASS ========== ]]
 local Entity = {}
@@ -129,6 +132,14 @@ do
     self:AnchorWarp(nil, nil)
     entities[self] = nil
     self:Obliterate()
+    
+    if entity_enemies[self] then
+      entity_enemies[self] = nil
+      
+      if not next(entity_enemies) then
+        winTrigger()
+      end
+    end
   end  
 end
 
@@ -164,6 +175,10 @@ function CreateEntity(params)
     fram:PositionWarp(x, y)
   end
   
+  if faction == "enemy" then
+    entity_enemies[fram] = true
+  end
+  
   return fram
 end
 
@@ -173,18 +188,6 @@ local lookup = {
     local player = CreateEntity({x = x, y = y, pic = "noncommercial/hero", faction = "friendly"})
     
     function player:Fall()
-      -- uhoh
-      local ded = Frame.Frame(Frame.Root)
-      ded:SetLayer(layer.ded)
-      ded:SetPoint("TOPLEFT", Frame.Root, "TOPLEFT")
-      ded:SetPoint("BOTTOMRIGHT", Frame.Root, "BOTTOMRIGHT")
-      ded:SetBackground(0.2, 0, 0, 0.7)
-      
-      local dedtext = Frame.Text(ded)
-      dedtext:SetText("U DED")
-      dedtext:SetPoint("CENTER", ded, "CENTER")
-      dedtext:SetSize(40)
-      
       loseTrigger()
       
       Entity.Fall(self)
