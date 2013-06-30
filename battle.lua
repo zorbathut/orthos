@@ -95,9 +95,9 @@ local player = nil -- filled with actual player
   
 player = Command.Battle.Spawn("Player", 1, 2)
 
-Command.Battle.Spawn("Bandit", 6, 3)
-Command.Battle.Spawn("Bandit", 5, 1)
---Command.Battle.Spawn("BossFlame", 5, 2)
+--Command.Battle.Spawn("Bandit", 6, 3)
+--Command.Battle.Spawn("Bandit", 5, 1)
+Command.Battle.Spawn("BossFlame", 5, 2)
 
 hud:SetPoint("BOTTOMRIGHT", player, "TOPCENTER")
 
@@ -123,19 +123,22 @@ Command.Environment.Insert(_G, "Command.Battle.Bump", function (x, y)
   if grid[x][y].entity then
     local entity = grid[x][y].entity
 
+    
     local dx = {0, 0, 1, -1}
     local dy = {1, -1, 0, 0}
     local avail = {}
+    
+    --[[  -- TWEAK: Bumping is 100% random, not trying the cardinal directions first
     for id in ipairs(dx) do
-      if entity:CanTravel(x + dx[id], y + dy[id]) then
+      if entity:AnchorWarpValid(x + dx[id], y + dy[id]) then
         table.insert(avail, {x + dx[id], y + dy[id]})
       end
-    end
+    end]]
     
     if #avail == 0 then
       for nx in ipairs(grid) do
         for ny in ipairs(grid[nx]) do
-          if entity:CanTravel(nx, ny) then
+          if entity:AnchorWarpValid(nx, ny) then
             table.insert(avail, {nx, ny})
           end
         end
@@ -147,7 +150,7 @@ Command.Environment.Insert(_G, "Command.Battle.Bump", function (x, y)
       entity:Fall()
     else
       local ncor = avail[math.random(#avail)]
-      entity:Warp(ncor[1], ncor[2])
+      entity:AnchorWarp(ncor[1], ncor[2])
       if entity.Bump then entity:Bump() end
     end
   end
@@ -192,13 +195,21 @@ Event.System.Key.Down:Attach(function (key)
   if state ~= "playing" then return end
   
   if key == "Up" then
-    player:ShiftTry(0, -1)
+    if player:AnchorWarpValid(player:AnchorXGet(), player:AnchorYGet() - 1) then
+      player:AnchorWarp(player:AnchorXGet(), player:AnchorYGet() - 1)
+    end
   elseif key == "Down" then
-    player:ShiftTry(0, 1)
+    if player:AnchorWarpValid(player:AnchorXGet(), player:AnchorYGet() + 1) then
+      player:AnchorWarp(player:AnchorXGet(), player:AnchorYGet() + 1)
+    end
   elseif key == "Left" then
-    player:ShiftTry(-1, 0)
+    if player:AnchorWarpValid(player:AnchorXGet() - 1, player:AnchorYGet()) then
+      player:AnchorWarp(player:AnchorXGet() - 1, player:AnchorYGet())
+    end
   elseif key == "Right" then
-    player:ShiftTry(1, 0)
+    if player:AnchorWarpValid(player:AnchorXGet() + 1, player:AnchorYGet()) then
+      player:AnchorWarp(player:AnchorXGet() + 1, player:AnchorYGet())
+    end
   elseif key == "z" then
     if #deckActive > 0 then
       dump(deckActive[1])

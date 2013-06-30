@@ -66,8 +66,8 @@ Command.Environment.Insert(_G, "Inspect.Battle.Grid.Hitscan", function (sx, sy, 
   sx = sx + direction * 0.1 -- close enough
   
   for entity in pairs(Inspect.Battle.Entities()) do
-    if entity.y == sy and not (entity:FactionGet() == "enemy" and missEnemy) and not (entity:FactionGet() == "friendly" and missFriendly) and (entity.x - sx) * direction > 0 then
-      table.insert(found, {ent = entity, dist = math.abs(sx - entity.x)})
+    if entity:PositionYGetGrid() == sy and not (entity:FactionGet() == "enemy" and missEnemy) and not (entity:FactionGet() == "friendly" and missFriendly) and (entity:PositionXGetGrid() - sx) * direction > 0 then
+      table.insert(found, {ent = entity, dist = math.abs(sx - entity:PositionXGetGrid())})
     end
   end
   
@@ -78,4 +78,10 @@ Command.Environment.Insert(_G, "Inspect.Battle.Grid.Hitscan", function (sx, sy, 
     table.insert(rv, v.ent)
   end
   return rv
+end)
+
+Command.Environment.Insert(_G, "Command.Battle.Grid.Position", function (self, x, y)
+  self:SetWidth(gridsize)
+  self:SetHeight(gridsize)
+  self:SetPoint("TOPLEFT", grid, "TOPLEFT", (x - 1) * gridsize, (y - 1) * gridsize)
 end)

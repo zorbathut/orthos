@@ -13,7 +13,7 @@ local function DamageAoe(tx, ty, dx, dy)
   for entity in pairs(entities) do
     local match = false
     for i = 1, #dx do
-      if entity:XGet() == tx + dx[i] and entity:YGet() == ty + dy[i] then
+      if entity:PositionXGetGrid() == tx + dx[i] and entity:PositionYGetGrid() == ty + dy[i] then
         table.insert(entitiesToDamage, entity)
         break
       end
@@ -32,7 +32,7 @@ local lookup = {
       ============================ ]]
       
   Spike = function (initiator)
-    local ix, iy = initiator:XGet(), initiator:YGet()
+    local ix, iy = initiator:PositionXGetGrid(), initiator:PositionYGetGrid()
     local grid = Inspect.Battle.Grid.Table()
     local entities = Inspect.Battle.Entities()
     
@@ -47,7 +47,7 @@ local lookup = {
   end,
   
   Shatter = function (initiator)
-    local ix, iy = initiator:XGet(), initiator:YGet()
+    local ix, iy = initiator:PositionXGetGrid(), initiator:PositionYGetGrid()
     local targetx, targety = ix + 3, iy
     
     local target = Frame.Texture(sfx)
@@ -80,17 +80,17 @@ local lookup = {
   end,
   
   Blast = function (initiator)
-    local x, y = initiator:XGet(), initiator:YGet()
+    local x, y = initiator:PositionXGetGrid(), initiator:PositionYGetGrid()
     DamageAoe(x, y, {1, 1, 1, 2}, {-1, 0, 1, 0})
     
-    Command.Battle.Cast("SFXBlast", x, y, 1, -1)
-    Command.Battle.Cast("SFXBlast", x, y, 1, 0)
-    Command.Battle.Cast("SFXBlast", x, y, 1, 1)
-    Command.Battle.Cast("SFXBlast", x, y, 2, 0)
+    Command.Battle.Cast("SFXBlast", x + 1, y - 1)
+    Command.Battle.Cast("SFXBlast", x + 1, y + 0)
+    Command.Battle.Cast("SFXBlast", x + 1, y + 1)
+    Command.Battle.Cast("SFXBlast", x + 2, y + 0)
   end,
   
   Pierce = function (initiator)
-    local ix, iy = initiator:XGet(), initiator:YGet()
+    local ix, iy = initiator:PositionXGetGrid(), initiator:PositionYGetGrid()
     local grid = Inspect.Battle.Grid.Table()
     local entities = Inspect.Battle.Entities()
     
@@ -109,40 +109,49 @@ local lookup = {
   end,
   
   Dash = function (initiator)
-    initiator:WarpTry(3, initiator.y)
-    if initiator:XGet() ~= 3 then
-      initiator:WarpTry(2, initiator.y)
+    if initiator:AnchorWarpValid(3, initiator:AnchorYGet()) then
+      initiator:AnchorWarp(3, initiator:AnchorYGet())
+    elseif initiator:AnchorWarpValid(2, initiator:AnchorYGet()) then
+      initiator:AnchorWarp(2, initiator:AnchorYGet())
     end
     
-    DamageAoe(initiator:XGet(), initiator:YGet(), {1}, {0})
+    DamageAoe(initiator:PositionXGetGrid(), initiator:PositionYGetGrid(), {1}, {0})
     
-    Command.Battle.Cast("SFXBlast", initiator:XGet(), initiator:YGet(), 1, 0)
+    Command.Battle.Cast("SFXBlast", initiator:PositionXGetGrid() + 1, initiator:PositionYGetGrid())
   end,
   
   Pull = function (initiator)
     local entities = Inspect.Battle.Entities()
     local targs = {}
     for entity in pairs(entities) do
-      if entity:FactionGet() ~= "friendly" then
+      if entity:FactionGet() ~= "friendly" and entity:AnchorXGet() then
         table.insert(targs, entity)
       end
     end
-    table.sort(targs, function (a, b) return a:XGet() < b:XGet() end)
+    table.sort(targs, function (a, b) return a:AnchorXGet() < b:AnchorXGet() end)
     
     for _, entity in ipairs(targs) do
-      entity:WarpTry(entity:XGet() - 1, entity:YGet())
+      if entity:AnchorWarpValid(entity:AnchorXGet() - 1, entity:AnchorYGet()) then
+        entity:AnchorWarp(entity:AnchorXGet() - 1, entity:AnchorYGet())
+      end
     end
   end,
   
   Repel = function (initiator)
-    local hs = Inspect.Battle.Grid.Hitscan(initiator:XGet(), initiator:YGet(), 1)
+    local hs = Inspect.Battle.Grid.Hitscan(initiator:PositionXGetGrid(), initiator:PositionYGetGrid(), 1)
     if hs[2] then
-      hs[2]:WarpTry(hs[2]:XGet() + 1, hs[2]:YGet())
+      if hs[2]:AnchorWarpValid(hs[2]:AnchorXGet() + 1, hs[2]:AnchorYGet()) then
+        hs[2]:AnchorWarp(hs[2]:AnchorXGet() + 1, hs[2]:AnchorYGet())
+      end
     end
     
     if hs[1] then
-      hs[1]:WarpTry(hs[1]:XGet() + 1, hs[1]:YGet())
-      hs[1]:WarpTry(hs[1]:XGet() + 1, hs[1]:YGet())
+      if hs[1]:AnchorWarpValid(hs[1]:AnchorXGet() + 1, hs[1]:AnchorYGet()) then
+        hs[1]:AnchorWarp(hs[1]:AnchorXGet() + 1, hs[1]:AnchorYGet())
+      end
+      if hs[1]:AnchorWarpValid(hs[1]:AnchorXGet() + 1, hs[1]:AnchorYGet()) then
+        hs[1]:AnchorWarp(hs[1]:AnchorXGet() + 1, hs[1]:AnchorYGet())
+      end
     end
   end,
   
@@ -160,7 +169,7 @@ local lookup = {
   
   Wall = function (initiator)
     local grid = Inspect.Battle.Grid.Table()
-    local destx, desty = initiator:XGet() + 1, initiator:YGet()
+    local destx, desty = initiator:PositionXGetGrid() + 1, initiator:PositionYGetGrid()
     
     if grid[destx][desty].entity then
       Command.Battle.Bump(destx, desty)
@@ -179,7 +188,7 @@ local lookup = {
       ============================ ]]
 
   EnemySpike = function (initiator)
-    local ix, iy = initiator:XGet(), initiator:YGet()
+    local ix, iy = initiator:PositionXGetGrid(), initiator:PositionYGetGrid()
     local grid = Inspect.Battle.Grid.Table()
     local entities = Inspect.Battle.Entities()
     
@@ -194,13 +203,13 @@ local lookup = {
   end,
       
   EnemyBossFlame = function (initiator)
-    local x, y = initiator:XGet(), initiator:YGet()
+    local x, y = initiator:PositionXGetGrid(), initiator:PositionYGetGrid()
     DamageAoe(x, y, {-2, -2, -2, -1}, {-1, 0, 1, 0})
     
-    Command.Battle.Cast("SFXBlast", x, y, -2, -1)
-    Command.Battle.Cast("SFXBlast", x, y, -2, 0)
-    Command.Battle.Cast("SFXBlast", x, y, -2, 1)
-    Command.Battle.Cast("SFXBlast", x, y, -1, 0)
+    Command.Battle.Cast("SFXBlast", x - 2, y - 1)
+    Command.Battle.Cast("SFXBlast", x - 2, y + 0)
+    Command.Battle.Cast("SFXBlast", x - 2, y + 1)
+    Command.Battle.Cast("SFXBlast", x - 1, y + 0)
   end,
   
 --[[ ============================
@@ -227,15 +236,10 @@ local lookup = {
     blaster:Obliterate()
   end,
   
-  SFXBlast = function (x, y, dx, dy)
-    local grid = Inspect.Battle.Grid.Table()
+  SFXBlast = function (x, y)
     local flame = Frame.Texture(sfx)
-    local gridx = grid[x][y]:GetWidth()
-    local gridy = grid[x][y]:GetHeight()
     flame:SetTexture("noncommercial/fire")
-    flame:SetPoint("CENTER", grid[x][y], "CENTER", gridx * dx, gridy * dy)
-    flame:SetWidth(grid[x][y]:GetWidth())
-    flame:SetHeight(grid[x][y]:GetHeight())
+    Command.Battle.Grid.Position(flame, x, y)
     
     local cooldown = 15
     for i = 1, cooldown do
@@ -250,7 +254,7 @@ local lookup = {
     local grid = Inspect.Battle.Grid.Table()
     local explosion = Frame.Texture(sfx)
     explosion:SetTexture("copyright_infringement/Explosion")
-    explosion:SetPoint("CENTER", grid[target:XGet()][target:YGet()], "CENTER", 0, 0)
+    explosion:SetPoint("CENTER", grid[target:PositionXGetGrid()][target:PositionYGetGrid()], "CENTER", 0, 0)
     
     local dur = 60 * 0.3
     for k = 1, dur do
@@ -265,7 +269,7 @@ local lookup = {
     local grid = Inspect.Battle.Grid.Table()
     local pierce = Frame.Texture(sfx)
     pierce:SetTexture("placeholder/pierce")
-    pierce:SetPoint("CENTER", grid[target:XGet()][target:YGet()], "CENTER", 0, 0)
+    pierce:SetPoint("CENTER", grid[target:PositionXGetGrid()][target:PositionYGetGrid()], "CENTER", 0, 0)
     
     local cooldown = 10
     for i = 1, cooldown do
