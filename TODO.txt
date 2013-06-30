@@ -1,6 +1,5 @@
 
 * Prototype combat system
-  * Stop using frame times
   * A few basic enemy options
     * Boss
   -- Tool: Make installer!
