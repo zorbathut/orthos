@@ -154,7 +154,7 @@ local lookup = {
       dedtext:SetPoint("CENTER", ded, "CENTER")
       dedtext:SetSize(40)
       
-      battleLost()
+      loseTrigger()
       
       Entity.Fall(self)
     end

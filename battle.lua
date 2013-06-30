@@ -95,9 +95,9 @@ local player = nil -- filled with actual player
   
 player = Command.Battle.Spawn("Player", 1, 2)
 
---Command.Battle.Spawn("Bandit", 6, 3)
---Command.Battle.Spawn("Bandit", 5, 1)
-Command.Battle.Spawn("BossFlame", 5, 2)
+Command.Battle.Spawn("Bandit", 6, 3)
+Command.Battle.Spawn("Bandit", 5, 1)
+--Command.Battle.Spawn("BossFlame", 5, 2)
 
 hud:SetPoint("BOTTOMRIGHT", player, "TOPCENTER")
 
