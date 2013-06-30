@@ -7,8 +7,8 @@
     * Rocketer
       * Lines
     * Boss
-    * Enemies that intentionally guard each other?
   -- Tool: Make installer!
+  * Enemies that intentionally guard each other?
   * A few basic card options
     * More attack options?
   * Choose and insert enemies

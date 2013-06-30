@@ -98,6 +98,9 @@ do
   
   function Entity:PositionAttachSet(pa)
     self.positionAttach = pa
+    if pa and self:AnchorXGet() and self:AnchorYGet() then
+      self:PositionWarp(self:AnchorXGet(), self:AnchorYGet())
+    end
   end
   
   function Entity:Hit()
@@ -289,86 +292,9 @@ local lookup = {
     
     return wall
   end,
-  
-  BossFlame = function (x, y)
-    local boss = CreateEntity({x = x, y = y, pic = "noncommercial/boss_flame", faction = "enemy"})
-    local grid = Inspect.Battle.Grid.Table()
-    
-    local indicator = Frame.Texture(boss)
-    indicator:SetTexture("noncommercial/fire")
-    indicator:SetVisible(false)
-    indicator:SetPoint(0.5, nil, boss.img, "LEFT")
-    indicator:SetHeight(45)
-    indicator:SetWidth(45)
-    
-    function ai(self)
-      local prerollPause = Utility.TicksFromSeconds(1.3)
-      local hopMin = 2
-      local hopMax = 5
-      local hopDelay = Utility.TicksFromSeconds(0.35)
-      local flameDelay = Utility.TicksFromSeconds(1)
-      
-      while true do
-        for i = 1, prerollPause do
-          coroutine.yield()
-        end
-        
-        local hops = math.random(hopMin, hopMax)
-        for i = 1, hops do
-          local finalhop = (i == hops)
-          
-          -- make one hop
-          local dests = {}
-          for nx in ipairs(grid) do
-            for ny in ipairs(grid[nx]) do
-              if self:AnchorWarpValid(nx, ny) and grid[nx][ny].entity ~= self then
-                if not finalhop or nx ~= 6 then -- if we're on our final hop, hop to one of the front two rows so our flamethrower won't be useless
-                  table.insert(dests, {nx, ny})
-                end
-              end
-            end
-          end
-          
-          -- warp if we can. if we can't, exit immediately so we can turboflame
-          if #dests > 0 then
-            local dest = dests[math.random(#dests)]
-            
-            self:AnchorWarp(dest[1], dest[2])
-          else
-            break
-          end
-          
-          -- don't want an extra hop delay on flamethrowing
-          if not finalhop then
-            for i = 1, hopDelay do
-              coroutine.yield()
-            end
-          end
-        end
-        
-        -- flamethrower hint
-        indicator:SetVisible(true)
-        for i = 1, flameDelay do
-          indicator:SetPoint(nil, 0.5, self, nil, 0.3 + math.random() * 0.4)
-          coroutine.yield()
-        end
-        indicator:SetVisible(false)
-        
-        -- fwoosh
-        Command.Battle.Cast("EnemyBossFlame", self)
-      end
-    end
-    
-    function boss:Bump()
-      -- reset AI if the boss is bumped. TODO, do so only during flamethrower chargeup?
-      boss.Think = coroutine.spawn(ai, boss)
-      indicator:SetVisible(false)
-    end
-    boss:Bump()
-    
-    return boss
-  end,
 }
+
+assert(loadfile("battle_entity_boss.lua"))(lookup)
 
 Command.Environment.Insert(_G, "Command.Battle.Spawn", function (entityId, ...)
   print("Spawning", entityId, ...)
