@@ -99,7 +99,8 @@ player = Command.Battle.Spawn("Player", 1, 2)
 --Command.Battle.Spawn("Bandit", 5, 1)
 --Command.Battle.Spawn("BossFlame", 5, 2)
 --Command.Battle.Spawn("BossSlam", 5, 2)
-Command.Battle.Spawn("BossRocket", 5, 2)
+--Command.Battle.Spawn("BossRocket", 5, 2)
+Command.Battle.Spawn("BossMulti", 5, 2)
 
 hud:SetPoint("BOTTOMRIGHT", player, "TOPCENTER")
 

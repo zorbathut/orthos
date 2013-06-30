@@ -1,5 +1,7 @@
 local Lookup = ...
 
+--[[ BOSS TUNING FACTORS ]]
+
 local prerollPause = Utility.TicksFromSeconds(1.3)
 local hopMin = 2
 local hopMax = 5
@@ -12,6 +14,8 @@ local slamXSpawn = 9
 local rocketDelay = Utility.TicksFromSeconds(1.2)
 local rocketLaunchSpeed = 0.9 / Utility.TicksFromSeconds(1)
 local rocketTravelSpeed = 15 / Utility.TicksFromSeconds(1)
+
+--[[ BOSS SHARED FUNCTIONALITY ]]
 
 local function BossHop(self, typ)
   local grid = Inspect.Battle.Grid.Table()
@@ -59,6 +63,25 @@ local function BossHop(self, typ)
   end
 end
 
+--[[ FLAME BOSS ]]
+
+function BossFlameRoutine(self, indicator)
+  indicator:SetPoint(0.5, nil, self.img, "LEFT")
+  
+  BossHop(self, "flame")
+
+  -- flamethrower hint
+  indicator:SetVisible(true)
+  for i = 1, flameDelay do
+    indicator:SetPoint(nil, 0.5, self, nil, 0.3 + math.random() * 0.4)
+    coroutine.yield()
+  end
+  indicator:SetVisible(false)
+
+  -- fwoosh
+  Command.Battle.Cast("EnemyBossFlame", self)
+end
+
 function Lookup.BossFlame(x, y)
   local boss = CreateEntity({x = x, y = y, pic = "noncommercial/boss_flame", faction = "enemy"})
   local grid = Inspect.Battle.Grid.Table()
@@ -66,24 +89,12 @@ function Lookup.BossFlame(x, y)
   local indicator = Frame.Texture(boss)
   indicator:SetTexture("noncommercial/fire")
   indicator:SetVisible(false)
-  indicator:SetPoint(0.5, nil, boss.img, "LET")
   indicator:SetHeight(45)
   indicator:SetWidth(45)
   
   function ai(self)
     while true do
-      BossHop(self, "flame")
-      
-      -- flamethrower hint
-      indicator:SetVisible(true)
-      for i = 1, flameDelay do
-        indicator:SetPoint(nil, 0.5, self, nil, 0.3 + math.random() * 0.4)
-        coroutine.yield()
-      end
-      indicator:SetVisible(false)
-      
-      -- fwoosh
-      Command.Battle.Cast("EnemyBossFlame", self)
+      BossFlameRoutine(self, indicator)
     end
   end
   
@@ -97,6 +108,8 @@ function Lookup.BossFlame(x, y)
   return boss
 end
 
+--[[ SLAM BOSS ]]
+
 local function TestImpact(self, impacts)
   local grid = Inspect.Battle.Grid.Table()
   if grid[self:PositionXGetGrid()] and grid[self:PositionXGetGrid()][self:PositionYGetGrid()] then
@@ -108,6 +121,43 @@ local function TestImpact(self, impacts)
   end
 end
 
+function BossSlamRoutine(self, indicator)
+  indicator:SetPoint(0.5, nil, self.img, "RIGHT")
+  
+  BossHop(self, "slam")
+  
+  -- flamethrower hint
+  indicator:SetVisible(true)
+  for i = 1, slamDelay do
+    indicator:SetPoint(nil, 0.5, self, nil, 0.3 + math.random() * 0.4)
+    coroutine.yield()
+  end
+  
+  -- fwoosh
+  self:PositionAttachSet(false)
+  
+  local impacts = {}
+  
+  while self:PositionXGet() > slamXEnd do
+    indicator:SetPoint(nil, 0.5, self, nil, 0.3 + math.random() * 0.4)
+    coroutine.yield()
+    self:PositionWarp(self:PositionXGet() - slamSpeed, self:PositionYGet())
+    TestImpact(self, impacts)
+  end
+  
+  self:PositionWarp(slamXSpawn, self:AnchorYGet())
+  
+  while self:PositionXGet() > self:AnchorXGet() do
+    indicator:SetPoint(nil, 0.5, self, nil, 0.3 + math.random() * 0.4)
+    coroutine.yield()
+    self:PositionWarp(self:PositionXGet() - slamSpeed, self:PositionYGet())
+    TestImpact(self, impacts)
+  end
+  
+  self:PositionAttachSet(true)
+  indicator:SetVisible(false)
+end
+
 function Lookup.BossSlam(x, y)
   local boss = CreateEntity({x = x, y = y, pic = "noncommercial/boss_slam", faction = "enemy"})
   local grid = Inspect.Battle.Grid.Table()
@@ -115,44 +165,12 @@ function Lookup.BossSlam(x, y)
   local indicator = Frame.Texture(boss)
   indicator:SetTexture("noncommercial/fire")
   indicator:SetVisible(false)
-  indicator:SetPoint(0.5, nil, boss.img, "RIGHT")
   indicator:SetHeight(45)
   indicator:SetWidth(45)
   
   function ai(self)
     while true do
-      BossHop(self, "slam")
-      
-      -- flamethrower hint
-      indicator:SetVisible(true)
-      for i = 1, slamDelay do
-        indicator:SetPoint(nil, 0.5, self, nil, 0.3 + math.random() * 0.4)
-        coroutine.yield()
-      end
-      
-      -- fwoosh
-      self:PositionAttachSet(false)
-      
-      local impacts = {}
-      
-      while self:PositionXGet() > slamXEnd do
-        indicator:SetPoint(nil, 0.5, self, nil, 0.3 + math.random() * 0.4)
-        coroutine.yield()
-        self:PositionWarp(self:PositionXGet() - slamSpeed, self:PositionYGet())
-        TestImpact(self, impacts)
-      end
-      
-      self:PositionWarp(slamXSpawn, self:AnchorYGet())
-      
-      while self:PositionXGet() > self:AnchorXGet() do
-        indicator:SetPoint(nil, 0.5, self, nil, 0.3 + math.random() * 0.4)
-        coroutine.yield()
-        self:PositionWarp(self:PositionXGet() - slamSpeed, self:PositionYGet())
-        TestImpact(self, impacts)
-      end
-      
-      self:PositionAttachSet(true)
-      indicator:SetVisible(false)
+      BossSlamRoutine(self, indicator)
     end
   end
   
@@ -167,21 +185,27 @@ function Lookup.BossSlam(x, y)
   return boss
 end
 
+--[[ ROCKET BOSS ]]
+
+function BossRocketRoutine(self)
+  BossHop(self, "rocket")
+  
+  -- launch ze missiles
+  Command.Battle.Spawn("BossRocket_Sub", self:AnchorXGet(), self:AnchorYGet(), 1)
+  Command.Battle.Spawn("BossRocket_Sub", self:AnchorXGet(), self:AnchorYGet(), -1)
+  
+  for k = 1, rocketDelay do
+    coroutine.yield()
+  end
+end
+
 function Lookup.BossRocket(x, y)
   local boss = CreateEntity({x = x, y = y, pic = "noncommercial/boss_rocket", faction = "enemy"})
   local grid = Inspect.Battle.Grid.Table()
   
   function ai(self)
     while true do
-      BossHop(self, "rocket")
-      
-      -- launch ze missiles
-      Command.Battle.Spawn("BossRocket_Sub", self:AnchorXGet(), self:AnchorYGet(), 1)
-      Command.Battle.Spawn("BossRocket_Sub", self:AnchorXGet(), self:AnchorYGet(), -1)
-      
-      for k = 1, rocketDelay do
-        coroutine.yield()
-      end
+      BossRocketRoutine(self)
     end
   end
   
@@ -227,4 +251,34 @@ function Lookup.BossRocket_Sub(x, y, dir)
   end
   
   return rocket
+end
+
+--[[ MULTI BOSS ]]
+
+function Lookup.BossMulti(x, y)
+  local boss = CreateEntity({x = x, y = y, pic = "noncommercial/boss", faction = "enemy"})
+  local grid = Inspect.Battle.Grid.Table()
+  
+  local indicator = Frame.Texture(boss)
+  indicator:SetTexture("noncommercial/fire")
+  indicator:SetVisible(false)
+  indicator:SetHeight(45)
+  indicator:SetWidth(45)
+  
+  function ai(self)
+    while true do
+      local options = {BossFlameRoutine, BossSlamRoutine, BossRocketRoutine}
+      options[math.random(#options)](self, indicator)
+    end
+  end
+  
+  function boss:Bump()
+    -- reset AI if the boss is bumped. TODO, do so only during flamethrower chargeup?
+    self.Think = coroutine.spawn(ai, boss)
+    indicator:SetVisible(false)
+    self:PositionAttachSet(true)
+  end
+  boss:Bump()
+  
+  return boss
 end

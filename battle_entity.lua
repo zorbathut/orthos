@@ -44,7 +44,7 @@ do
       grid[self.anchor_x][self.anchor_y].entity = self
     end
     
-    if self:PositionAttachGet() then
+    if self:PositionAttachGet() and nx and ny then
       self:PositionWarp(nx, ny)
     end
   end

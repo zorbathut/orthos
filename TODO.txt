@@ -1,13 +1,13 @@
 
 * Prototype combat system
-  * A few basic enemy options
-    * Boss
+  * Victory screen
+  * Choose and insert enemies
   -- Tool: Make installer!
   * priority system for dropping
   * Enemies that intentionally guard each other?
   * A few basic card options
     * More attack options?
-  * Choose and insert enemies
+
   * Ability types!
   * Make it fun?
     * Cooldown on movement
