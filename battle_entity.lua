@@ -326,3 +326,10 @@ Event.System.Tick:Attach(function ()
   end
 end)
 
+Event.Debug.Lose:Attach(function ()
+  loseTrigger()
+end)
+
+Event.Debug.Win:Attach(function ()
+  winTrigger()
+end)

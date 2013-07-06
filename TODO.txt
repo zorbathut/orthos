@@ -1,9 +1,14 @@
 
 * Prototype combat system
-  * Choose and insert enemies
-  -- Tool: Make installer!
+  * War loop (abort/retry/fail)
+  * include directory change
   * debugging - why is the boss behaving like a rocket? I think this happens when the boss is bumped in missile mode
-  * debugging - various keyboard keys aren't entering properly
+  * debugging - various keyboard keys aren't entering properly (enter)
+  * debugging - debug console broken
+  * infrastructure - something like bubbling for key events?
+  * infrastructure - debug console uses the right environment (what is "right" defined as)
+  * Combat editor
+  -- Tool: Make installer!
   * better ability icons
   * priority system for dropping
   * Enemies that intentionally guard each other?

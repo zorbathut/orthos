@@ -1,4 +1,6 @@
 
+local enemyPack = ...
+
 layer = {
   bg = -10,
   grid = -1,
@@ -93,14 +95,11 @@ deckChoose()
 
 local player = nil -- filled with actual player
   
-player = Command.Battle.Spawn("Player", 1, 2)
+player = Command.Battle.Spawn("Player", 2, 2)
 
---Command.Battle.Spawn("Bandit", 6, 3)
---Command.Battle.Spawn("Bandit", 5, 1)
---Command.Battle.Spawn("BossFlame", 5, 2)
---Command.Battle.Spawn("BossSlam", 5, 2)
---Command.Battle.Spawn("BossRocket", 5, 2)
-Command.Battle.Spawn("BossMulti", 5, 2)
+for _, v in ipairs(enemyPack) do
+  Command.Battle.Spawn(v.type, v.x, v.y)
+end
 
 hud:SetPoint("BOTTOMRIGHT", player, "TOPCENTER")
 
@@ -192,34 +191,10 @@ end)
 
 Event.Battle.Lost:Attach(function ()
   state = "loss"
-  
-  -- uhoh
-  local ded = Frame.Frame(Frame.Root)
-  ded:SetLayer(layer.ded)
-  ded:SetPoint("TOPLEFT", Frame.Root, "TOPLEFT")
-  ded:SetPoint("BOTTOMRIGHT", Frame.Root, "BOTTOMRIGHT")
-  ded:SetBackground(0.2, 0, 0, 0.7)
-  
-  local dedtext = Frame.Text(ded)
-  dedtext:SetText("U DED")
-  dedtext:SetPoint("CENTER", ded, "CENTER")
-  dedtext:SetSize(40)
 end)
 
 Event.Battle.Won:Attach(function ()
   state = "won"
-  
-  -- yay
-  local ded = Frame.Frame(Frame.Root)
-  ded:SetLayer(layer.ded)
-  ded:SetPoint("TOPLEFT", Frame.Root, "TOPLEFT")
-  ded:SetPoint("BOTTOMRIGHT", Frame.Root, "BOTTOMRIGHT")
-  ded:SetBackground(0, 0, 0.2, 0.7)
-  
-  local dedtext = Frame.Text(ded)
-  dedtext:SetText("U WON")
-  dedtext:SetPoint("CENTER", ded, "CENTER")
-  dedtext:SetSize(40)
 end)
 
 Event.System.Key.Down:Attach(function (key)

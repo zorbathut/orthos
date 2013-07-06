@@ -216,7 +216,7 @@ function Lookup.BossRocket(x, y)
 end
 
 function Lookup.BossRocket_Sub(x, y, dir)
-  local rocket = CreateEntity({x = x, y = y, pic = "placeholder/rocket", faction = "enemy", attached = false})
+  local rocket = CreateEntity({x = x, y = y, pic = "noncommercial/rocket", faction = "enemy", attached = false})
   local grid = Inspect.Battle.Grid.Table()
   
   function ai(self)
