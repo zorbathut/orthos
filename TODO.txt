@@ -1,6 +1,6 @@
 
 * Prototype combat system
-  * Run out of cards
+  * Run out of cards crash
   * War loop (abort/retry/fail)
   * include directory change
   * debugging - why is the boss behaving like a rocket? I think this happens when the boss is bumped in missile mode
@@ -11,7 +11,10 @@
   * Combat editor
   -- Tool: Make installer!
   * better ability icons
-  * priority system for dropping
+  * ability names
+  * hitstuns (player, enemy)
+  * recharge delay
+  * priority system for dropping so trash doesn't outlive bosses
   * Enemies that intentionally guard each other?
   * A few basic card options
     * More attack options?
