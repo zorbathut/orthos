@@ -1,6 +1,5 @@
 
 * Prototype combat system
-  * include directory change
   * debugging - why is the boss behaving like a rocket? I think this happens when the boss is bumped in missile mode
   * debugging - various keyboard keys aren't entering properly (enter)
   * debugging - debug console broken
