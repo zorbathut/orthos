@@ -220,7 +220,9 @@ Event.System.Key.Down:Attach(function (key)
     if #deckActive > 0 then
       dump(deckActive[1])
       Command.Battle.Cast(deckActive[1].name, player)
-      table.remove(deckActive, 1)
+      Command.Deck.Discard(table.remove(deckActive, 1))
+      
+      print("Cast", #deckActive, #deckStack, #deckDiscard)
       
       Command.Battle.Display.Card.Resync()
     else

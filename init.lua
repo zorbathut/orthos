@@ -7,11 +7,11 @@ local battle
 local menu
 
 --local combatblob = {{type = "Bandit", x = 6, y = 1}}
---local combatblob = {{type = "Bandit", x = 6, y = 3}, {type = "Bandit", x = 5, y = 1}}
+local combatblob = {{type = "Bandit", x = 6, y = 3}, {type = "Bandit", x = 5, y = 1}}
 --local combatblob = {{type = "BossFlame", x = 5, y = 2}}
 --local combatblob = {{type = "BossSlam", x = 5, y = 2}}
 --local combatblob = {{type = "BossRocket", x = 5, y = 2}}
-local combatblob = {{type = "BossMulti", x = 5, y = 2}}
+--local combatblob = {{type = "BossMulti", x = 5, y = 2}}
 
 local function ReturnToMenu()
   if menu then
