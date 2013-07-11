@@ -5,6 +5,7 @@ local stattext
 local aborttext
 local retrytext
 local failtext
+local startpos
 
 if lw == "lose" then
   r, g, b, a = 0.2, 0, 0, 0.7
@@ -12,12 +13,14 @@ if lw == "lose" then
   aborttext = "Cancel the battle entirely"
   retrytext = "Attempt the battle again"
   failtext = "Return to the main menu"
+  startpos = 2
 else
   r, g, b, a = 0, 0, 0.2, 0.7
   stattext = "Program complete, returning to OS"
   aborttext = "Return to battle configuration"
   retrytext = "Attempt the battle again"
   failtext = "Return to the main menu"
+  startpos = 1
 end
 
 local ded = Frame.Frame(Frame.Root)
@@ -78,7 +81,7 @@ local function SetIndicator(npos)
   indicator:SetBackground(1, 1, 1)
   indicator:SetPoint("TOPCENTER", opts[optpos], "BOTTOMCENTER", 0, 10)
 end
-SetIndicator(2)
+SetIndicator(startpos)
 
 Event.System.Key.Down:Attach(function (key)
   if key == "Left" then

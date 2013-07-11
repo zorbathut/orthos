@@ -1,9 +1,6 @@
 
 local enemypack = ...
 
-local loseTrigger = Command.Event.Create(_G, "War.Lost")
-local winTrigger = Command.Event.Create(_G, "War.Won")
-
 local battleEnvironment
 local arf
 
@@ -33,8 +30,10 @@ local function RebuildBattle()
 end
 RebuildBattle()
 
+local abort = Command.Event.Create(_G, "War.Abort")
+
 Command.Environment.Insert(_G, "Command.War.Abort", function ()
-  Command.War.Fail() -- same thing right now
+  Command.Battle.Abort()
 end)
 
 Command.Environment.Insert(_G, "Command.War.Retry", function ()

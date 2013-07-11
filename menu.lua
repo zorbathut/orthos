@@ -138,7 +138,7 @@ starttext:SetText("( START )")
 
 local descr = Frame.Text(Frame.Root)
 descr:SetSize(40)
-descr:SetText("Arrows to move - Z to choose or fire")
+descr:SetText("Arrows to move - Z to continue, choose, or fire")
 descr:SetPoint("CENTER", Frame.Root, "CENTER", 0, 400)
 
 local descr2 = Frame.Text(Frame.Root)
@@ -149,7 +149,7 @@ descr2:SetPoint("BOTTOMCENTER", Frame.Root, "BOTTOMCENTER", 0, -10)
 local init = Command.Event.Create(_G, "Init.Start")
 
 Event.System.Key.Down:Attach(function (key)
-  if key == "z" or key == "Return" then
+  if key == "z" or key == "Return" or key == "Space" then
     print("go")
     init()
   end

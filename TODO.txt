@@ -1,8 +1,12 @@
 
 * Prototype combat system
-  * debugging - why is the boss behaving like a rocket? I think this happens when the boss is bumped in missile mode
   * Combat editor
-  -- Tool: Make installer!
+  * Resizability
+    * on-the-fly
+    * autosize per screen
+    * fullscreen
+      * alt-enter
+  -- Tool: Make standalone!
   * better ability icons
   * ability names
   * hitstuns (player, enemy)

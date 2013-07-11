@@ -266,9 +266,18 @@ function Lookup.BossMulti(x, y)
   indicator:SetWidth(45)
   
   function ai(self)
+    local last = nil
     while true do
       local options = {BossFlameRoutine, BossSlamRoutine, BossRocketRoutine}
-      options[math.random(#options)](self, indicator)
+      local routine = nil
+      while not routine do
+        routine = options[math.random(#options)]
+        if routine == last then
+          routine = nil
+        end
+      end
+      last = routine
+      routine(self, indicator)
     end
   end
   
