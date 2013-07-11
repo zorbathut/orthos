@@ -1,10 +1,6 @@
 
 * Prototype combat system
   * debugging - why is the boss behaving like a rocket? I think this happens when the boss is bumped in missile mode
-  * debugging - various keyboard keys aren't entering properly (enter)
-  * debugging - debug console brokenish
-  * infrastructure - something like bubbling for key events?
-  * infrastructure - debug console uses the right environment (what is "right" defined as)
   * Combat editor
   -- Tool: Make installer!
   * better ability icons
@@ -15,7 +11,6 @@
   * Enemies that intentionally guard each other?
   * A few basic card options
     * More attack options?
-
   * Ability types!
   * Make it fun?
     * Cooldown on movement
@@ -23,9 +18,12 @@
     * Sound effects
     * Music
     * Stuns
-   
+
 * Tool day:
-  * Trace the GC to find our frame
+  * Trace the GC to find leaks
+  * http://molecularmusings.wordpress.com/2011/09/05/properly-handling-keyboard-input/
+  * debugging - debug console brokenish
+  * infrastructure - something like bubbling for key events?
 
 * REMEMBER THE AVENGERS
 * don't show the bits that are unimportant
