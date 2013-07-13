@@ -1,12 +1,20 @@
 
 * Prototype combat system
-  * Combat editor
+  * Trace the GC to find leaks
   * Resizability
     * on-the-fly
     * autosize per screen
     * fullscreen
       * alt-enter
+  * Crash reporter
   -- Tool: Make standalone!
+  * Debug mode
+  * Figure out how command/event/inspect propogation works! What I'm doing now isn't working. Figure out abstraction barriers, calling conventions, etc
+    * Commands and Inspects don't propogate up and down (except for system global commands and inspects), they're used for communication *within* a layer
+    * A batch of Commands or Inspects can be exported down a layer explicitly, and this is semi-common
+    * Communication up layer is generally done via hooking Events, so that the lower layer never really knows what the upper layer is doing with its responses
+      * this is assuming there weren't explicitly-exported Commands
+    * REINTRODUCE init_util.lua CHECKS
   * better ability icons
   * ability names
   * hitstuns (player, enemy)
@@ -24,7 +32,6 @@
     * Stuns
 
 * Tool day:
-  * Trace the GC to find leaks
   * http://molecularmusings.wordpress.com/2011/09/05/properly-handling-keyboard-input/
   * debugging - debug console brokenish
   * infrastructure - something like bubbling for key events?

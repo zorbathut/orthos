@@ -1,12 +1,17 @@
 
-local gridsize = 200
+local params = ...
+params = params or {}
+
+local gridsize = params.gridsize or 200
 local border = 5
 local outline = 5
 
-local grid = Frame.Frame(Frame.Root)
-grid:SetPoint("TOPLEFT", Frame.Root, "CENTER", -gridsize * 3, -gridsize * 1.5)
-grid:SetPoint("BOTTOMRIGHT", Frame.Root, "CENTER", gridsize * 3, gridsize * 1.5)
-grid:SetLayer(layer.grid)
+local parent = params.parent or Frame.Root
+
+local grid = Frame.Frame(parent)
+grid:SetPoint("TOPLEFT", parent, "CENTER", -gridsize * 3, -gridsize * 1.5)
+grid:SetPoint("BOTTOMRIGHT", parent, "CENTER", gridsize * 3, gridsize * 1.5)
+grid:SetLayer(layer and layer.grid or -1) -- grid defaults to being "behind"
 
 for row = 1, 6 do
   grid[row] = {}

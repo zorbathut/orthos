@@ -1,5 +1,5 @@
 
-local enemypack = ...
+local enemypack, mode = ...
 
 local battleEnvironment
 local arf
@@ -30,16 +30,26 @@ local function RebuildBattle()
 end
 RebuildBattle()
 
-local abort = Command.Event.Create(_G, "War.Abort")
-
-Command.Environment.Insert(_G, "Command.War.Abort", function ()
-  Command.Battle.Abort()
-end)
-
 Command.Environment.Insert(_G, "Command.War.Retry", function ()
   RebuildBattle()
 end)
 
-Command.Environment.Insert(_G, "Command.War.Fail", function ()
-  Command.Init.Return()
-end)
+if not mode then
+  Command.Environment.Insert(_G, "Command.War.Abort", function ()
+    Command.Battle.Abort() -- same thing right now
+  end)
+
+  Command.Environment.Insert(_G, "Command.War.Fail", function ()
+    Command.Init.Return()
+  end)
+elseif mode == "forge" then
+  Command.Environment.Insert(_G, "Command.War.Abort", function ()
+    Command.Forge.Test.End()
+  end)
+
+  Command.Environment.Insert(_G, "Command.War.Fail", function ()
+    Command.Forge.Test.End()
+  end)
+else
+  assert(false)
+end

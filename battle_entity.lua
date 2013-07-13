@@ -1,6 +1,6 @@
 
 local entityLayer = Frame.Frame(Frame.Root)
-entityLayer:SetLayer(layer.entities)
+entityLayer:SetLayer(layer and layer.entities or 0)
 
 local loseTrigger = Command.Event.Create(_G, "Battle.Lost")
 local winTrigger = Command.Event.Create(_G, "Battle.Won")

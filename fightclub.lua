@@ -30,7 +30,7 @@ for k, v in ipairs(canned) do
   v.ui = ft
 end
 
---[[do
+do
   local ft = Frame.Text(options)
   ft:SetText("Build your Own")
   ft:SetSize(50)
@@ -38,7 +38,7 @@ end
   optanchor = ft
   
   table.insert(canned, {ui = ft, buildyourown = true})
-end]]
+end
 
 local optid = 1
 local pointer = Frame.Text(options)
@@ -68,9 +68,15 @@ Event.System.Key.Down:Attach(function (key)
     if optid > #canned then optid = #canned end
     ResyncPointer()
   elseif key == "z" or key == "Return" or key == "Space" then
-    battle = Command.Environment.Create(_G, "Battleloop", "battleloop.lua", canned[optid])
-    battle.Frame.Root:SetLayer(2)
-    options:SetVisible(false)
+    if not canned[optid].buildyourown then
+      battle = Command.Environment.Create(_G, "Battleloop", "battleloop.lua", canned[optid])
+      battle.Frame.Root:SetLayer(2)
+      options:SetVisible(false)
+    else
+      battle = Command.Environment.Create(_G, "Fightclub forge", "fightclub_forge.lua")
+      battle.Frame.Root:SetLayer(2)
+      options:SetVisible(false)
+    end
   end
 end)
 
