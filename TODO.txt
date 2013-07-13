@@ -1,6 +1,5 @@
 
 * Prototype combat system
-  * Trace the GC to find leaks
   * Resizability
     * on-the-fly
     * autosize per screen
