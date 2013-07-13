@@ -1,6 +1,6 @@
 
 * Prototype combat system
-  * Crash reporter
+  * See what keeps mail from getting to me
   -- Tool: Make standalone!
   * Debug mode
   * Figure out how command/event/inspect propogation works! What I'm doing now isn't working. Figure out abstraction barriers, calling conventions, etc
@@ -32,6 +32,9 @@
   * glscissor/glviewport rescaling, hmm
   * fullscreen
     * alt-enter
+  * soft assert vs. hard assert
+    * assert popup
+  
 
 * REMEMBER THE AVENGERS
 * don't show the bits that are unimportant
