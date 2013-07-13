@@ -1,5 +1,4 @@
 (cd glorp/libs/logal && git pull)
-(cd glorp/libs/opengal32 && git pull)
 (cd glorp/libs/frame && git pull)
 (cd glorp && git pull)
 git pull

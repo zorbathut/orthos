@@ -1,6 +1,5 @@
 git submodule init glorp ; git submodule update glorp
 (cd glorp ; git checkout glorp2)
 (cd glorp ; git submodule init libs/logal ; git submodule update libs/logal) && (cd glorp/libs/logal ; git checkout master)
-(cd glorp ; git submodule init libs/opengal32 ; git submodule update libs/opengal32) && (cd glorp/libs/opengal32 ; git checkout master)
 (cd glorp ; git submodule init libs/frame ; git submodule update libs/frame) && (cd glorp/libs/frame ; git checkout master)
 
