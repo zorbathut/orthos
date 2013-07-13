@@ -1,6 +1,7 @@
 
 * Prototype combat system
   * Tool: Make standalone!
+    * Strip copyright infringement
     * Single-file
     * Reporter with single-file
     * Proper icon
