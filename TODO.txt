@@ -1,10 +1,8 @@
 
 * Prototype combat system
   * Tool: Make standalone!
-    * Strip copyright infringement
     * Single-file
     * Reporter with single-file
-    * Proper icon
   * Debug mode
   * Figure out how command/event/inspect propogation works! What I'm doing now isn't working. Figure out abstraction barriers, calling conventions, etc
     * Commands and Inspects don't propogate up and down (except for system global commands and inspects), they're used for communication *within* a layer

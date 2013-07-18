@@ -4,6 +4,7 @@ local name = "orthos"
 local longname = "Orthos"
 local font = "font/Vera.ttf"
 local resolution = {1920, 1080}
+local icon = "data/placeholder/icon.ico"
 
 local libs = {
   box2d = false,
@@ -16,4 +17,4 @@ local gl_version_expected = 1.0
 
 local f, e = loadfile("glorp/Den")
 assert(f, e)
-f{name = name, longname = longname, font = font, resolution = resolution, libs = libs, gl_version_expected = gl_version_expected, targets = {...}}
+f{name = name, longname = longname, font = font, resolution = resolution, libs = libs, gl_version_expected = gl_version_expected, icon = icon, targets = {...}}
