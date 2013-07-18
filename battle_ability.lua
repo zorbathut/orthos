@@ -257,7 +257,7 @@ local lookup = {
   SFXExplosion = function (target)
     local grid = Inspect.Battle.Grid.Table()
     local explosion = Frame.Texture(sfx)
-    explosion:SetTexture("copyright_infringement/Explosion")
+    explosion:SetTexture("noncommercial/explosion")
     explosion:SetPoint("CENTER", grid[target:PositionXGetGrid()][target:PositionYGetGrid()], "CENTER", 0, 0)
     
     local dur = Utility.TicksFromSeconds(0.3)

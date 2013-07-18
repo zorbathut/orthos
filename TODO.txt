@@ -1,5 +1,7 @@
 
 * Prototype combat system
+  * add explosions back in :V
+  * replace copyright_infringement
   * Tool: Make standalone!
     * Single-file
     * Reporter with single-file
