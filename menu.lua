@@ -18,7 +18,12 @@ for c in ("ORTHOS"):gmatch(".") do
     char = Frame.Raw(Frame.Root)
     char:SetWidth(gadgetwidth)
     char:SetHeight(gadgetwidth)
-    local timer = math.random() * 360
+    local timera = math.random() * 360
+    local timerb = math.random() * 360
+    local timerc = math.random() * 360
+    local timeraa = math.random() * 1 + .1
+    local timerba = math.random() * 1 + .1
+    local timerca = math.random() * 1 + .1
     local lasttime = Inspect.System.Time.Real()
     char:EventAttach(Frame.Event.Render, function ()
       gl.Disable("DEPTH_TEST")
@@ -28,12 +33,15 @@ for c in ("ORTHOS"):gmatch(".") do
       gl.MatrixMode("MODELVIEW")
       gl.Translate((char:GetLeft() + char:GetRight()) / 2, (char:GetTop() + char:GetBottom()) / 2, 0)
       gl.Scale(rwidth / 2, rwidth / 2, 0.5)
-      gl.Rotate(math.sin(timer) * 10, 1, 0, 0)
-      gl.Rotate(timer * 4, 0, 0, 1)
+      gl.Rotate(timera, 1, 0, 0)
+      gl.Rotate(timerb, 0, 1, 0)
+      gl.Rotate(timerc, 0, 0, 1)
       gl.Rotate(35.264, 1, 0, 0)
       gl.Rotate(45, 0, 1, 0)
       
-      timer = timer + (Inspect.System.Time.Real() - lasttime) * 0.3
+      timera = timera + (Inspect.System.Time.Real() - lasttime) * timeraa
+      timerb = timerb + (Inspect.System.Time.Real() - lasttime) * timerba
+      timerc = timerc + (Inspect.System.Time.Real() - lasttime) * timerca
       lasttime = Inspect.System.Time.Real()
       
       gl.Begin("QUADS")
