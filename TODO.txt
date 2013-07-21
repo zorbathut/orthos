@@ -6,9 +6,7 @@
   * Maintenance:
     * replace copyright_infringement
   * Tool:
-    * Make standalone!
-      * Single-file
-      * Reporter with single-file
+    * make git describe faster >:(
     * Figure out how command/event/inspect propogation works! What I'm doing now isn't working. Figure out abstraction barriers, calling conventions, etc
       * Commands and Inspects don't propogate up and down (except for system global commands and inspects), they're used for communication *within* a layer
       * A batch of Commands or Inspects can be exported down a layer explicitly, and this is semi-common
