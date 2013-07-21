@@ -1,20 +1,35 @@
 
 * Prototype combat system
-  * replace copyright_infringement
-  * Tool: Make standalone!
-    * Single-file
-    * Reporter with single-file
-  * Debug mode
-  * Figure out how command/event/inspect propogation works! What I'm doing now isn't working. Figure out abstraction barriers, calling conventions, etc
-    * Commands and Inspects don't propogate up and down (except for system global commands and inspects), they're used for communication *within* a layer
-    * A batch of Commands or Inspects can be exported down a layer explicitly, and this is semi-common
-    * Communication up layer is generally done via hooking Events, so that the lower layer never really knows what the upper layer is doing with its responses
-      * this is assuming there weren't explicitly-exported Commands
-    * REINTRODUCE init_util.lua CHECKS
-  * better ability icons
-  * ability names
-  * hitstuns (player, enemy)
+  * Offstream:
+    * Set up tablet
+    * Chair mat
+  * Maintenance:
+    * replace copyright_infringement
+  * Tool:
+    * Make standalone!
+      * Single-file
+      * Reporter with single-file
+    * Figure out how command/event/inspect propogation works! What I'm doing now isn't working. Figure out abstraction barriers, calling conventions, etc
+      * Commands and Inspects don't propogate up and down (except for system global commands and inspects), they're used for communication *within* a layer
+      * A batch of Commands or Inspects can be exported down a layer explicitly, and this is semi-common
+      * Communication up layer is generally done via hooking Events, so that the lower layer never really knows what the upper layer is doing with its responses
+        * this is assuming there weren't explicitly-exported Commands
+      * REINTRODUCE init_util.lua CHECKS
+  * Block on tablet:
+    * better ability icons
+      * Spike - sharp arrow pointing right
+      * Shatter - X shape with ice
+      * Blast - Conesplosion
+      * Pierce - Through enemy
+      * Dash - Speed lines
+      * Pull - Magnet
+      * Repel - Shockwave
+      * Fortify - Blocks moving in
+      * Wall - Wall
+  * Better playable directory
   * recharge delay
+    * How will this work?
+  * Card exclusion
   * priority system for dropping so trash doesn't outlive bosses
   * Enemies that intentionally guard each other?
   * A few basic card options
@@ -23,9 +38,9 @@
   * Make it fun?
     * Cooldown on movement
     * Cooldown on firing
+    * hitstuns (player, enemy)
     * Sound effects
     * Music
-    * Stuns
 
 * Tool day:
   * http://molecularmusings.wordpress.com/2011/09/05/properly-handling-keyboard-input/
