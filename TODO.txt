@@ -8,10 +8,7 @@
       * move to appropriate directory, change permissions
       * get URL to me somehow?
       * need a "latest version" link somewhere
-  * Maintenance:
     * replace copyright_infringement
-  * Tool:
-    * replace glorp/master with glorp/glorp2
   * Block on tablet:
     * better ability icons
       * Spike - sharp arrow pointing right
@@ -23,7 +20,6 @@
       * Repel - Shockwave
       * Fortify - Blocks moving in
       * Wall - Wall
-  * Better playable directory
   * recharge delay
     * How will this work?
   * Card exclusion
