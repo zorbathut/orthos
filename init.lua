@@ -21,7 +21,7 @@ local function ReturnToMenu()
   menu.Event.Init.Start:Attach(function ()
     Command.Environment.Destroy(menu)
     menu = nil
-    battle = Command.Environment.Create(_G, "Fight Club", "fightclub.lua")
+    battle = Command.Environment.Create(_G, "Fight Club", "fightclub.lua", {"Init"})
   end)
 end
 ReturnToMenu()

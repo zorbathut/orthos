@@ -83,6 +83,10 @@ local function SetIndicator(npos)
 end
 SetIndicator(startpos)
 
+local abortEvent = Command.Event.Create(_G, "Battleloop.Arf.Abort")
+local retryEvent = Command.Event.Create(_G, "Battleloop.Arf.Retry")
+local failEvent = Command.Event.Create(_G, "Battleloop.Arf.Fail")
+
 Event.System.Key.Down:Attach(function (key)
   if key == "Left" then
     local pos = optpos - 1
@@ -94,11 +98,11 @@ Event.System.Key.Down:Attach(function (key)
     SetIndicator(pos)
   elseif key == "z" or key == "Enter" then
     if opts[optpos] == abort then
-      Command.War.Abort()
+      abortEvent()
     elseif opts[optpos] == retry then
-      Command.War.Retry()
+      retryEvent()
     elseif opts[optpos] == fail then
-      Command.War.Fail()
+      failEvent()
     end
   end
 end)

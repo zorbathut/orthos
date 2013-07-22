@@ -11,12 +11,6 @@
       * move to appropriate directory, change permissions
       * get URL to me somehow?
       * need a "latest version" link somewhere
-    * Figure out how command/event/inspect propogation works! What I'm doing now isn't working. Figure out abstraction barriers, calling conventions, etc
-      * CIEs don't propogate up and down (except for system global commands and inspects), they're used for communication *within* a layer
-      * A batch of CIEs can be exported deeper explicitly, and this is semi-common
-      * Communication up layer is generally done via hooking Events, so that the lower layer never really knows what the upper layer is doing with its responses
-        * this is assuming there weren't explicitly-exported Commands
-      * REINTRODUCE init_util.lua CHECKS
     * replace glorp/master with glorp/glorp2
   * Block on tablet:
     * better ability icons

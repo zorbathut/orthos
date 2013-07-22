@@ -76,7 +76,7 @@ local function deckChoose()
   
   state = "decking"
   
-  local deckbuild = Command.Environment.Create(_G, "Deck", "battle_deckbuild.lua")
+  local deckbuild = Command.Environment.Create(_G, "Deckbuild", "battle_deckbuild.lua", {"Deck"})
   deckbuild.Frame.Root:SetLayer(layer.deckbuilder)
   
   deckbuild.Event.Deck.Created:Attach(function (deck)
@@ -114,7 +114,7 @@ Command.Environment.Insert(_G, "Command.Battle.Display.Card.Resync", function ()
   
   local bottom = hud
   for k = 1, #deckActive do
-    local tf = Command.Art.Button.Card(hud.carddisplay, deckActive[k])
+    local tf = Command.Library.Art.Button.Card(hud.carddisplay, deckActive[k])
     tf:SetPoint("BOTTOMRIGHT", bottom, "BOTTOMRIGHT", -10, -10)
     tf:SetLayer(-k)
     bottom = tf

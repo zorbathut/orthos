@@ -51,11 +51,11 @@ ResyncPointer()
 
 local battle
 
-Command.Environment.Insert(_G, "Command.Battle.Abort", function ()
+local function AbortBattle()
   Command.Environment.Destroy(battle)
   options:SetVisible(true)
   battle = nil
-end)
+end
 
 Event.System.Key.Down:Attach(function (key)
   if battle then return end
@@ -69,8 +69,10 @@ Event.System.Key.Down:Attach(function (key)
     ResyncPointer()
   elseif key == "z" or key == "Return" or key == "Space" then
     if not canned[optid].buildyourown then
-      battle = Command.Environment.Create(_G, "Battleloop", "battleloop.lua", canned[optid])
+      battle = Command.Environment.Create(_G, "Battleloop", "battleloop.lua", nil, canned[optid])
       battle.Frame.Root:SetLayer(2)
+      battle.Event.Battleloop.Abort:Attach(AbortBattle)
+      battle.Event.Battleloop.Fail:Attach(Command.Init.Return)
       options:SetVisible(false)
     else
       battle = Command.Environment.Create(_G, "Fightclub forge", "fightclub_forge.lua")

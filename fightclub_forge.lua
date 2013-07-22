@@ -146,7 +146,9 @@ Event.System.Key.Down:Attach(function (key)
             table.insert(gamepackage, {x = x, y = y, type = ite})
           end
         end
-        battle = Command.Environment.Create(_G, "Battleloop", "battleloop.lua", gamepackage, "forge")
+        battle = Command.Environment.Create(_G, "Battleloop", "battleloop.lua", nil, gamepackage)
+        battle.Event.Battleloop.Abort:Attach(TestEnd)
+        battle.Event.Battleloop.Fail:Attach(TestEnd)
         battle.Frame.Root:SetLayer(2)
         choosemode = "play"
       else
@@ -177,11 +179,11 @@ Event.System.Key.Down:Attach(function (key)
   end
 end)
 
-Command.Environment.Insert(_G, "Command.Forge.Test.End", function ()
+function TestEnd()
   Command.Environment.Destroy(battle)
   battle = nil
   choosemode = "type"
-end)
+end
 
 local descr = Frame.Text(Frame.Root)
 descr:SetSize(40)

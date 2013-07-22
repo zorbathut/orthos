@@ -1,4 +1,4 @@
-Command.Environment.Insert(_G, "Command.Art.Button.Card", function (root, card)
+Command.Environment.Insert(_G, "Command.Library.Art.Button.Card", function (root, card)
   local cardmini = Frame.Frame(root)
   local cardminitext = Frame.Text(cardmini)
   cardminitext:SetText(card.name)
@@ -28,7 +28,7 @@ Command.Environment.Insert(_G, "Command.Art.Button.Card", function (root, card)
   return cardmini
 end)
   
-Command.Environment.Insert(_G, "Command.Art.Card.Big", function (root, card)
+Command.Environment.Insert(_G, "Command.Library.Art.Card.Big", function (root, card)
   local cardbig = Frame.Frame(root)
   cardbig:SetBackground(0, 0, 0.2)
   local cardbigtext = Frame.Text(cardbig)
@@ -41,7 +41,7 @@ Command.Environment.Insert(_G, "Command.Art.Card.Big", function (root, card)
   return cardbig
 end)
 
-Command.Environment.Insert(_G, "Command.Art.Button.Accept", function (root)
+Command.Environment.Insert(_G, "Command.Library.Art.Button.Accept", function (root)
   local cardmini = Frame.Frame(root)
   cardmini:SetBackground(0.2, 0, 0)
   local cardminitext = Frame.Text(cardmini)
@@ -72,7 +72,7 @@ Command.Environment.Insert(_G, "Command.Art.Button.Accept", function (root)
   return cardmini
 end)
 
-Command.Environment.Insert(_G, "Command.Art.Button.Back", function (root)
+Command.Environment.Insert(_G, "Command.Library.Art.Button.Back", function (root)
   local cardmini = Frame.Frame(root)
   cardmini:SetBackground(0.2, 0, 0)
   local cardminitext = Frame.Text(cardmini)
