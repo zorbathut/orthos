@@ -20,18 +20,26 @@
       * Repel - Shockwave
       * Fortify - Blocks moving in
       * Wall - Wall
-  * recharge delay
-    * How will this work?
-  * Card exclusion
+    * Card borders!
+      * Metal - Green? Rust, copper, greek/roman
+      * Sound - Green? waveforms/pond ripples around the card
+      * Flow - Red? intertwining, spraying outwards
+      * Home - Red? blueprints? (redprints) Pick-up sticks?
+      * Unity - Blue? circles, facing inwards
+      * Regret - Blue? shattered, spiky
   * priority system for dropping so trash doesn't outlive bosses
-  * Enemies that intentionally guard each other?
-  * A few basic card options
-    * More attack options?
-  * Ability types!
+  * More . . .
+    * Cards
+      * More attack options?
+    * Enemies
+      * Enemies that intentionally guard each other?
   * Make it fun?
     * Cooldown on movement
     * Cooldown on firing
     * hitstuns (player, enemy)
+  * Deckbuilder
+  * Audio
+    * Figure out API
     * Sound effects
     * Music
 
