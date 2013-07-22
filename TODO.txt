@@ -3,14 +3,14 @@
   * Offstream:
     * Set up tablet
     * Chair mat
-  * Maintenance:
-    * replace copyright_infringement
-  * Tool:
     * One-button deploy
       * upload via ssh
       * move to appropriate directory, change permissions
       * get URL to me somehow?
       * need a "latest version" link somewhere
+  * Maintenance:
+    * replace copyright_infringement
+  * Tool:
     * replace glorp/master with glorp/glorp2
   * Block on tablet:
     * better ability icons
