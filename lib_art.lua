@@ -27,6 +27,51 @@ Command.Environment.Insert(_G, "Command.Library.Art.Button.Card", function (root
   
   return cardmini
 end)
+
+Command.Environment.Insert(_G, "Command.Library.Art.Button.Rechoose", function (root)
+  local cardmini = Frame.Frame(root)
+  local cardminitext = Frame.Text(cardmini)
+  cardminitext:SetText("Rechoose")
+  cardminitext:SetPoint("CENTER", cardmini, "CENTER")
+  cardminitext:SetSize(12)
+  cardmini:SetWidth(40)
+  cardmini:SetHeight(40)
+  
+  local coold = Frame.Text(cardmini)
+  coold:SetPoint("TOPCENTER", cardminitext, "BOTTOMCENTER", 0, 5)
+  coold:SetSize(10)
+  
+  local dis = false
+  function cardmini:SetDisable(disable)
+    dis = disable
+    
+    if disable then
+      cardmini:SetBackground(0, 0.05, 0)
+      cardminitext:SetColor(0.3, 0.3, 0.3)
+    else
+      cardmini:SetBackground(0, 0.2, 0)
+      cardminitext:SetColor(1.0, 1.0, 1.0)
+    end
+  end
+  function cardmini:GetDisable()
+    return dis
+  end
+  
+  function cardmini:SetCooldown(val)
+    if val < 1 then
+      coold:SetVisible(true)
+      coold:SetText(string.format("%.2f", val))
+      self:SetDisable(true)
+    else
+      coold:SetVisible(false)
+      self:SetDisable(false)
+    end
+  end
+  
+  cardmini:SetDisable(false)
+  
+  return cardmini
+end)
   
 Command.Environment.Insert(_G, "Command.Library.Art.Card.Big", function (root, card)
   local cardbig = Frame.Frame(root)

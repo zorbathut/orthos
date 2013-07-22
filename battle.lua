@@ -28,6 +28,9 @@ assert(loadfile("battle_grid.lua"))()
 assert(loadfile("battle_ability.lua"))()
 assert(loadfile("battle_entity.lua"))()
 
+local deckCooldownTimer = 9
+local deckCooldown = 0
+
 local deckDiscard = {}
 do
   local types = {"Spike", "Spike", "Shatter", "Shatter", "Blast", "Blast", "Pierce", "Dash", "Pull", "Repel", "Fortify", "Wall"}
@@ -90,6 +93,8 @@ local function deckChoose()
     -- todo: rig up better event control
     state = "deck_aborting"
     
+    deckCooldown = deckCooldownTimer
+    
     Command.Battle.Display.Card.Resync()
   end)
 end
@@ -105,6 +110,8 @@ end
 
 hud:SetPoint("BOTTOMRIGHT", player, "TOPCENTER")
 
+local rechooseIcon
+
 Command.Environment.Insert(_G, "Command.Battle.Display.Card.Resync", function ()
   if hud.carddisplay then
     hud.carddisplay:Obliterate()
@@ -119,6 +126,11 @@ Command.Environment.Insert(_G, "Command.Battle.Display.Card.Resync", function ()
     tf:SetLayer(-k)
     bottom = tf
   end
+  
+  rechooseIcon = Command.Library.Art.Button.Rechoose(hud.carddisplay)
+  rechooseIcon:SetPoint("BOTTOMRIGHT", bottom, "BOTTOMRIGHT", -10, -10)
+  rechooseIcon:SetLayer(-50)
+  
 end)
 
 Command.Environment.Insert(_G, "Command.Battle.Bump", function (x, y)
@@ -227,7 +239,7 @@ Event.System.Key.Down:Attach(function (key)
       print("Cast", #deckActive, #deckStack, #deckDiscard)
       
       Command.Battle.Display.Card.Resync()
-    else
+    elseif deckCooldown < 0 then
       deckChoose()
     end
   end
@@ -236,4 +248,6 @@ end)
 Event.System.Tick:Attach(function ()
   if state == "deck_aborting" then state = "playing" return end  -- eugh
   if not Inspect.Battle.Active() then return end
+  deckCooldown = deckCooldown - 1/60
+  rechooseIcon:SetCooldown(1 - deckCooldown / deckCooldownTimer)
 end)
