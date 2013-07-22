@@ -6,7 +6,6 @@
   * Maintenance:
     * replace copyright_infringement
   * Tool:
-    * make git describe faster >:(
     * One-button deploy
       * upload via ssh
       * move to appropriate directory, change permissions
