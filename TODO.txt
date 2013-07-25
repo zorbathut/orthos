@@ -1,7 +1,6 @@
 
 * Prototype combat system
   * Offstream:
-    * Set up tablet
     * Chair mat
     * One-button deploy
       * upload via ssh
@@ -31,6 +30,10 @@
   * More . . .
     * Cards
       * More attack options?
+      * Think "metal"
+      * Curved missiles
+      * Bouncing throwing stars
+      * Spears from off-screen
     * Enemies
       * Enemies that intentionally guard each other?
   * Make it fun?
