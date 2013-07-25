@@ -8,6 +8,8 @@
       * get URL to me somehow?
       * need a "latest version" link somewhere
     * replace copyright_infringement
+  * Tools
+    * Detect case-sensitivity more early
   * Block on tablet:
     * better ability icons
       * Spike - sharp arrow pointing right
