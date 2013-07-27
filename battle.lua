@@ -14,7 +14,7 @@ layer = {
 do
   local bg = Frame.Texture(Frame.Root)
   bg:SetLayer(layer.bg)
-  bg:SetTexture("copyright_infringement/cyberspace_bg")
+  bg:SetTexture("noncommercial/cyberspace_bg")
   bg:SetPoint("TOPLEFT", Frame.Root, "TOPLEFT")
   bg:SetPoint("BOTTOMRIGHT", Frame.Root, "BOTTOMRIGHT")
 end

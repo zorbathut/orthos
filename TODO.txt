@@ -2,12 +2,6 @@
 * Prototype combat system
   * Offstream:
     * Chair mat
-    * One-button deploy
-      * upload via ssh
-      * move to appropriate directory, change permissions
-      * get URL to me somehow?
-      * need a "latest version" link somewhere
-    * replace copyright_infringement
   * Tools
     * Detect case-sensitivity more early
   * Block on tablet:
@@ -38,6 +32,10 @@
       * Spears from off-screen
     * Enemies
       * Enemies that intentionally guard each other?
+      * More interesting movement powers
+        * chase player
+        * dash against player, stab
+        * run patterns
   * Make it fun?
     * Cooldown on movement
     * Cooldown on firing
@@ -57,7 +55,9 @@
     * alt-enter
   * soft assert vs. hard assert
     * assert popup
-  
+
+* Miscellany
+  * replace copyright_infringement
 
 * REMEMBER THE AVENGERS
 * don't show the bits that are unimportant
