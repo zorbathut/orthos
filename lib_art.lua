@@ -1,9 +1,27 @@
+
+local cardart = {
+  Spike = "placeholder/card/spike",
+  Shatter = "placeholder/card/shatter",
+  Pierce = "placeholder/card/pierce"
+}
+
 Command.Environment.Insert(_G, "Command.Library.Art.Button.Card", function (root, card)
   local cardmini = Frame.Frame(root)
-  local cardminitext = Frame.Text(cardmini)
-  cardminitext:SetText(card.name)
-  cardminitext:SetPoint("CENTER", cardmini, "CENTER")
-  cardminitext:SetSize(12)
+  local cardminitext
+  local cardminitex
+  
+  if not cardart[card.name] then
+    cardminitext = Frame.Text(cardmini)
+    cardminitext:SetText(card.name)
+    cardminitext:SetPoint("CENTER", cardmini, "CENTER")
+    cardminitext:SetSize(12)
+  else
+    cardminitex = Frame.Texture(cardmini)
+    cardminitex:SetTexture(cardart[card.name])
+    cardminitex:SetPoint("TOPLEFT", cardmini, "TOPLEFT")
+    cardminitex:SetPoint("BOTTOMRIGHT", cardmini, "BOTTOMRIGHT")
+  end
+  
   cardmini:SetWidth(40)
   cardmini:SetHeight(40)
   
@@ -13,10 +31,12 @@ Command.Environment.Insert(_G, "Command.Library.Art.Button.Card", function (root
     
     if disable then
       cardmini:SetBackground(0, 0, 0.05)
-      cardminitext:SetColor(0.3, 0.3, 0.3)
+      if cardminitext then cardminitext:SetColor(0.3, 0.3, 0.3) end
+      if cardminitex then cardminitex:SetTint(0.3, 0.3, 0.3) end
     else
       cardmini:SetBackground(0, 0, 0.2)
-      cardminitext:SetColor(1.0, 1.0, 1.0)
+      if cardminitext then cardminitext:SetColor(1.0, 1.0, 1.0) end
+      if cardminitex then cardminitex:SetTint(1.0, 1.0, 1.0) end
     end
   end
   function cardmini:GetDisable()
@@ -78,10 +98,21 @@ Command.Environment.Insert(_G, "Command.Library.Art.Card.Big", function (root, c
   cardbig:SetBackground(0, 0, 0.2)
   local cardbigtext = Frame.Text(cardbig)
   cardbigtext:SetText(card.name)
-  cardbigtext:SetPoint("CENTER", cardbig, "CENTER")
   cardbigtext:SetSize(30)
+  cardbigtext:SetLayer(1)
   cardbig:SetWidth(200)
   cardbig:SetHeight(200)
+  
+  local cardbigtex
+  if cardart[card.name] then
+    cardbigtex = Frame.Texture(cardbig)
+    cardbigtex:SetPoint("TOPLEFT", cardbig, "TOPLEFT")
+    cardbigtex:SetPoint("BOTTOMRIGHT", cardbig, "BOTTOMRIGHT")
+    cardbigtex:SetTexture(cardart[card.name])
+    cardbigtext:SetPoint("CENTER", cardbig, 0.5, 0.9)
+  else
+    cardbigtext:SetPoint("CENTER", cardbig, "CENTER")
+  end
   
   return cardbig
 end)

@@ -6,10 +6,10 @@
     * Detect case-sensitivity more early
   * Block on tablet:
     * better ability icons
-      * Spike - sharp arrow pointing right
-      * Shatter - X shape with ice
+      X Spike - sharp arrow pointing right
+      X Shatter - X shape with ice
       * Blast - Conesplosion
-      * Pierce - Through enemy
+      X Pierce - Through enemy
       * Dash - Speed lines
       * Pull - Magnet
       * Repel - Shockwave
