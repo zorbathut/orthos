@@ -2,7 +2,11 @@
 local cardart = {
   Spike = "placeholder/card/spike",
   Shatter = "placeholder/card/shatter",
-  Pierce = "placeholder/card/pierce"
+  Pierce = "placeholder/card/pierce",
+  Blast = "placeholder/card/blast",
+  Pull = "placeholder/card/pull",
+  Repel = "placeholder/card/repel",
+  Dash = "placeholder/card/dash",
 }
 
 Command.Environment.Insert(_G, "Command.Library.Art.Button.Card", function (root, card)

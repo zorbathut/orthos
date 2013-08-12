@@ -1,28 +1,17 @@
 
 * Prototype combat system
-  * Offstream:
-    * Chair mat
+  * Adaptive boundaries (4x4, more)
+  * Try out new card-type 3sat system
+  * priority system for dropping so trash doesn't outlive bosses
+  * Card borders!
+    * Metal - Green? Rust, copper, greek/roman
+    * Sound - Green? waveforms/pond ripples around the card
+    * Flow - Red? intertwining, spraying outwards
+    * Home - Red? blueprints? (redprints) Pick-up sticks?
+    * Unity - Blue? circles, facing inwards
+    * Regret - Blue? shattered, spiky
   * Tools
     * Detect case-sensitivity more early
-  * Block on tablet:
-    * better ability icons
-      X Spike - sharp arrow pointing right
-      X Shatter - X shape with ice
-      * Blast - Conesplosion
-      X Pierce - Through enemy
-      * Dash - Speed lines
-      * Pull - Magnet
-      * Repel - Shockwave
-      * Fortify - Blocks moving in
-      * Wall - Wall
-    * Card borders!
-      * Metal - Green? Rust, copper, greek/roman
-      * Sound - Green? waveforms/pond ripples around the card
-      * Flow - Red? intertwining, spraying outwards
-      * Home - Red? blueprints? (redprints) Pick-up sticks?
-      * Unity - Blue? circles, facing inwards
-      * Regret - Blue? shattered, spiky
-  * priority system for dropping so trash doesn't outlive bosses
   * More . . .
     * Cards
       * More attack options?
