@@ -1,5 +1,8 @@
 
-local enemyPack = ...
+local config = ...
+
+assert(config.enemyStart)
+assert(config.size)
 
 layer = {
   bg = -10,
@@ -24,7 +27,7 @@ local state = "playing"
 local hud = Frame.Frame(Frame.Root)
 hud:SetLayer(layer.hud)
 
-assert(loadfile("battle_grid.lua"))()
+assert(loadfile("battle_grid.lua"))({gridsize = 200, worldsize = config.size})
 assert(loadfile("battle_ability.lua"))()
 assert(loadfile("battle_entity.lua"))()
 
@@ -104,7 +107,7 @@ local player = nil -- filled with actual player
   
 player = Command.Battle.Spawn("Player", 2, 2)
 
-for _, v in ipairs(enemyPack) do
+for _, v in ipairs(config.enemyStart) do
   Command.Battle.Spawn(v.type, v.x, v.y)
 end
 
@@ -175,11 +178,15 @@ end)
 Command.Environment.Insert(_G, "Command.Battle.Damage", function (enemy)
   local grid = Inspect.Battle.Grid.Table()
   
-  local order
+  local order = {}
   if enemy then
-    order = {6, 5, 4}
+    for k = config.size * 2, config.size + 1, -1 do
+      table.insert(order, k)
+    end
   else
-    order = {1, 2, 3}
+    for k = 1, config.size do
+      table.insert(order, k)
+    end
   end
   
   for _, kx in ipairs(order) do

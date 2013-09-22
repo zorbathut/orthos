@@ -10,12 +10,13 @@ end
 local grid = Frame.Frame(Frame.Root)
 
 local gridsize = 180
+local worldsize = 4
 
-assert(loadfile("battle_grid.lua"))({gridsize = gridsize, parent = grid})
+assert(loadfile("battle_grid.lua"))({gridsize = gridsize, worldsize = worldsize, parent = grid})
 assert(loadfile("entitydb.lua"))()
 
-grid:SetWidth(gridsize * 6)
-grid:SetHeight(gridsize * 3)
+grid:SetWidth(gridsize * worldsize * 2)
+grid:SetHeight(gridsize * worldsize)
 grid:SetPoint("CENTER", Frame.Root, "CENTER", 0, 200)
 
 local items = 2 -- nothing, start
@@ -99,11 +100,11 @@ local choosemode = "type"
 local choice = nil
 local battle = nil
 
-local px = 5
-local py = 2
+local px = math.ceil(worldsize + worldsize / 2)
+local py = math.ceil(worldsize / 2)
 
 local gridcreate = {}
-for x = 1, 6 do
+for x = 1, worldsize * 2 do
   table.insert(gridcreate, {})
 end
 
@@ -140,10 +141,10 @@ Event.System.Key.Down:Attach(function (key)
       ResyncPointer()
     elseif key == "z" or key == "Return" or key == "Space" then
       if optid == #choices then
-        local gamepackage = {}
+        local gamepackage = {size = 4, enemyStart = {}}
         for x, v in pairs(gridcreate) do
           for y, ite in pairs(v) do
-            table.insert(gamepackage, {x = x, y = y, type = ite})
+            table.insert(gamepackage.enemyStart, {x = x, y = y, type = ite})
           end
         end
         battle = Command.Environment.Create(_G, "Battleloop", "battleloop.lua", nil, gamepackage)
@@ -161,13 +162,13 @@ Event.System.Key.Down:Attach(function (key)
     end
   elseif choosemode == "place" then
     if key == "Left" then
-      px = math.max(4, px - 1)
+      px = math.max(worldsize + 1, px - 1)
     elseif key == "Right" then
-      px = math.min(6, px + 1)
+      px = math.min(worldsize * 2, px + 1)
     elseif key == "Up" then
       py = math.max(1, py - 1)
     elseif key == "Down" then
-      py = math.min(3, py + 1)
+      py = math.min(worldsize, py + 1)
     elseif key == "z" or key == "Return" or key == "Space" then
       gridcreate[px][py] = choice
       choosemode = "type"

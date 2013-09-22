@@ -8,12 +8,12 @@ do
 end
 
 local canned = {
-  {name = "Bandit Solo", {type = "Bandit", x = 6, y = 1}},
-  {name = "Bandit Pack", {type = "Bandit", x = 6, y = 3}, {type = "Bandit", x = 5, y = 1}},
-  {name = "Flame Boss", {type = "BossFlame", x = 5, y = 2}},
-  {name = "Slam Boss", {type = "BossSlam", x = 5, y = 2}},
-  {name = "Rocket Boss", {type = "BossRocket", x = 5, y = 2}},
-  {name = "Ultimate Boss", {type = "BossMulti", x = 5, y = 2}},
+  {name = "Bandit Solo", size = 4, enemyStart = {{type = "Bandit", x = 6, y = 1}}},
+  {name = "Bandit Pack", size = 4, enemyStart = {{type = "Bandit", x = 6, y = 3}, {type = "Bandit", x = 5, y = 1}}},
+  {name = "Flame Boss", size = 4, enemyStart = {{type = "BossFlame", x = 5, y = 2}}},
+  {name = "Slam Boss", size = 4, enemyStart = {{type = "BossSlam", x = 5, y = 2}}},
+  {name = "Rocket Boss", size = 4, enemyStart = {{type = "BossRocket", x = 5, y = 2}}},
+  {name = "Ultimate Boss", size = 4, enemyStart = {{type = "BossMulti", x = 5, y = 2}}},
 }
 
 local options = Frame.Frame(Frame.Root)

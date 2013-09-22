@@ -1,25 +1,29 @@
 
 local params = ...
-params = params or {}
 
-local gridsize = params.gridsize or 200
+assert(params)
+assert(params.gridsize)
+assert(params.worldsize)
+
+local gridsize = params.gridsize
+local worldsize = params.worldsize
 local border = 5
 local outline = 5
 
 local parent = params.parent or Frame.Root
 
 local grid = Frame.Frame(parent)
-grid:SetPoint("TOPLEFT", parent, "CENTER", -gridsize * 3, -gridsize * 1.5)
-grid:SetPoint("BOTTOMRIGHT", parent, "CENTER", gridsize * 3, gridsize * 1.5)
+grid:SetPoint("TOPLEFT", parent, "CENTER", -gridsize * worldsize, -gridsize * worldsize / 2)
+grid:SetPoint("BOTTOMRIGHT", parent, "CENTER", gridsize * worldsize, gridsize * worldsize / 2)
 grid:SetLayer(layer and layer.grid or -1) -- grid defaults to being "behind"
 
-for row = 1, 6 do
+for row = 1, worldsize * 2 do
   grid[row] = {}
   
   local enemy = false
-  if row >= 4 then enemy = true end
+  if row > worldsize then enemy = true end
   
-  for col = 1, 3 do
+  for col = 1, worldsize do
     local brick = Frame.Frame(grid)
     brick.enemy = enemy
     grid[row][col] = brick
